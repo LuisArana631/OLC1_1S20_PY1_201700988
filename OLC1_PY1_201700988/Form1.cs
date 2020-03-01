@@ -15,6 +15,8 @@ namespace OLC1_PY1_201700988
         public Form1()
         {
             InitializeComponent();
+            archivoToolStripMenuItem.ForeColor = Color.Gray;
+            abrirToolStripMenuItem.ForeColor = Color.Gray;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -25,6 +27,11 @@ namespace OLC1_PY1_201700988
         private void archivoToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void abrirToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            
         }
     }
 }
