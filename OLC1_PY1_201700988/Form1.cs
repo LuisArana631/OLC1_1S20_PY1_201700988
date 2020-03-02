@@ -21,6 +21,8 @@ namespace OLC1_PY1_201700988
             nuevoToolStripMenuItem.ForeColor = Color.White;
             guardarComoToolStripMenuItem.ForeColor = Color.White;
             guardarToolStripMenuItem.ForeColor = Color.White;
+
+            menuStrip1.Renderer = new ToolStripProfessionalRenderer(new MyColorTable());
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -31,8 +33,8 @@ namespace OLC1_PY1_201700988
 
         private void archivoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
-        }
+            
+        }        
 
         private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
@@ -41,6 +43,124 @@ namespace OLC1_PY1_201700988
 
         private void richTextBox1_TextChanged(object sender, EventArgs e)
         {
+        }
+
+        private void richTextBox2_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void abrirToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private class MyColorTable : ProfessionalColorTable
+        {
+            public override Color ToolStripDropDownBackground
+            {
+                get
+                {
+                    return Color.FromArgb(70, 70, 70);
+                }
+            } 
+
+            public override Color ImageMarginGradientBegin
+            {
+                get
+                {
+                    return Color.FromArgb(70, 70, 70);
+                }
+            }
+            
+
+            public override Color ImageMarginGradientMiddle
+            {
+                get
+                {
+                    return Color.FromArgb(70, 70, 70);
+                }
+            }
+
+            public override Color ImageMarginRevealedGradientEnd
+            {
+                get
+                {
+                    return Color.FromArgb(70, 70, 70);
+                }
+            }
+
+            public override Color MenuItemBorder
+            {
+                get
+                {
+                    return Color.FromArgb(70, 70, 70);
+                }
+            }
+
+            public override Color MenuBorder
+            {
+                get
+                {
+                    return Color.FromArgb(70, 70, 70);
+                }
+            }
+
+            public override Color MenuItemSelected
+            {
+                get
+                {
+                    return Color.FromArgb(100, 100, 100);
+                }
+            }
+
+            public override Color MenuStripGradientBegin
+            {
+                get
+                {
+                    return Color.FromArgb(70, 70, 70);
+                }
+            }
+
+            public override Color MenuStripGradientEnd
+            {
+                get
+                {
+                    return Color.FromArgb(70, 70, 70);
+                }
+            }
+
+            public override Color MenuItemSelectedGradientBegin
+            {
+                get
+                {
+                    return Color.FromArgb(100, 100, 100);
+                }
+            }
+
+            public override Color MenuItemSelectedGradientEnd
+            {
+                get
+                {
+                    return Color.FromArgb(100, 100, 100);
+                }
+            }
+
+            public override Color MenuItemPressedGradientBegin
+            {
+                get
+                {
+                    return Color.FromArgb(70, 70, 70);
+                }
+            }
+
+            public override Color MenuItemPressedGradientEnd
+            {
+                get
+                {
+                    return Color.FromArgb(70, 70, 70);
+                }
+            }
         }
     }
 }
