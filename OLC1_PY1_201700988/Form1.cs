@@ -53,9 +53,50 @@ namespace OLC1_PY1_201700988
 
         private void abrirToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            addTabPage();
-            getFile();
+            Control controlBox;            
+            int posPage = 0;
+            bool createPage = true;
 
+            tabControl1.SelectedIndex = posPage;
+            foreach (TabPage paginaActual in tabControl1.TabPages)
+            {                
+                if (paginaActual.ToolTipText.Equals(""))
+                {
+                    //--------
+                    if (tabControl1.SelectedTab.HasChildren)
+                    {
+                        foreach (Control item in tabControl1.SelectedTab.Controls)
+                        {
+                            controlBox = item;
+                            
+                            if (controlBox is RichTextBox)
+                            {
+                                Console.WriteLine(posPage + " " + controlBox.Text);
+                                if (controlBox.Text.Equals(""))
+                                {                                    
+                                    createPage = false;
+                                    break;                                    
+                                }
+                            }
+                        }
+                    }
+                    //--------
+                }
+                if (createPage)
+                {
+                    posPage++;
+                }                
+                tabControl1.SelectedIndex = posPage;
+            }
+
+            Console.WriteLine("posPage: " + posPage);
+
+            if (createPage)
+            {
+                addTabPage();
+            }            
+            
+            getFile();
         }
 
         private class MyColorTable : ProfessionalColorTable
@@ -189,6 +230,7 @@ namespace OLC1_PY1_201700988
                         {
                             Title = "Seleccione la ruta",
                             Filter = "Archivo Compiladores 1 | *.er",
+                            FileName = tabControl1.SelectedTab.Text,
                             AddExtension = true,
                         };
 
@@ -310,7 +352,7 @@ namespace OLC1_PY1_201700988
 
         private void guardarToolStripMenuItem_Click(object sender, EventArgs e)
         {           
-            if(tabControl1.SelectedTab.Text.Equals("Untitled"))
+            if(tabControl1.SelectedTab.ToolTipText.Equals(""))
             {
                 saveAsMethod();
             }
