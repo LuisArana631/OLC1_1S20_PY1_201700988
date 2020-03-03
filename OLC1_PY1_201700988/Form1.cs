@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -52,6 +53,8 @@ namespace OLC1_PY1_201700988
 
         private void abrirToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            addTabPage();
+            getFile();
 
         }
 
@@ -161,6 +164,165 @@ namespace OLC1_PY1_201700988
                     return Color.FromArgb(70, 70, 70);
                 }
             }
+        }
+
+        private void guardarComoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            saveAsMethod();
+        }
+
+        private void saveAsMethod()
+        {
+            Control controlBox;
+            string rutaString = "";
+
+            if (tabControl1.SelectedTab.HasChildren)
+            {
+                foreach (Control item in tabControl1.SelectedTab.Controls)
+                {
+                    controlBox = item;
+
+                    if (controlBox is RichTextBox)
+                    {
+
+                        SaveFileDialog saveFile = new SaveFileDialog()
+                        {
+                            Title = "Seleccione la ruta",
+                            Filter = "Archivo Compiladores 1 | *.er",
+                            AddExtension = true,
+                        };
+
+                        var result = saveFile.ShowDialog();
+
+                        if(result == DialogResult.OK)
+                        {
+                            StreamWriter writer = new StreamWriter(saveFile.FileName);
+                            writer.Write(controlBox.Text);
+                            writer.Close();
+
+                            String[] ruta = saveFile.FileName.Split('\\');
+                            rutaString = saveFile.FileName;
+                            tabControl1.SelectedTab.ToolTipText = saveFile.FileName;
+
+                            tabControl1.SelectedTab.Text = ruta[ruta.Length - 1];
+                        }                        
+                    }
+                }
+            }
+        }
+
+
+        private void saveMethod()
+        {
+            Control controlBox;
+            Control richText = null;           
+
+            if (tabControl1.SelectedTab.HasChildren)
+            {
+                foreach (Control item in tabControl1.SelectedTab.Controls)
+                {
+                    controlBox = item;
+
+                    if  (controlBox is RichTextBox)
+                    {
+                        richText = item;
+                    }
+
+
+                }
+                StreamWriter writer = new StreamWriter(tabControl1.SelectedTab.ToolTipText);
+                writer.Write(richText.Text);
+                writer.Close();
+            }
+            else
+            {
+                mostrarError();
+            }
+        }
+
+
+        private void mostrarError()
+        {
+            MessageBox.Show("Error al guardar el archivo", "Error al guardar",MessageBoxButtons.OK,MessageBoxIcon.Error);
+        }
+
+        private void getFile()
+        {
+            OpenFileDialog openFile = new OpenFileDialog()
+            {
+                Title = "Seleccionar Archivo",
+                Filter = "Archivo Compiladores 1 | *.er",
+                DefaultExt = "er"
+            };
+            var result = openFile.ShowDialog();
+
+            if (result == DialogResult.OK)
+            {
+                StreamReader read = new StreamReader(openFile.FileName);
+
+                Control controlBox;
+
+                if (tabControl1.SelectedTab.HasChildren)
+                {
+                    foreach (Control item in tabControl1.SelectedTab.Controls)
+                    {
+                        controlBox = item;
+
+                        if (controlBox is RichTextBox)
+                        {
+                            controlBox.Text = read.ReadToEnd();
+                            read.Close();
+                        }
+                    }
+                }
+                
+                String[] ruta = openFile.FileName.Split('\\');
+                tabControl1.SelectedTab.Text = ruta[ruta.Length - 1];
+                tabControl1.SelectedTab.ToolTipText = openFile.FileName;
+
+            }
+
+        }
+                
+
+        private void addTabPage()
+        {
+            int numPage = tabControl1.TabPages.Count + 1;
+            TabPage newPage = new TabPage("Untitled_"+numPage);
+
+            RichTextBox textBox = new RichTextBox();
+            textBox.SetBounds(50,0,594,295);
+            textBox.BackColor = Color.FromArgb(70, 70, 70);
+            textBox.ForeColor = Color.White;
+            textBox.Font = new Font("Tahoma", 10, FontStyle.Regular);
+            textBox.WordWrap = false;
+
+            PictureBox num = new PictureBox();
+            num.SetBounds(0, 0, 54, 291);
+            num.BackColor = Color.FromArgb(50, 50, 50);
+
+            newPage.Controls.Add(textBox);
+            newPage.Controls.Add(num);
+
+            tabControl1.TabPages.Add(newPage);
+            tabControl1.SelectedTab = newPage;
+        }
+
+        private void guardarToolStripMenuItem_Click(object sender, EventArgs e)
+        {           
+            if(tabControl1.SelectedTab.Text.Equals("Untitled"))
+            {
+                saveAsMethod();
+            }
+            else
+            {
+                saveMethod();
+            }
+        }
+
+        private void nuevoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            addTabPage();
         }
     }
 }
