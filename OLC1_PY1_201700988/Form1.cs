@@ -329,14 +329,14 @@ namespace OLC1_PY1_201700988
             TabPage newPage = new TabPage("Untitled_" + numPage);
 
             RichTextBox textBox = new RichTextBox();
-            textBox.SetBounds(50, 0, 594, 497);
+            textBox.SetBounds(50, 0, 594, 458);
             textBox.BackColor = Color.FromArgb(70, 70, 70);
             textBox.ForeColor = Color.White;
             textBox.Font = new Font("Tahoma", 10, FontStyle.Regular);
             textBox.WordWrap = false;
 
             PictureBox num = new PictureBox();
-            num.SetBounds(0, 0, 54, 493);
+            num.SetBounds(0, 0, 54, 458);
             num.BackColor = Color.FromArgb(50, 50, 50);
             num.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox2_Paint);
 
@@ -434,6 +434,8 @@ namespace OLC1_PY1_201700988
 
         private void btnAnalizar_Click(object sender, EventArgs e)
         {
+            Program.conteoAnalisis++;
+
             Control controlBox;            
             if (tabControl1.SelectedTab.HasChildren)
             {
@@ -445,6 +447,7 @@ namespace OLC1_PY1_201700988
                     {
                         Program.analizador.scannerMethod(controlBox.Text);
                         Program.analizador.imprimirConsola(consolaLexico);
+                        Program.analizador.reporteGlobal();
                     }
                 }
             }

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Collections;
 using static OLC1_PY1_201700988.Analizador.token;
 using System.Windows.Forms;
+using System.IO;
 
 namespace OLC1_PY1_201700988.Analizador
 {
@@ -22,6 +23,7 @@ namespace OLC1_PY1_201700988.Analizador
             listaTokens = new ArrayList();
             estado = 0;
             auxiliarLexico = "";
+            linea = 1;
 
             char caracter;
             for (int i = 0; i < entrada.Length; i++)
@@ -316,7 +318,8 @@ namespace OLC1_PY1_201700988.Analizador
                                 else
                                 {
                                     addToken(tipo.IDENTIFICADOR);
-                                }                                
+                                }
+                                i--;
                             }
                         break;
 
@@ -438,6 +441,74 @@ namespace OLC1_PY1_201700988.Analizador
             
             consola.Text += "                 [Fin de Reporte]               \n";
             consola.Text += "------------------------------------------------\n";
+        }
+
+        public void reporteGlobal()
+        {
+            string pathDesktop = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
+            string pathFolder = pathDesktop + "\\ER_Analisis\\Analisis_Lexico";
+
+            try
+            {
+                //Existe el directorio para el archivo, sino crearlo
+                if (!Directory.Exists(pathFolder))
+                {
+                    DirectoryInfo dir = Directory.CreateDirectory(pathFolder);
+                }
+
+                //Crear el reporte
+                string pathRep = pathFolder + "\\Analisis_" + Program.conteoAnalisis + ".html";
+                StreamWriter repHtml = new StreamWriter(pathRep);
+
+                //Escribir la tabla html
+                repHtml.WriteLine("<!DOCTYPE html>");
+                repHtml.WriteLine("<html>");
+                repHtml.WriteLine("<head>");
+                repHtml.WriteLine("<title>Analisis_" + Program.conteoAnalisis + "</title>");
+                repHtml.WriteLine("<meta charset=\"utf-8\">");
+                repHtml.WriteLine("<h1 style=\"text-align:center\">Universidad de San Carlos de Guatemala</h1>");
+                repHtml.WriteLine("<h2 style=\"text - align: center\">Organizacion de lenguajes y compiladores 1</h2>");
+                repHtml.WriteLine("</head>");
+                repHtml.WriteLine("<body>");
+                repHtml.WriteLine("<table border=\"1\" style=\"width =100%\">");
+                repHtml.WriteLine("<caption><h3>Reporte de analisis lexico</h3></caption>");
+                repHtml.WriteLine("<colgroup>");
+                repHtml.WriteLine("<col style=\"width: 20 % \"/>");
+                repHtml.WriteLine("<col style=\"width: 40 % \"/>");
+                repHtml.WriteLine("<col style=\"width: 40 % \"/>");
+                repHtml.WriteLine("</colgroup>");
+                repHtml.WriteLine("<thead>");
+                repHtml.WriteLine("<tr>");
+                repHtml.WriteLine("<th rowspan=\"2\">Fila</th>");
+                repHtml.WriteLine("<th colspan=\"2\">Analisis de archivo</th>");
+                repHtml.WriteLine("</tr>");
+                repHtml.WriteLine("<tr>");
+                repHtml.WriteLine("<th>Tipo de token</th>");
+                repHtml.WriteLine("<th>Lexema</th>");
+                repHtml.WriteLine("</tr>");
+                repHtml.WriteLine("</thead>");
+                repHtml.WriteLine("<tfoot>");
+                repHtml.WriteLine("<tr>");
+                repHtml.WriteLine("<td colspan=\"3\">Fin de Reporte</td>");
+                repHtml.WriteLine("</tr>");
+                repHtml.WriteLine("</tfoot>");
+                repHtml.WriteLine("<tbody>");
+
+
+
+
+                repHtml.WriteLine("</tbody>");
+                repHtml.WriteLine("</table>")
+                repHtml.WriteLine("</body>");
+                repHtml.WriteLine("</html>");
+
+                repHtml.Close();
+            }
+            catch (Exception er)
+            {
+                MessageBox.Show("Error al generar el reporte","Error con reporte lexico", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            
         }
 
     }

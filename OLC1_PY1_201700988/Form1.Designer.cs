@@ -30,6 +30,13 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("AFND");
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("AFD");
+            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Tabla de Transiciones");
+            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Inicio", new System.Windows.Forms.TreeNode[] {
+            treeNode1,
+            treeNode2,
+            treeNode3});
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.archivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -138,9 +145,9 @@
             this.groupBox1.Controls.Add(this.ConsolaLexema);
             this.groupBox1.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.ForeColor = System.Drawing.Color.White;
-            this.groupBox1.Location = new System.Drawing.Point(8, 555);
+            this.groupBox1.Location = new System.Drawing.Point(8, 513);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1072, 175);
+            this.groupBox1.Size = new System.Drawing.Size(1072, 158);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Consola";
@@ -154,7 +161,7 @@
             this.consolaLexico.Location = new System.Drawing.Point(658, 19);
             this.consolaLexico.Name = "consolaLexico";
             this.consolaLexico.ReadOnly = true;
-            this.consolaLexico.Size = new System.Drawing.Size(408, 150);
+            this.consolaLexico.Size = new System.Drawing.Size(408, 130);
             this.consolaLexico.TabIndex = 1;
             this.consolaLexico.Text = "";
             this.consolaLexico.WordWrap = false;
@@ -168,7 +175,7 @@
             this.ConsolaLexema.Location = new System.Drawing.Point(6, 19);
             this.ConsolaLexema.Name = "ConsolaLexema";
             this.ConsolaLexema.ReadOnly = true;
-            this.ConsolaLexema.Size = new System.Drawing.Size(646, 150);
+            this.ConsolaLexema.Size = new System.Drawing.Size(646, 130);
             this.ConsolaLexema.TabIndex = 0;
             this.ConsolaLexema.Text = "";
             this.ConsolaLexema.WordWrap = false;
@@ -180,7 +187,7 @@
             this.richTextBox2.ForeColor = System.Drawing.Color.White;
             this.richTextBox2.Location = new System.Drawing.Point(50, 0);
             this.richTextBox2.Name = "richTextBox2";
-            this.richTextBox2.Size = new System.Drawing.Size(594, 497);
+            this.richTextBox2.Size = new System.Drawing.Size(594, 458);
             this.richTextBox2.TabIndex = 0;
             this.richTextBox2.Text = "";
             this.richTextBox2.WordWrap = false;
@@ -209,9 +216,9 @@
             this.groupBox2.Controls.Add(this.pictureBox1);
             this.groupBox2.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox2.ForeColor = System.Drawing.Color.White;
-            this.groupBox2.Location = new System.Drawing.Point(666, 269);
+            this.groupBox2.Location = new System.Drawing.Point(666, 205);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(414, 280);
+            this.groupBox2.Size = new System.Drawing.Size(414, 306);
             this.groupBox2.TabIndex = 5;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Gráfico";
@@ -221,7 +228,7 @@
             this.pictureBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
             this.pictureBox1.Location = new System.Drawing.Point(6, 19);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(402, 255);
+            this.pictureBox1.Size = new System.Drawing.Size(402, 281);
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
@@ -238,7 +245,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 25);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(644, 493);
+            this.tabPage1.Size = new System.Drawing.Size(644, 455);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Untitled_1";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -248,7 +255,7 @@
             this.pictureBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
             this.pictureBox2.Location = new System.Drawing.Point(0, 0);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(50, 493);
+            this.pictureBox2.Size = new System.Drawing.Size(50, 458);
             this.pictureBox2.TabIndex = 1;
             this.pictureBox2.TabStop = false;
             this.pictureBox2.Click += new System.EventHandler(this.pictureBox2_Click);
@@ -261,7 +268,7 @@
             this.tabControl1.Location = new System.Drawing.Point(8, 27);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(652, 522);
+            this.tabControl1.Size = new System.Drawing.Size(652, 484);
             this.tabControl1.TabIndex = 1;
             // 
             // groupBox3
@@ -271,7 +278,7 @@
             this.groupBox3.ForeColor = System.Drawing.Color.White;
             this.groupBox3.Location = new System.Drawing.Point(666, 78);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(414, 185);
+            this.groupBox3.Size = new System.Drawing.Size(414, 127);
             this.groupBox3.TabIndex = 6;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Contenido";
@@ -281,9 +288,20 @@
             this.treeView1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
             this.treeView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.treeView1.ForeColor = System.Drawing.SystemColors.Info;
+            this.treeView1.LineColor = System.Drawing.Color.SkyBlue;
             this.treeView1.Location = new System.Drawing.Point(6, 22);
             this.treeView1.Name = "treeView1";
-            this.treeView1.Size = new System.Drawing.Size(402, 157);
+            treeNode1.Name = "Nodo1";
+            treeNode1.Text = "AFND";
+            treeNode2.Name = "Nodo2";
+            treeNode2.Text = "AFD";
+            treeNode3.Name = "Nodo3";
+            treeNode3.Text = "Tabla de Transiciones";
+            treeNode4.Name = "Nodo0";
+            treeNode4.Text = "Inicio";
+            this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
+            treeNode4});
+            this.treeView1.Size = new System.Drawing.Size(402, 99);
             this.treeView1.TabIndex = 0;
             // 
             // btnLexemas
@@ -311,7 +329,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
-            this.ClientSize = new System.Drawing.Size(1092, 742);
+            this.ClientSize = new System.Drawing.Size(1092, 678);
             this.Controls.Add(this.btnLexemas);
             this.Controls.Add(this.btnAnalizar);
             this.Controls.Add(this.groupBox3);
