@@ -72,8 +72,7 @@ namespace OLC1_PY1_201700988
                             controlBox = item;
 
                             if (controlBox is RichTextBox)
-                            {
-                                Console.WriteLine(posPage + " " + controlBox.Text);
+                            {                                
                                 if (controlBox.Text.Equals(""))
                                 {
                                     createPage = false;
@@ -90,8 +89,6 @@ namespace OLC1_PY1_201700988
                 }
                 tabControl1.SelectedIndex = posPage;
             }
-
-            Console.WriteLine("posPage: " + posPage);
 
             if (createPage)
             {
@@ -332,15 +329,16 @@ namespace OLC1_PY1_201700988
             TabPage newPage = new TabPage("Untitled_" + numPage);
 
             RichTextBox textBox = new RichTextBox();
-            textBox.SetBounds(50, 0, 594, 295);
+            textBox.SetBounds(50, 0, 594, 497);
             textBox.BackColor = Color.FromArgb(70, 70, 70);
             textBox.ForeColor = Color.White;
             textBox.Font = new Font("Tahoma", 10, FontStyle.Regular);
             textBox.WordWrap = false;
 
             PictureBox num = new PictureBox();
-            num.SetBounds(0, 0, 54, 291);
+            num.SetBounds(0, 0, 54, 493);
             num.BackColor = Color.FromArgb(50, 50, 50);
+            num.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox2_Paint);
 
             newPage.Controls.Add(textBox);
             newPage.Controls.Add(num);
@@ -396,7 +394,7 @@ namespace OLC1_PY1_201700988
         private void pintarNumeros(PaintEventArgs e)
         {
             caracter = 0;
-            int altura = 0;
+            int altura = 1;
             PictureBox numeros = null;
             RichTextBox aux = null;
 
@@ -423,16 +421,34 @@ namespace OLC1_PY1_201700988
             {
                 for (int i = 0; i < aux.Lines.Length; i++)
                 {
-                    e.Graphics.DrawString((i + 1).ToString(), aux.Font, Brushes.White, numeros.Width - (e.Graphics.MeasureString((i + 1).ToString(), aux.Font).Width + 10), altura);
+                    e.Graphics.DrawString((i + 1).ToString(), aux.Font, Brushes.SkyBlue, numeros.Width - (e.Graphics.MeasureString((i + 1).ToString(), aux.Font).Width + 10), altura);
                     caracter += aux.Lines[i].Length + 1;
                     altura = aux.GetPositionFromCharIndex(caracter).Y;
                 }
             }
             else
             {
-                e.Graphics.DrawString("1", aux.Font, Brushes.White, numeros.Width - (e.Graphics.MeasureString("1", aux.Font).Width + 10), altura);
+                e.Graphics.DrawString("1", aux.Font, Brushes.SkyBlue, numeros.Width - (e.Graphics.MeasureString("1", aux.Font).Width + 10), altura);
             }
         }
 
+        private void btnAnalizar_Click(object sender, EventArgs e)
+        {
+            Control controlBox;            
+            if (tabControl1.SelectedTab.HasChildren)
+            {
+                foreach (Control item in tabControl1.SelectedTab.Controls)
+                {
+                    controlBox = item;
+
+                    if (controlBox is RichTextBox)
+                    {
+                        Program.analizador.scannerMethod(controlBox.Text);
+                        Program.analizador.imprimirConsola(consolaLexico);
+                    }
+                }
+            }
+                        
+        }
     }
 }

@@ -39,7 +39,8 @@
             this.guardarComoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ayudaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.consolaLexico = new System.Windows.Forms.RichTextBox();
+            this.ConsolaLexema = new System.Windows.Forms.RichTextBox();
             this.richTextBox2 = new System.Windows.Forms.RichTextBox();
             this.btnAnalizar = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -71,7 +72,7 @@
             this.ayudaToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(990, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1092, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             this.menuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuStrip1_ItemClicked);
@@ -93,7 +94,7 @@
             this.abrirToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
             this.abrirToolStripMenuItem.Name = "abrirToolStripMenuItem";
             this.abrirToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.abrirToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.abrirToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
             this.abrirToolStripMenuItem.Text = "Abrir";
             this.abrirToolStripMenuItem.Click += new System.EventHandler(this.abrirToolStripMenuItem_Click);
             // 
@@ -102,7 +103,7 @@
             this.nuevoToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
             this.nuevoToolStripMenuItem.Name = "nuevoToolStripMenuItem";
             this.nuevoToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-            this.nuevoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.nuevoToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
             this.nuevoToolStripMenuItem.Text = "Nuevo";
             this.nuevoToolStripMenuItem.Click += new System.EventHandler(this.nuevoToolStripMenuItem_Click);
             // 
@@ -111,7 +112,7 @@
             this.guardarToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
             this.guardarToolStripMenuItem.Name = "guardarToolStripMenuItem";
             this.guardarToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.guardarToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.guardarToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
             this.guardarToolStripMenuItem.Text = "Guardar";
             this.guardarToolStripMenuItem.Click += new System.EventHandler(this.guardarToolStripMenuItem_Click);
             // 
@@ -119,7 +120,7 @@
             // 
             this.guardarComoToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
             this.guardarComoToolStripMenuItem.Name = "guardarComoToolStripMenuItem";
-            this.guardarComoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.guardarComoToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
             this.guardarComoToolStripMenuItem.Text = "Guardar Como";
             this.guardarComoToolStripMenuItem.Click += new System.EventHandler(this.guardarComoToolStripMenuItem_Click);
             // 
@@ -133,29 +134,45 @@
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.Color.Transparent;
-            this.groupBox1.Controls.Add(this.richTextBox1);
+            this.groupBox1.Controls.Add(this.consolaLexico);
+            this.groupBox1.Controls.Add(this.ConsolaLexema);
             this.groupBox1.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.ForeColor = System.Drawing.Color.White;
-            this.groupBox1.Location = new System.Drawing.Point(8, 353);
+            this.groupBox1.Location = new System.Drawing.Point(8, 555);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(652, 153);
+            this.groupBox1.Size = new System.Drawing.Size(1072, 175);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Consola";
             // 
-            // richTextBox1
+            // consolaLexico
             // 
-            this.richTextBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
-            this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.richTextBox1.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.richTextBox1.ForeColor = System.Drawing.SystemColors.Info;
-            this.richTextBox1.Location = new System.Drawing.Point(6, 19);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.ReadOnly = true;
-            this.richTextBox1.Size = new System.Drawing.Size(640, 128);
-            this.richTextBox1.TabIndex = 0;
-            this.richTextBox1.Text = "";
-            this.richTextBox1.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
+            this.consolaLexico.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
+            this.consolaLexico.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.consolaLexico.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.consolaLexico.ForeColor = System.Drawing.SystemColors.Info;
+            this.consolaLexico.Location = new System.Drawing.Point(658, 19);
+            this.consolaLexico.Name = "consolaLexico";
+            this.consolaLexico.ReadOnly = true;
+            this.consolaLexico.Size = new System.Drawing.Size(408, 150);
+            this.consolaLexico.TabIndex = 1;
+            this.consolaLexico.Text = "";
+            this.consolaLexico.WordWrap = false;
+            // 
+            // ConsolaLexema
+            // 
+            this.ConsolaLexema.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
+            this.ConsolaLexema.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.ConsolaLexema.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ConsolaLexema.ForeColor = System.Drawing.SystemColors.Info;
+            this.ConsolaLexema.Location = new System.Drawing.Point(6, 19);
+            this.ConsolaLexema.Name = "ConsolaLexema";
+            this.ConsolaLexema.ReadOnly = true;
+            this.ConsolaLexema.Size = new System.Drawing.Size(646, 150);
+            this.ConsolaLexema.TabIndex = 0;
+            this.ConsolaLexema.Text = "";
+            this.ConsolaLexema.WordWrap = false;
+            this.ConsolaLexema.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
             // 
             // richTextBox2
             // 
@@ -163,7 +180,7 @@
             this.richTextBox2.ForeColor = System.Drawing.Color.White;
             this.richTextBox2.Location = new System.Drawing.Point(50, 0);
             this.richTextBox2.Name = "richTextBox2";
-            this.richTextBox2.Size = new System.Drawing.Size(594, 295);
+            this.richTextBox2.Size = new System.Drawing.Size(594, 497);
             this.richTextBox2.TabIndex = 0;
             this.richTextBox2.Text = "";
             this.richTextBox2.WordWrap = false;
@@ -178,12 +195,13 @@
             this.btnAnalizar.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAnalizar.ForeColor = System.Drawing.Color.White;
             this.btnAnalizar.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.btnAnalizar.Location = new System.Drawing.Point(666, 27);
+            this.btnAnalizar.Location = new System.Drawing.Point(765, 29);
             this.btnAnalizar.Name = "btnAnalizar";
             this.btnAnalizar.Size = new System.Drawing.Size(154, 43);
             this.btnAnalizar.TabIndex = 3;
             this.btnAnalizar.Text = "Analizar Entrada";
             this.btnAnalizar.UseVisualStyleBackColor = false;
+            this.btnAnalizar.Click += new System.EventHandler(this.btnAnalizar_Click);
             // 
             // groupBox2
             // 
@@ -193,7 +211,7 @@
             this.groupBox2.ForeColor = System.Drawing.Color.White;
             this.groupBox2.Location = new System.Drawing.Point(666, 269);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(317, 237);
+            this.groupBox2.Size = new System.Drawing.Size(414, 280);
             this.groupBox2.TabIndex = 5;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Gráfico";
@@ -203,7 +221,7 @@
             this.pictureBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
             this.pictureBox1.Location = new System.Drawing.Point(6, 19);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(305, 212);
+            this.pictureBox1.Size = new System.Drawing.Size(402, 255);
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
@@ -220,7 +238,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 25);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(644, 291);
+            this.tabPage1.Size = new System.Drawing.Size(644, 493);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Untitled_1";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -230,7 +248,7 @@
             this.pictureBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
             this.pictureBox2.Location = new System.Drawing.Point(0, 0);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(50, 291);
+            this.pictureBox2.Size = new System.Drawing.Size(50, 493);
             this.pictureBox2.TabIndex = 1;
             this.pictureBox2.TabStop = false;
             this.pictureBox2.Click += new System.EventHandler(this.pictureBox2_Click);
@@ -243,7 +261,7 @@
             this.tabControl1.Location = new System.Drawing.Point(8, 27);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(652, 320);
+            this.tabControl1.Size = new System.Drawing.Size(652, 522);
             this.tabControl1.TabIndex = 1;
             // 
             // groupBox3
@@ -253,7 +271,7 @@
             this.groupBox3.ForeColor = System.Drawing.Color.White;
             this.groupBox3.Location = new System.Drawing.Point(666, 78);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(317, 185);
+            this.groupBox3.Size = new System.Drawing.Size(414, 185);
             this.groupBox3.TabIndex = 6;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Contenido";
@@ -265,7 +283,7 @@
             this.treeView1.ForeColor = System.Drawing.SystemColors.Info;
             this.treeView1.Location = new System.Drawing.Point(6, 22);
             this.treeView1.Name = "treeView1";
-            this.treeView1.Size = new System.Drawing.Size(305, 157);
+            this.treeView1.Size = new System.Drawing.Size(402, 157);
             this.treeView1.TabIndex = 0;
             // 
             // btnLexemas
@@ -277,7 +295,7 @@
             this.btnLexemas.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLexemas.ForeColor = System.Drawing.Color.White;
             this.btnLexemas.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.btnLexemas.Location = new System.Drawing.Point(826, 27);
+            this.btnLexemas.Location = new System.Drawing.Point(925, 29);
             this.btnLexemas.Name = "btnLexemas";
             this.btnLexemas.Size = new System.Drawing.Size(155, 43);
             this.btnLexemas.TabIndex = 7;
@@ -293,7 +311,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
-            this.ClientSize = new System.Drawing.Size(990, 512);
+            this.ClientSize = new System.Drawing.Size(1092, 742);
             this.Controls.Add(this.btnLexemas);
             this.Controls.Add(this.btnAnalizar);
             this.Controls.Add(this.groupBox3);
@@ -332,7 +350,7 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button btnAnalizar;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.RichTextBox ConsolaLexema;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.ToolStripMenuItem abrirToolStripMenuItem;
@@ -347,6 +365,7 @@
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Button btnLexemas;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.RichTextBox consolaLexico;
     }
 }
 
