@@ -13,6 +13,8 @@ namespace OLC1_PY1_201700988
 {
     public partial class Form1 : Form
     {
+        int caracter = 0;
+
         public Form1()
         {
             InitializeComponent();
@@ -28,14 +30,14 @@ namespace OLC1_PY1_201700988
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
-        
+            timer1.Interval = 10;
+            timer1.Start();
         }
 
         private void archivoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
-        }        
+
+        }
 
         private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
@@ -53,13 +55,13 @@ namespace OLC1_PY1_201700988
 
         private void abrirToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Control controlBox;            
+            Control controlBox;
             int posPage = 0;
             bool createPage = true;
 
             tabControl1.SelectedIndex = posPage;
             foreach (TabPage paginaActual in tabControl1.TabPages)
-            {                
+            {
                 if (paginaActual.ToolTipText.Equals(""))
                 {
                     //--------
@@ -68,14 +70,14 @@ namespace OLC1_PY1_201700988
                         foreach (Control item in tabControl1.SelectedTab.Controls)
                         {
                             controlBox = item;
-                            
+
                             if (controlBox is RichTextBox)
                             {
                                 Console.WriteLine(posPage + " " + controlBox.Text);
                                 if (controlBox.Text.Equals(""))
-                                {                                    
+                                {
                                     createPage = false;
-                                    break;                                    
+                                    break;
                                 }
                             }
                         }
@@ -85,7 +87,7 @@ namespace OLC1_PY1_201700988
                 if (createPage)
                 {
                     posPage++;
-                }                
+                }
                 tabControl1.SelectedIndex = posPage;
             }
 
@@ -94,8 +96,8 @@ namespace OLC1_PY1_201700988
             if (createPage)
             {
                 addTabPage();
-            }            
-            
+            }
+
             getFile();
         }
 
@@ -107,7 +109,7 @@ namespace OLC1_PY1_201700988
                 {
                     return Color.FromArgb(70, 70, 70);
                 }
-            } 
+            }
 
             public override Color ImageMarginGradientBegin
             {
@@ -116,7 +118,7 @@ namespace OLC1_PY1_201700988
                     return Color.FromArgb(70, 70, 70);
                 }
             }
-            
+
 
             public override Color ImageMarginGradientMiddle
             {
@@ -236,7 +238,7 @@ namespace OLC1_PY1_201700988
 
                         var result = saveFile.ShowDialog();
 
-                        if(result == DialogResult.OK)
+                        if (result == DialogResult.OK)
                         {
                             StreamWriter writer = new StreamWriter(saveFile.FileName);
                             writer.Write(controlBox.Text);
@@ -247,17 +249,16 @@ namespace OLC1_PY1_201700988
                             tabControl1.SelectedTab.ToolTipText = saveFile.FileName;
 
                             tabControl1.SelectedTab.Text = ruta[ruta.Length - 1];
-                        }                        
+                        }
                     }
                 }
             }
         }
 
-
         private void saveMethod()
         {
             Control controlBox;
-            Control richText = null;           
+            Control richText = null;
 
             if (tabControl1.SelectedTab.HasChildren)
             {
@@ -265,7 +266,7 @@ namespace OLC1_PY1_201700988
                 {
                     controlBox = item;
 
-                    if  (controlBox is RichTextBox)
+                    if (controlBox is RichTextBox)
                     {
                         richText = item;
                     }
@@ -282,10 +283,9 @@ namespace OLC1_PY1_201700988
             }
         }
 
-
         private void mostrarError()
         {
-            MessageBox.Show("Error al guardar el archivo", "Error al guardar",MessageBoxButtons.OK,MessageBoxIcon.Error);
+            MessageBox.Show("Error al guardar el archivo", "Error al guardar", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         private void getFile()
@@ -317,7 +317,7 @@ namespace OLC1_PY1_201700988
                         }
                     }
                 }
-                
+
                 String[] ruta = openFile.FileName.Split('\\');
                 tabControl1.SelectedTab.Text = ruta[ruta.Length - 1];
                 tabControl1.SelectedTab.ToolTipText = openFile.FileName;
@@ -325,15 +325,14 @@ namespace OLC1_PY1_201700988
             }
 
         }
-                
 
         private void addTabPage()
         {
             int numPage = tabControl1.TabPages.Count + 1;
-            TabPage newPage = new TabPage("Untitled_"+numPage);
+            TabPage newPage = new TabPage("Untitled_" + numPage);
 
             RichTextBox textBox = new RichTextBox();
-            textBox.SetBounds(50,0,594,295);
+            textBox.SetBounds(50, 0, 594, 295);
             textBox.BackColor = Color.FromArgb(70, 70, 70);
             textBox.ForeColor = Color.White;
             textBox.Font = new Font("Tahoma", 10, FontStyle.Regular);
@@ -351,8 +350,8 @@ namespace OLC1_PY1_201700988
         }
 
         private void guardarToolStripMenuItem_Click(object sender, EventArgs e)
-        {           
-            if(tabControl1.SelectedTab.ToolTipText.Equals(""))
+        {
+            if (tabControl1.SelectedTab.ToolTipText.Equals(""))
             {
                 saveAsMethod();
             }
@@ -366,5 +365,74 @@ namespace OLC1_PY1_201700988
         {
             addTabPage();
         }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            Control controlBox;
+            if (tabControl1.SelectedTab.HasChildren)
+            {
+                foreach (Control item in tabControl1.SelectedTab.Controls)
+                {
+                    controlBox = item;
+
+                    if (controlBox is PictureBox)
+                    {
+                        controlBox.Refresh();
+                    }
+                }
+            }
+        }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pictureBox2_Paint(object sender, PaintEventArgs e)
+        {
+            pintarNumeros(e);
+        }
+
+        private void pintarNumeros(PaintEventArgs e)
+        {
+            caracter = 0;
+            int altura = 0;
+            PictureBox numeros = null;
+            RichTextBox aux = null;
+
+            Control controlBox;
+            if (tabControl1.SelectedTab.HasChildren)
+            {
+                foreach (Control item in tabControl1.SelectedTab.Controls)
+                {
+                    controlBox = item;
+
+                    if (controlBox is RichTextBox)
+                    {
+                        aux = (RichTextBox)item;
+                    }
+
+                    if (controlBox is PictureBox)
+                    {
+                        numeros = (PictureBox)item;
+                    }
+                }
+            }
+
+            if (aux.Lines.Length > 0)
+            {
+                for (int i = 0; i < aux.Lines.Length; i++)
+                {
+                    e.Graphics.DrawString((i + 1).ToString(), aux.Font, Brushes.White, numeros.Width - (e.Graphics.MeasureString((i + 1).ToString(), aux.Font).Width + 10), altura);
+                    caracter += aux.Lines[i].Length + 1;
+                    altura = aux.GetPositionFromCharIndex(caracter).Y;
+                }
+            }
+            else
+            {
+                e.Graphics.DrawString("1", aux.Font, Brushes.White, numeros.Width - (e.Graphics.MeasureString("1", aux.Font).Width + 10), altura);
+            }
+        }
+
     }
 }
