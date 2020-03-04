@@ -1,0 +1,9 @@
+
+CONJ: mayusculas -> A~Z;
+CONJ: minusculas -> a~z;
+CONJ: digitos-> 0~9;
+
+
+EXP1 -> .{mayusculas}*.|?{minusculas}.{mayusculas}*.|{digitos}" "{digitos}
+
+EXP1: "Un compilador es un programa informatico que se encarga de traducir el codigo fuente de cualquier aplicacion que este desarrollando";

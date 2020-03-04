@@ -1,0 +1,40 @@
+//Conjuntos
+CONJ: vocales -> a,e,i,o,u;
+CONJ: minusculas -> a~z;
+CONJ: simbolos ->  ~);
+CONJ: digitos -> 0~9;
+CONJ: a -> a,A;
+
+//Expresiones regulares
+exp1 -> ...|"El""Los"" "+|{minusculas}" "".";
+exp2 -> ...{digitos}*{digitos}"."{digitos}*{digitos};
+exp3 -> +|{simbolos}{vocales};
+exp4 -> .{a}+|" "{digitos};
+exp5 -> .\n"hola";
+
+<!
+----------Lexemas--------
+!>
+
+exp1: "El camino es bonito.";
+exp1: "La pelicula esta bonita";
+exp1: "Los vengadores son muy cracks";
+exp1: "El 54 es un numero";
+
+exp2: "54.95";
+exp2: "asf.97";
+exp2: "4.";
+exp2: "74.746";
+
+exp3: "soy un ( abre";
+exp3: "(comentario)";
+exp3: "   espacio!";
+exp3: "#$ error";
+
+exp4:"a 54";
+exp4:"a  12";
+exp4:"A A";
+exp4:  "A4 5";
+
+exp5 ->"
+hola";
