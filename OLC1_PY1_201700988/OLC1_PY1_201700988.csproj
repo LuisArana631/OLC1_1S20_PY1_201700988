@@ -54,6 +54,11 @@
     <Compile Include="DisplayReportes.Designer.cs">
       <DependentUpon>DisplayReportes.cs</DependentUpon>
     </Compile>
+    <Compile Include="Estructuras\ANFD\afnd.cs" />
+    <Compile Include="Estructuras\ANFD\nodoSiguientes.cs" />
+    <Compile Include="Estructuras\ANFD\nodoThompson.cs" />
+    <Compile Include="Estructuras\arbol.cs" />
+    <Compile Include="Estructuras\nodoArbol.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
