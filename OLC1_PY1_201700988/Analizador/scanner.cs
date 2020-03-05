@@ -261,6 +261,10 @@ namespace OLC1_PY1_201700988.Analizador
 
                         case 5:
                             //Evaluar que venga cualquier contenido hasta encontrar "
+                            if(caracter == 10)
+                            {
+                                linea++;
+                            }
                             auxiliarLexico += caracter;
                             if (caracter == 34)
                             {                                
@@ -459,6 +463,7 @@ namespace OLC1_PY1_201700988.Analizador
                 //Crear el reporte
                 string pathRep = pathFolder + "\\Analisis_" + Program.conteoAnalisis + ".html";
                 StreamWriter repHtml = new StreamWriter(pathRep);
+                Program.pathLexico = pathRep;
 
                 //Escribir la tabla html
                 repHtml.WriteLine("<!DOCTYPE html>");
@@ -467,19 +472,21 @@ namespace OLC1_PY1_201700988.Analizador
                 repHtml.WriteLine("<title>Analisis_" + Program.conteoAnalisis + "</title>");
                 repHtml.WriteLine("<meta charset=\"utf-8\">");
                 repHtml.WriteLine("<h1 style=\"text-align:center\">Universidad de San Carlos de Guatemala</h1>");
-                repHtml.WriteLine("<h2 style=\"text - align: center\">Organizacion de lenguajes y compiladores 1</h2>");
+                repHtml.WriteLine("<h2 style=\"text-align: center\">Organizacion de lenguajes y compiladores 1</h2>");
+                repHtml.WriteLine("<h4 style=\"text-align: center\">Luis Fernando Arana Arias - 201700988</h4>");
                 repHtml.WriteLine("</head>");
                 repHtml.WriteLine("<body>");
-                repHtml.WriteLine("<table border=\"1\" style=\"width =100%\">");
+                repHtml.WriteLine("<center>");
+                repHtml.WriteLine("<table border=\"1\" style=\"width:60%\">");
                 repHtml.WriteLine("<caption><h3>Reporte de analisis lexico</h3></caption>");
                 repHtml.WriteLine("<colgroup>");
-                repHtml.WriteLine("<col style=\"width: 20 % \"/>");
-                repHtml.WriteLine("<col style=\"width: 40 % \"/>");
-                repHtml.WriteLine("<col style=\"width: 40 % \"/>");
+                repHtml.WriteLine("<col style=\"width: 10% \"/>");
+                repHtml.WriteLine("<col style=\"width: 20% \"/>");
+                repHtml.WriteLine("<col style=\"width: 70% \"/>");
                 repHtml.WriteLine("</colgroup>");
                 repHtml.WriteLine("<thead>");
                 repHtml.WriteLine("<tr>");
-                repHtml.WriteLine("<th rowspan=\"2\">Fila</th>");
+                repHtml.WriteLine("<th rowspan=\"2\">Linea</th>");
                 repHtml.WriteLine("<th colspan=\"2\">Analisis de archivo</th>");
                 repHtml.WriteLine("</tr>");
                 repHtml.WriteLine("<tr>");
@@ -494,11 +501,18 @@ namespace OLC1_PY1_201700988.Analizador
                 repHtml.WriteLine("</tfoot>");
                 repHtml.WriteLine("<tbody>");
 
-
-
+                foreach(token item in listaTokens)
+                {
+                    repHtml.WriteLine("<tr>");
+                    repHtml.WriteLine("<th> Linea " + item.getLinea() + "</th>");
+                    repHtml.WriteLine("<td>" + item.getTipoString() + "</td>");
+                    repHtml.WriteLine("<td>" + item.getValor() + "</td>");
+                    repHtml.WriteLine("</tr>");
+                }
 
                 repHtml.WriteLine("</tbody>");
-                repHtml.WriteLine("</table>")
+                repHtml.WriteLine("</table>");
+                repHtml.WriteLine("</center>");
                 repHtml.WriteLine("</body>");
                 repHtml.WriteLine("</html>");
 

@@ -448,6 +448,8 @@ namespace OLC1_PY1_201700988
                         Program.analizador.scannerMethod(controlBox.Text);
                         Program.analizador.imprimirConsola(consolaLexico);
                         Program.analizador.reporteGlobal();
+                        DisplayReportes reporteLexico = new DisplayReportes();
+                        reporteLexico.Show();
                     }
                 }
             }

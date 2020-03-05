@@ -79,7 +79,8 @@
             this.ayudaToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1092, 24);
+            this.menuStrip1.Padding = new System.Windows.Forms.Padding(7, 2, 0, 2);
+            this.menuStrip1.Size = new System.Drawing.Size(1274, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             this.menuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuStrip1_ItemClicked);
@@ -145,9 +146,9 @@
             this.groupBox1.Controls.Add(this.ConsolaLexema);
             this.groupBox1.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.ForeColor = System.Drawing.Color.White;
-            this.groupBox1.Location = new System.Drawing.Point(8, 513);
+            this.groupBox1.Location = new System.Drawing.Point(9, 552);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1072, 158);
+            this.groupBox1.Size = new System.Drawing.Size(1251, 170);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Consola";
@@ -158,10 +159,10 @@
             this.consolaLexico.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.consolaLexico.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.consolaLexico.ForeColor = System.Drawing.SystemColors.Info;
-            this.consolaLexico.Location = new System.Drawing.Point(658, 19);
+            this.consolaLexico.Location = new System.Drawing.Point(768, 20);
             this.consolaLexico.Name = "consolaLexico";
             this.consolaLexico.ReadOnly = true;
-            this.consolaLexico.Size = new System.Drawing.Size(408, 130);
+            this.consolaLexico.Size = new System.Drawing.Size(476, 140);
             this.consolaLexico.TabIndex = 1;
             this.consolaLexico.Text = "";
             this.consolaLexico.WordWrap = false;
@@ -172,10 +173,10 @@
             this.ConsolaLexema.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.ConsolaLexema.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ConsolaLexema.ForeColor = System.Drawing.SystemColors.Info;
-            this.ConsolaLexema.Location = new System.Drawing.Point(6, 19);
+            this.ConsolaLexema.Location = new System.Drawing.Point(7, 20);
             this.ConsolaLexema.Name = "ConsolaLexema";
             this.ConsolaLexema.ReadOnly = true;
-            this.ConsolaLexema.Size = new System.Drawing.Size(646, 130);
+            this.ConsolaLexema.Size = new System.Drawing.Size(754, 140);
             this.ConsolaLexema.TabIndex = 0;
             this.ConsolaLexema.Text = "";
             this.ConsolaLexema.WordWrap = false;
@@ -185,9 +186,9 @@
             // 
             this.richTextBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
             this.richTextBox2.ForeColor = System.Drawing.Color.White;
-            this.richTextBox2.Location = new System.Drawing.Point(50, 0);
+            this.richTextBox2.Location = new System.Drawing.Point(58, 0);
             this.richTextBox2.Name = "richTextBox2";
-            this.richTextBox2.Size = new System.Drawing.Size(594, 458);
+            this.richTextBox2.Size = new System.Drawing.Size(692, 493);
             this.richTextBox2.TabIndex = 0;
             this.richTextBox2.Text = "";
             this.richTextBox2.WordWrap = false;
@@ -202,9 +203,9 @@
             this.btnAnalizar.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAnalizar.ForeColor = System.Drawing.Color.White;
             this.btnAnalizar.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.btnAnalizar.Location = new System.Drawing.Point(765, 29);
+            this.btnAnalizar.Location = new System.Drawing.Point(892, 31);
             this.btnAnalizar.Name = "btnAnalizar";
-            this.btnAnalizar.Size = new System.Drawing.Size(154, 43);
+            this.btnAnalizar.Size = new System.Drawing.Size(180, 46);
             this.btnAnalizar.TabIndex = 3;
             this.btnAnalizar.Text = "Analizar Entrada";
             this.btnAnalizar.UseVisualStyleBackColor = false;
@@ -216,9 +217,9 @@
             this.groupBox2.Controls.Add(this.pictureBox1);
             this.groupBox2.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox2.ForeColor = System.Drawing.Color.White;
-            this.groupBox2.Location = new System.Drawing.Point(666, 205);
+            this.groupBox2.Location = new System.Drawing.Point(777, 221);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(414, 306);
+            this.groupBox2.Size = new System.Drawing.Size(483, 330);
             this.groupBox2.TabIndex = 5;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Gráfico";
@@ -226,9 +227,9 @@
             // pictureBox1
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
-            this.pictureBox1.Location = new System.Drawing.Point(6, 19);
+            this.pictureBox1.Location = new System.Drawing.Point(7, 20);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(402, 281);
+            this.pictureBox1.Size = new System.Drawing.Size(469, 303);
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
@@ -245,7 +246,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 25);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(644, 455);
+            this.tabPage1.Size = new System.Drawing.Size(753, 492);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Untitled_1";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -255,7 +256,7 @@
             this.pictureBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
             this.pictureBox2.Location = new System.Drawing.Point(0, 0);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(50, 458);
+            this.pictureBox2.Size = new System.Drawing.Size(58, 493);
             this.pictureBox2.TabIndex = 1;
             this.pictureBox2.TabStop = false;
             this.pictureBox2.Click += new System.EventHandler(this.pictureBox2_Click);
@@ -265,10 +266,10 @@
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tabControl1.Location = new System.Drawing.Point(8, 27);
+            this.tabControl1.Location = new System.Drawing.Point(9, 29);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(652, 484);
+            this.tabControl1.Size = new System.Drawing.Size(761, 521);
             this.tabControl1.TabIndex = 1;
             // 
             // groupBox3
@@ -276,9 +277,9 @@
             this.groupBox3.Controls.Add(this.treeView1);
             this.groupBox3.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox3.ForeColor = System.Drawing.Color.White;
-            this.groupBox3.Location = new System.Drawing.Point(666, 78);
+            this.groupBox3.Location = new System.Drawing.Point(777, 84);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(414, 127);
+            this.groupBox3.Size = new System.Drawing.Size(483, 137);
             this.groupBox3.TabIndex = 6;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Contenido";
@@ -289,7 +290,7 @@
             this.treeView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.treeView1.ForeColor = System.Drawing.SystemColors.Info;
             this.treeView1.LineColor = System.Drawing.Color.SkyBlue;
-            this.treeView1.Location = new System.Drawing.Point(6, 22);
+            this.treeView1.Location = new System.Drawing.Point(7, 24);
             this.treeView1.Name = "treeView1";
             treeNode1.Name = "Nodo1";
             treeNode1.Text = "AFND";
@@ -301,7 +302,7 @@
             treeNode4.Text = "Inicio";
             this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
             treeNode4});
-            this.treeView1.Size = new System.Drawing.Size(402, 99);
+            this.treeView1.Size = new System.Drawing.Size(469, 107);
             this.treeView1.TabIndex = 0;
             // 
             // btnLexemas
@@ -313,9 +314,9 @@
             this.btnLexemas.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLexemas.ForeColor = System.Drawing.Color.White;
             this.btnLexemas.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.btnLexemas.Location = new System.Drawing.Point(925, 29);
+            this.btnLexemas.Location = new System.Drawing.Point(1079, 31);
             this.btnLexemas.Name = "btnLexemas";
-            this.btnLexemas.Size = new System.Drawing.Size(155, 43);
+            this.btnLexemas.Size = new System.Drawing.Size(181, 46);
             this.btnLexemas.TabIndex = 7;
             this.btnLexemas.Text = "Analizar Lexemas";
             this.btnLexemas.UseVisualStyleBackColor = false;
@@ -326,10 +327,10 @@
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
-            this.ClientSize = new System.Drawing.Size(1092, 678);
+            this.ClientSize = new System.Drawing.Size(1274, 730);
             this.Controls.Add(this.btnLexemas);
             this.Controls.Add(this.btnAnalizar);
             this.Controls.Add(this.groupBox3);
@@ -337,6 +338,7 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.menuStrip1);
+            this.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));

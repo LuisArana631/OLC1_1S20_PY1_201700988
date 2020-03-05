@@ -12,6 +12,7 @@ namespace OLC1_PY1_201700988
     {
         public static scanner analizador = new scanner();
         public static int conteoAnalisis = 0;
+        public static string pathLexico = "";
 
         [STAThread]
         static void Main()
