@@ -320,6 +320,7 @@
             this.btnLexemas.TabIndex = 7;
             this.btnLexemas.Text = "Analizar Lexemas";
             this.btnLexemas.UseVisualStyleBackColor = false;
+            this.btnLexemas.Click += new System.EventHandler(this.btnLexemas_Click);
             // 
             // timer1
             // 

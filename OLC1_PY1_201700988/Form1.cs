@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OLC1_PY1_201700988.Estructuras;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -450,10 +451,35 @@ namespace OLC1_PY1_201700988
                         Program.analizador.reporteGlobal();
                         DisplayReportes reporteLexico = new DisplayReportes();
                         reporteLexico.Show();
+
+                        //Prueba de salida de thompson
+                        Program.listER.Add(new er("exp1", 1));
+                        foreach(er exp in Program.listER)
+                        {
+                            exp.addNodoArbol(".",1);
+                            exp.addNodoArbol("|", 1);
+                            exp.addNodoArbol("*", 2);
+                            exp.addNodoArbol("a", 0);
+                            exp.addNodoArbol("b", 0);                            
+                            exp.addNodoArbol("c", 0);                                                        
+
+                            exp.agregarEstados();
+                            exp.graficarArbol();
+
+                            exp.afnInsert();
+
+                            exp.graficarAfnd();
+                        }
                     }
                 }
             }
                         
+        }
+
+        private void btnLexemas_Click(object sender, EventArgs e)
+        {
+            char epsilon = (char)603;
+            ConsolaLexema.Text = epsilon.ToString();
         }
     }
 }
