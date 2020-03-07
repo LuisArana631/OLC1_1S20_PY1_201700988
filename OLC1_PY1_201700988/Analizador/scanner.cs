@@ -450,7 +450,7 @@ namespace OLC1_PY1_201700988.Analizador
         public void reporteGlobal()
         {
             string pathDesktop = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
-            string pathFolder = pathDesktop + "\\ER_Analisis\\Analisis_Lexico";
+            string pathFolder = pathDesktop + "\\ER_Analisis\\"+Program.conteoAnalisis+"\\Analisis_Lexico";
 
             try
             {

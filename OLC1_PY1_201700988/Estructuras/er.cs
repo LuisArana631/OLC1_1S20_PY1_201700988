@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Collections;
 using System.IO;
 using OLC1_PY1_201700988.Estructuras.ANFD;
+using System.Diagnostics;
 
 namespace OLC1_PY1_201700988.Estructuras
 {
@@ -15,15 +16,60 @@ namespace OLC1_PY1_201700988.Estructuras
         private arbol arbolGuia;
         private ArrayList afn;
         private ArrayList afd;
-        private int numDoc;
+        private int numEr;
 
-        public er(string id, int numDoc)
+        public string getId()
+        {
+            return id;
+        }
+
+        public arbol getArbol()
+        {
+            return arbolGuia;
+        }
+
+        public ArrayList getAfn()
+        {
+            return afn;
+        }
+
+        public ArrayList getAfd()
+        {
+            return afd;
+        }
+
+        public int getNumEr()
+        {
+            return numEr;
+        }
+
+        public void setId(string id)
         {
             this.id = id;
-            this.numDoc = numDoc;
+        }
+
+        public void setArbol(arbol tree)
+        {
+            this.arbolGuia = tree;
+        }
+
+        public void setAfn(ArrayList afn)
+        {
+            this.afn = afn;
+        }
+
+        public void setAfd(ArrayList afd)
+        {
+            this.afd = afd;
+        }
+
+        public er(string id, int numEr)
+        {
+            this.id = id;            
             this.arbolGuia = new arbol();
             this.afn = new ArrayList();
             this.afd = new ArrayList();
+            this.numEr = numEr;
         }
 
         public void addNodoArbol(string valor, int tipo)
@@ -49,7 +95,7 @@ namespace OLC1_PY1_201700988.Estructuras
         public void graficarAfnd()
         {
             string pathDesktop = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
-            string pathFolder = pathDesktop + "\\ER_Analisis\\AFND";
+            string pathFolder = pathDesktop + "\\ER_Analisis\\"+Program.conteoAnalisis+"\\AFND";
 
             try
             {
@@ -58,7 +104,7 @@ namespace OLC1_PY1_201700988.Estructuras
                     DirectoryInfo dir = Directory.CreateDirectory(pathFolder);
                 }
 
-                string pathRep = pathFolder + "\\AFND_"+Program.conteoAnalisis + numDoc + ".dot";
+                string pathRep = pathFolder + "\\AFND"+Program.conteoAnalisis + +numEr+".dot";
                 StreamWriter repAFND = new StreamWriter(pathRep);
                 
                 //Escribir el archivo dot
@@ -84,6 +130,8 @@ namespace OLC1_PY1_201700988.Estructuras
                 repAFND.WriteLine("}");
                 repAFND.Close();
 
+                string pathPng = pathFolder + "\\AFND"+Program.conteoAnalisis  +numEr +".png";
+                this.crearImagen(pathRep,pathPng);
             }
             catch (Exception e)
             {
@@ -91,5 +139,30 @@ namespace OLC1_PY1_201700988.Estructuras
             }
 
         }
+
+        private void crearImagen(string rutaDot, string rutaPng)
+        {
+            try
+            {
+                Console.WriteLine("dot: " + rutaDot);
+                Console.WriteLine("png: " + rutaPng);
+                string comando = "dot.exe -Tpng \"" +rutaDot+"\" -o \""+ rutaPng+"\" ";
+                var command = string.Format(comando);
+                var procInicio = new ProcessStartInfo("cmd","/C"+command);
+                var prc = new Process();
+
+                prc.StartInfo = procInicio;
+                prc.Start();
+                prc.WaitForExit();
+            }
+            catch(Exception e)
+            {
+
+            }
+
+        }
+
+
+
     }
 }

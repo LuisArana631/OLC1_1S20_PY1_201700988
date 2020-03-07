@@ -453,18 +453,19 @@ namespace OLC1_PY1_201700988
                         reporteLexico.Show();
 
                         //Prueba de salida de thompson
-                        Program.listER.Add(new er("exp1", 1));
+                        Program.listER.Add(new er("exp1",1));
                         foreach(er exp in Program.listER)
                         {
                             exp.addNodoArbol(".",1);
+                            exp.addNodoArbol(".",1);
                             exp.addNodoArbol("|", 1);
-                            exp.addNodoArbol("*", 2);
                             exp.addNodoArbol("a", 0);
                             exp.addNodoArbol("b", 0);                            
-                            exp.addNodoArbol("c", 0);                                                        
+                            exp.addNodoArbol("c", 0);
+                            exp.addNodoArbol("*", 2);
+                            exp.addNodoArbol("puto", 0);
 
-                            exp.agregarEstados();
-                            exp.graficarArbol();
+                            exp.agregarEstados();                            
 
                             exp.afnInsert();
 

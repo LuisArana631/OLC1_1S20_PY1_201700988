@@ -110,7 +110,7 @@ namespace OLC1_PY1_201700988.Estructuras
             if (nodo.getValor().Equals("."))
             {
                 //Concatenar los valores
-                nodo.getLeft().setEstadoFin(nodo.getRight().getEstadoInicio());
+                nodo.getRight().setEstadoInicio(nodo.getLeft().getEstadoFin());
                 nodo.setEstadoInicio(nodo.getLeft().getEstadoInicio());
                 nodo.setEstadoFin(nodo.getRight().getEstadoFin());
             }
