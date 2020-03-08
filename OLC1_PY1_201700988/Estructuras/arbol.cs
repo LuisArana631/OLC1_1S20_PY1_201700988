@@ -107,7 +107,7 @@ namespace OLC1_PY1_201700988.Estructuras
             }
 
             //Evaluar si el nodo es una concatenacion
-            if (nodo.getValor().Equals("."))
+            if (nodo.getValor().Equals(".") && nodo.getTipo() == 1)
             {
                 nodo.setEstadoInicio(nodo.getLeft().getEstadoInicio());
                 nodo.setEstadoFin(nodo.getRight().getEstadoFin());
@@ -118,7 +118,7 @@ namespace OLC1_PY1_201700988.Estructuras
                 while (aux != null)
                 {
                     aux.setEstadoInicio(estadoContinuo);
-                    if (aux.getValor().Equals("."))
+                    if (aux.getValor().Equals(".") && nodo.getTipo() == 1)
                     {                        
                         aux = aux.getLeft();
                     }
@@ -128,13 +128,6 @@ namespace OLC1_PY1_201700988.Estructuras
                     }
                 }
                 
-            }
-            else if (nodo.getValor().Equals("+"))
-            {
-                nodo.setEstadoInicio(estado);
-                estado += 2;
-                nodo.setEstadoFin(estado);
-                estado++;
             }
             else
             {
@@ -176,115 +169,112 @@ namespace OLC1_PY1_201700988.Estructuras
                 tablaAfnd.Add(new nodoThompson(nodo.getEstadoFin()));
             }
 
-            if (nodo.getValor().Equals("+"))
-            {
-                tablaAfnd.Add(new nodoThompson(nodo.getEstadoFin()-1));
-            }
-
             char epsilon = (char)603;
             //Insertar transiciones
-            switch (nodo.getValor())
+            switch (nodo.getTipo())
             {
-                case ".":
-                    //Ignorar
-                    break;
-                case "|":
-                    //Insertar conexiones
-                    foreach(nodoThompson item in tablaAfnd)
-                    {
-                        //Conexiones iniciales
-                        if(item.getEstado() == nodo.getEstadoInicio())
-                        {
-                            item.addTransicion(nodo.getLeft().getEstadoInicio(), epsilon.ToString());
-                            item.addTransicion(nodo.getRight().getEstadoInicio(), epsilon.ToString());
-                        }
-
-                        //Conectar al final
-                        if(item.getEstado() == nodo.getLeft().getEstadoFin())
-                        {
-                            item.addTransicion(nodo.getEstadoFin(), epsilon.ToString());
-                        }
-                        if(item.getEstado() == nodo.getRight().getEstadoFin())
-                        {
-                            item.addTransicion(nodo.getEstadoFin(), epsilon.ToString());
-                        }
-
-                    }
-                    break;
-                case "*":
-                    //Insertar conexiones
-                    foreach(nodoThompson item in tablaAfnd)
-                    {
-                        //Conexiones iniciales
-                        if(item.getEstado() == nodo.getEstadoInicio())
-                        {
-                            item.addTransicion(nodo.getEstadoFin(), epsilon.ToString());
-                            item.addTransicion(nodo.getLeft().getEstadoInicio(), epsilon.ToString());
-                        }
-
-                        //Conexiones finales nodo hijo
-                        if(item.getEstado() == nodo.getLeft().getEstadoFin())
-                        {
-                            item.addTransicion(nodo.getEstadoFin(), epsilon.ToString());
-                            item.addTransicion(nodo.getLeft().getEstadoInicio(), epsilon.ToString());
-                        }
-                    }
-                    break;
-                case "?":                    
-                    //Insertar conexiones
-                    foreach(nodoThompson item in tablaAfnd)
-                    {
-                        //Conexiones iniciales
-                        if(item.getEstado() == nodo.getEstadoInicio())
-                        {
-                            item.addTransicion(nodo.getLeft().getEstadoInicio(), epsilon.ToString());
-                            item.addTransicion(nodo.getEstadoFin(), epsilon.ToString());
-                        }
-
-                        //Conexiones finales
-                        if(item.getEstado() == nodo.getLeft().getEstadoFin())
-                        {
-                            item.addTransicion(nodo.getEstadoFin(), epsilon.ToString());
-                        }                        
-
-                    }
-                    break;
-                case "+":                    
-                    //Insertar conexiones
+                case 0:
+                    //Conectar nodos de hoja
                     foreach (nodoThompson item in tablaAfnd)
                     {
-                        //Conexiones iniciales
                         if (item.getEstado() == nodo.getEstadoInicio())
-                        {
-                            item.addTransicion(nodo.getLeft().getEstadoInicio(), epsilon.ToString());
-                            item.addTransicion(nodo.getEstadoFin() - 1, epsilon.ToString());
-                        }
-
-                        //Conexiones del final nodo hijo
-                        if(item.getEstado() == nodo.getLeft().getEstadoFin())
-                        {
-                            item.addTransicion(nodo.getLeft().getEstadoInicio(), epsilon.ToString());
-                            item.addTransicion(nodo.getEstadoFin() - 1, epsilon.ToString());
-                        }
-
-                        //Conexiones del estado fin - 1
-                        if(item.getEstado() == (nodo.getEstadoFin() - 1))
-                        {
-                            item.addTransicion(nodo.getEstadoFin(), epsilon.ToString());
-                        }
-                    }
-
-                    break;
-                default:
-                    //Conectar nodos de hoja
-                    foreach(nodoThompson item in tablaAfnd)
-                    {
-                        if(item.getEstado() == nodo.getEstadoInicio())
                         {
                             item.addTransicion(nodo.getEstadoFin(), nodo.getValor());
                         }
+                    }                    
+                    break;
+                case 1:
+                    switch (nodo.getValor())
+                    {
+                        case ".":
+                            //Ignorar
+                            break;
+                        case "|":
+                            //Insertar conexiones
+                            foreach (nodoThompson item in tablaAfnd)
+                            {
+                                //Conexiones iniciales
+                                if (item.getEstado() == nodo.getEstadoInicio())
+                                {
+                                    item.addTransicion(nodo.getLeft().getEstadoInicio(), epsilon.ToString());
+                                    item.addTransicion(nodo.getRight().getEstadoInicio(), epsilon.ToString());
+                                }
+
+                                //Conectar al final
+                                if (item.getEstado() == nodo.getLeft().getEstadoFin())
+                                {
+                                    item.addTransicion(nodo.getEstadoFin(), epsilon.ToString());
+                                }
+                                if (item.getEstado() == nodo.getRight().getEstadoFin())
+                                {
+                                    item.addTransicion(nodo.getEstadoFin(), epsilon.ToString());
+                                }
+
+                            }
+                            break;
                     }
                     break;
+                case 2:
+                    switch (nodo.getValor())
+                    {
+                        case "*":
+                            //Insertar conexiones
+                            foreach (nodoThompson item in tablaAfnd)
+                            {
+                                //Conexiones iniciales
+                                if (item.getEstado() == nodo.getEstadoInicio())
+                                {
+                                    item.addTransicion(nodo.getEstadoFin(), epsilon.ToString());
+                                    item.addTransicion(nodo.getLeft().getEstadoInicio(), epsilon.ToString());
+                                }
+
+                                //Conexiones finales nodo hijo
+                                if (item.getEstado() == nodo.getLeft().getEstadoFin())
+                                {
+                                    item.addTransicion(nodo.getEstadoFin(), epsilon.ToString());
+                                    item.addTransicion(nodo.getLeft().getEstadoInicio(), epsilon.ToString());
+                                }
+                            }
+                            break;
+                        case "?":
+                            //Insertar conexiones
+                            foreach (nodoThompson item in tablaAfnd)
+                            {
+                                //Conexiones iniciales
+                                if (item.getEstado() == nodo.getEstadoInicio())
+                                {
+                                    item.addTransicion(nodo.getLeft().getEstadoInicio(), epsilon.ToString());
+                                    item.addTransicion(nodo.getEstadoFin(), epsilon.ToString());
+                                }
+
+                                //Conexiones finales
+                                if (item.getEstado() == nodo.getLeft().getEstadoFin())
+                                {
+                                    item.addTransicion(nodo.getEstadoFin(), epsilon.ToString());
+                                }
+
+                            }
+                            break;
+                        case "+":
+                            //Insertar conexiones
+                            foreach (nodoThompson item in tablaAfnd)
+                            {
+                                //Conexiones iniciales
+                                if (item.getEstado() == nodo.getEstadoInicio())
+                                {
+                                    item.addTransicion(nodo.getLeft().getEstadoInicio(), epsilon.ToString());
+                                }
+
+                                //Conexiones finales
+                                if (item.getEstado() == nodo.getLeft().getEstadoFin())
+                                {
+                                    item.addTransicion(nodo.getLeft().getEstadoInicio(), epsilon.ToString());
+                                    item.addTransicion(nodo.getEstadoFin(), epsilon.ToString());
+                                }
+                            }
+                            break;
+                    }
+                    break;                   
             }
 
         }
@@ -302,7 +292,7 @@ namespace OLC1_PY1_201700988.Estructuras
             return false;
         }
 
-        public void graficarArbol()
+        public void graficarArbol(int er)
         {
             string pathDesktop = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
             string pathFolder = pathDesktop + "\\ER_Analisis\\Arbol";
@@ -314,7 +304,7 @@ namespace OLC1_PY1_201700988.Estructuras
                     DirectoryInfo dir = Directory.CreateDirectory(pathFolder);
                 }
 
-                string pathRep = pathFolder + "\\Arbol_" + Program.conteoAnalisis+ ".dot";
+                string pathRep = pathFolder + "\\Arbol_" + er+ ".dot";
                 StreamWriter repArb = new StreamWriter(pathRep);
 
                 repArb.WriteLine("digraph Arbol{");
@@ -342,17 +332,17 @@ namespace OLC1_PY1_201700988.Estructuras
                 {
                     if (nodo.getValor().Length == 1)
                     {
-                        write.WriteLine("\"node" + nodo.getValor() + "\"[label = \"<f0>" + nodo.getEstadoInicio() + " |<f1>\\" + nodo.getValor() + " |<f2>" + nodo.getEstadoFin() + " \"];");
+                        write.WriteLine("\"node" + nodo.getValor() + nodo.getEstadoFin() + nodo.getEstadoInicio() + "\"[label = \"<f0>" + nodo.getEstadoInicio() + " |<f1>\\" + nodo.getValor() + " |<f2>" + nodo.getEstadoFin() + " \"];");
                     }
 
                     if (nodo.getLeft() != null)
                     {
-                        write.WriteLine("\"node" + nodo.getValor() + "\":f0 -> \"node" + nodo.getLeft().getValor() + "\";");
+                        write.WriteLine("\"node" + nodo.getValor() + nodo.getEstadoFin() + nodo.getEstadoInicio() + "\":f0 -> \"node" + nodo.getLeft().getValor() + nodo.getLeft().getEstadoFin() + nodo.getLeft().getEstadoInicio() + "\";");
                     }
 
                     if (nodo.getRight() != null)
                     {
-                        write.WriteLine("\"node" + nodo.getValor() + "\":f2 -> \"node" + nodo.getRight().getValor() + "\";");
+                        write.WriteLine("\"node" + nodo.getValor() + nodo.getEstadoFin() + nodo.getEstadoInicio() + "\":f2 -> \"node" + nodo.getRight().getValor() + nodo.getRight().getEstadoFin() + nodo.getRight().getEstadoInicio() + "\";");
                     }
                 }
                 catch(Exception e)
@@ -362,12 +352,9 @@ namespace OLC1_PY1_201700988.Estructuras
                 crearArbol(write, nodo.getRight());
             }
         }
-
-
+        
     }
-
-
-
+    
     // 0 -> hoja
     // 1 -> operacion
     // 2 -> cerradura

@@ -19,8 +19,12 @@ namespace OLC1_PY1_201700988.Funciones
         {
             int estado = 0;
             int conjEstado = 0;
+            int erEstado = 0;
 
-            consola.Text += "------------------------Insertando expresiones regulares-------------------------";
+            consola.Text += "---------------------------------------------------------------------------------\n";
+            consola.Text += "                       [Insertando expresiones regulares]                        \n";
+            consola.Text += "---------------------------------------------------------------------------------\n";
+            
 
             for (int i=0; i<listaToken.Count; i++)
             {
@@ -51,7 +55,7 @@ namespace OLC1_PY1_201700988.Funciones
                                     }
                                     else
                                     {
-                                        consola.Text += "(ID Duplicado) *No puede tener identificadores duplicados -" + idActual + "-* ";
+                                        consola.Text += "(ID Duplicado) *No puede tener identificadores duplicados -" + idActual + "-* \n";
                                         //Ir al estado para controlar expresion repetida
                                         estado = 3;
                                     }
@@ -69,6 +73,7 @@ namespace OLC1_PY1_201700988.Funciones
                                 {
                                     conjEstado = 1;
                                     Program.listConj.Add(new nodoConj(item.getValor()));
+                                    idActual = item.getValor();
                                 }
                                 //Ignorar caracter :
                                 else if (item.getTipo() == token.tipo.DOS_PUNTOS)
@@ -77,7 +82,7 @@ namespace OLC1_PY1_201700988.Funciones
                                 }
                                 else
                                 {
-                                    consola.Text += "Error sintactico con el token -"+item.getValor()+"- se esperaba un identificador";
+                                    printError(consola, item.getValor(), "identificador");
                                 }
                                 break;
                             case 1:
@@ -89,29 +94,188 @@ namespace OLC1_PY1_201700988.Funciones
                                 //Sino mostrar error sintactico
                                 else
                                 {
-                                    consola.Text += "Error sintactico con el token -" + item.getValor() + "- se esperaba un identificador";
+                                    printError(consola, item.getValor(), "asignacion");
                                 }
                                 break;
                             case 2:
                                 //Debemos insertar el conjunto
-                                
+                                if (item.getTipo() == token.tipo.CARACTER || item.getTipo() == token.tipo.NUMERO || item.getTipo() == token.tipo.SIMBOLO)
+                                {
+                                    //Si encontramos un token valido de un conjunto insertar
+                                    posConj(idActual).addItem(item.getValor());
+                                }
+                                else if (item.getTipo() == token.tipo.COMA)
+                                {
+                                    //Si encontramos una coma seguir en este case
+                                    //Ignorar la coma solo mantenerse en el estado 2
+                                }
+                                else if(item.getTipo() == token.tipo.MACRO)
+                                {
+                                    //Si encontramos un macro ir al case para tratar macros
+                                    conjEstado = 3;
+                                }
+                                else if(item.getTipo() == token.tipo.PUNTO_COMA)
+                                {
+                                    //Si encontramos un punto y coma regresar al estado 0
+                                    conjEstado = 0;
+                                    estado = 0;
+                                }
+                                else
+                                {
+                                    //Notificar un error sintactico
+                                    printError(consola, item.getValor(), "conjunto");
+                                }
 
                                 break;
+                            case 3:
+                                if (item.getTipo() == token.tipo.CARACTER)
+                                {
+                                    //Insertar los caracteres
+                                    string itemInicio = (string)posConj(idActual).getConjunto()[0];
+                                    char caracterInicial = itemInicio[0];
 
+                                    for (int j = caracterInicial + 1; j < (char)item.getValor()[0]; j++)
+                                    {
+                                        char charInsert = (char)j;
+                                        if (char.IsLetter(charInsert))
+                                        {
+                                            posConj(idActual).getConjunto().Add(charInsert.ToString());
+                                        }
+                                    }
+                                }
+                                else if (item.getTipo() == token.tipo.NUMERO)
+                                {
+                                    //Insertar el conjunto de numeros
+                                    int itemInicio = Int32.Parse((string) posConj(idActual).getConjunto()[0]);
+
+                                    for (int j  = itemInicio+1; j < int.Parse(item.getValor()); j++)
+                                    {
+                                        posConj(idActual).getConjunto().Add(j.ToString());
+                                    }
+                                }
+                                else if(item.getTipo() == token.tipo.SIMBOLO)
+                                {
+                                    //Insertar los caracteres
+                                    string itemInicio = (string)posConj(idActual).getConjunto()[0];
+                                    char caracterInicial = itemInicio[0];
+
+                                    for (int j = caracterInicial + 1; j < (char)item.getValor()[0]; j++)
+                                    {
+                                        char charInsert = (char)j;
+                                        if (!char.IsLetterOrDigit(charInsert))
+                                        {
+                                            posConj(idActual).getConjunto().Add(charInsert.ToString());
+                                        }
+                                    }
+                                }
+                                else if(item.getTipo() == token.tipo.PUNTO_COMA)
+                                {
+                                    //Regresar todo al inicio
+                                    conjEstado = 0;
+                                    estado = 0;
+                                }
+                                else
+                                {
+                                    //Notificar un error sintactico
+                                    printError(consola, item.getValor(), "caracter|numero|simbolo");
+                                }
+                                break;
                         }
                         break;
                     case 2:
-                        estado = 0;
+                        switch (erEstado)
+                        {
+                            case 0:
+                                //Debemos encontrar un token asignacion
+                                if (item.getTipo() == token.tipo.ASIGNACION)
+                                {                                    
+                                    erEstado = 1;
+                                }
+                                else if(item.getTipo()  == token.tipo.DOS_PUNTOS)
+                                {
+                                    estado = 3;
+                                }
+                                else
+                                {
+                                    //Notificar un error sintactico
+                                    printError(consola, item.getValor(), "asignacion");
+                                }
+                                break;
+                            case 1:
+                                Console.WriteLine("Insertando en el arbol: " + item.getValor());
+                                if(item.getTipo() == token.tipo.CADENA || item.getTipo() == token.tipo.IDENTIFICADOR || item.getTipo() == token.tipo.TABULACION || item.getTipo() == token.tipo.SALTO_LINEA || item.getTipo() == token.tipo.COMILLA_DOBLE || item.getTipo() == token.tipo.COMILLA_SIMPLE || item.getTipo()==token.tipo.CUALQUIER_CARACTER)
+                                {
+                                    //Si encontramos una cadena insertar un nodo hoja
+                                    if(item.getTipo() == token.tipo.CADENA)
+                                    {
+                                        posEr(idActual).addNodoArbol(item.getValor().Replace('"', ' ').Trim(), 0);
+                                    }
+                                    else
+                                    {
+                                        posEr(idActual).addNodoArbol(item.getValor(), 0);
+                                    }                                    
+                                }
+                                else if (item.getTipo() == token.tipo.CERRADURA_DUDA || item.getTipo() == token.tipo.CERRADURA_KLEENE || item.getTipo() == token.tipo.CERRADURA_POSITIVA)
+                                {
+                                    //Si insertamos una cerradura, ingresar un nodo cerradura
+                                    posEr(idActual).addNodoArbol(item.getValor(), 2);
+                                }
+                                else if(item.getTipo() == token.tipo.CONCATENACION || item.getTipo() == token.tipo.DISYUNCION)
+                                {
+                                    //Si encontramos una operacion insertar el nodo
+                                    posEr(idActual).addNodoArbol(item.getValor(), 1);
+                                }
+                                else if(item.getTipo() == token.tipo.LLAVE_DER || item.getTipo() == token.tipo.LLAVE_IZQ)
+                                {
+                                    //Ignorar llaves
+                                }
+                                else if(item.getTipo() == token.tipo.PUNTO_COMA)
+                                {
+                                    try
+                                    {
+                                        //Generar AFND
+                                        posEr(idActual).funcionAFND();
+                                        consola.Text += "---------------------------------------------------------------------------------\n";
+                                        consola.Text += "                   [Expresion " +idActual+ " insertada con exito]                       \n";
+                                        consola.Text += "---------------------------------------------------------------------------------\n";
+                                    }
+                                    catch(Exception e)
+                                    {
+                                        consola.Text += "***Error al generar la expresion regular "+idActual+", verifica que este escrita correctamente.*** \n";
+                                        consola.Text += e+ "\n";
+                                    }                                    
+                                    //Regresar al estado inicial
+                                    erEstado = 0;
+                                    estado = 0;
+                                }
+                                else
+                                {
+                                    //Notificar un error sintactico
+                                    printError(consola, item.getValor(), "Expresion Regular");
+                                }
+
+                                break;
+                        }
                         break;
                     case 3:
                         //Omitir todo el contenido hasta encontrar un punto y coma
                         if(item.getTipo() == token.tipo.PUNTO_COMA)
                         {
+                            //Regresar todo al inicio
+                            conjEstado = 0;
+                            erEstado = 0;
                             estado = 0;
                         }
                         break;
                 }
             }
+
+
+        }
+
+        private void printError(RichTextBox consola, string valor, string espera)
+        {
+            consola.Text += "Error sintactico con el lexema -" + valor + "- se esperaba un " +espera +"\n";
         }
 
         private bool existeER(string id)
@@ -125,5 +289,33 @@ namespace OLC1_PY1_201700988.Funciones
             }
             return false;
         }
+
+        private nodoConj posConj(string id)
+        {            
+
+            foreach(nodoConj nodo in Program.listConj)
+            {
+                if (nodo.getId().Equals(id))
+                {
+                    return nodo;
+                }                
+            }
+
+            return null;
+        }
+
+        private er posEr(string id)
+        {
+            foreach(er expresion in Program.listER)
+            {
+                if (expresion.getId().Equals(id))
+                {
+                    return expresion;
+                }
+            }
+            return null;
+        }
+
+
     }
 }

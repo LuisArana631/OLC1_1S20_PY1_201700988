@@ -77,22 +77,22 @@ namespace OLC1_PY1_201700988.Estructuras
             arbolGuia.insert(valor, tipo);
         }
 
-        public void afnInsert()
+        private void afnInsert()
         {
             afn = arbolGuia.crearAfnd();
         }
         
-        public void agregarEstados()
+        private void agregarEstados()
         {
             this.arbolGuia.calcularEstados(arbolGuia.getRaiz());
         }
 
-        public void graficarArbol()
+        private void graficarArbol()
         {
-            this.arbolGuia.graficarArbol();
+            this.arbolGuia.graficarArbol(numEr);
         }
 
-        public void graficarAfnd()
+        private void graficarAfnd()
         {
             string pathDesktop = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
             string pathFolder = pathDesktop + "\\ER_Analisis\\"+Program.conteoAnalisis+"\\AFND";
@@ -112,8 +112,9 @@ namespace OLC1_PY1_201700988.Estructuras
                 repAFND.WriteLine("rankdir=LR;");
                 repAFND.WriteLine("size=\"13\";");
                 //Nodo de aceptacion
-                int numEstados = afn.Count - 1;
+                int numEstados = afn.Count-1;
                 nodoThompson aceptacion = (nodoThompson) afn[numEstados];
+                Console.WriteLine(afn.Count);
                 repAFND.WriteLine(aceptacion.getEstado() + "[peripheries = 2, shape=circle];");
                 //Configuracion de los nodos
                 repAFND.WriteLine("node[shape=circle, peripheries=1];");
@@ -162,7 +163,13 @@ namespace OLC1_PY1_201700988.Estructuras
 
         }
 
-
+        public void funcionAFND()
+        {
+            agregarEstados();
+            //graficarArbol();
+            afnInsert();
+            graficarAfnd();
+        }
 
     }
 }

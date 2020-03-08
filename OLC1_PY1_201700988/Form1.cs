@@ -436,6 +436,7 @@ namespace OLC1_PY1_201700988
         private void btnAnalizar_Click(object sender, EventArgs e)
         {
             Program.conteoAnalisis++;
+            ConsolaLexema.Clear();
 
             Control controlBox;            
             if (tabControl1.SelectedTab.HasChildren)
@@ -455,23 +456,6 @@ namespace OLC1_PY1_201700988
 
                         //Cargar las expresiones regulares
                         Program.upDate.upDateEr(Program.listTokensAnalisis, ConsolaLexema);
-
-                        //Prueba de salida de thompson
-                        Program.listER.Add(new er("exp1",1));
-                        foreach(er exp in Program.listER)
-                        {
-                            
-                            exp.addNodoArbol("+", 2);
-                            exp.addNodoArbol("D", 0);
-
-                            
-
-                            exp.agregarEstados();                            
-
-                            exp.afnInsert();
-
-                            exp.graficarAfnd();
-                        }
                     }
                 }
             }
