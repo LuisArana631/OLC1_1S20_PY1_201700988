@@ -109,10 +109,25 @@ namespace OLC1_PY1_201700988.Estructuras
             //Evaluar si el nodo es una concatenacion
             if (nodo.getValor().Equals("."))
             {
-                //Concatenar los valores
-                nodo.getRight().setEstadoInicio(nodo.getLeft().getEstadoFin());
                 nodo.setEstadoInicio(nodo.getLeft().getEstadoInicio());
                 nodo.setEstadoFin(nodo.getRight().getEstadoFin());
+                nodo.getRight().setEstadoInicio(nodo.getLeft().getEstadoFin());
+                int estadoContinuo = nodo.getLeft().getEstadoFin();                
+                nodoArbol aux = nodo.getRight();
+
+                while (aux != null)
+                {
+                    aux.setEstadoInicio(estadoContinuo);
+                    if (aux.getValor().Equals("."))
+                    {                        
+                        aux = aux.getLeft();
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+                
             }
             else if (nodo.getValor().Equals("+"))
             {
@@ -347,6 +362,8 @@ namespace OLC1_PY1_201700988.Estructuras
                 crearArbol(write, nodo.getRight());
             }
         }
+
+
     }
 
 

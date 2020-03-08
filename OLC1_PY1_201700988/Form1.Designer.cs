@@ -60,6 +60,7 @@
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.btnLexemas = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -80,7 +81,7 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(7, 2, 0, 2);
-            this.menuStrip1.Size = new System.Drawing.Size(1274, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1269, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             this.menuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuStrip1_ItemClicked);
@@ -142,11 +143,12 @@
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.Color.Transparent;
+            this.groupBox1.Controls.Add(this.richTextBox1);
             this.groupBox1.Controls.Add(this.consolaLexico);
             this.groupBox1.Controls.Add(this.ConsolaLexema);
             this.groupBox1.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.ForeColor = System.Drawing.Color.White;
-            this.groupBox1.Location = new System.Drawing.Point(9, 552);
+            this.groupBox1.Location = new System.Drawing.Point(11, 492);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(1251, 170);
             this.groupBox1.TabIndex = 2;
@@ -176,7 +178,7 @@
             this.ConsolaLexema.Location = new System.Drawing.Point(7, 20);
             this.ConsolaLexema.Name = "ConsolaLexema";
             this.ConsolaLexema.ReadOnly = true;
-            this.ConsolaLexema.Size = new System.Drawing.Size(754, 140);
+            this.ConsolaLexema.Size = new System.Drawing.Size(739, 140);
             this.ConsolaLexema.TabIndex = 0;
             this.ConsolaLexema.Text = "";
             this.ConsolaLexema.WordWrap = false;
@@ -188,7 +190,7 @@
             this.richTextBox2.ForeColor = System.Drawing.Color.White;
             this.richTextBox2.Location = new System.Drawing.Point(58, 0);
             this.richTextBox2.Name = "richTextBox2";
-            this.richTextBox2.Size = new System.Drawing.Size(692, 493);
+            this.richTextBox2.Size = new System.Drawing.Size(695, 432);
             this.richTextBox2.TabIndex = 0;
             this.richTextBox2.Text = "";
             this.richTextBox2.WordWrap = false;
@@ -217,9 +219,9 @@
             this.groupBox2.Controls.Add(this.pictureBox1);
             this.groupBox2.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox2.ForeColor = System.Drawing.Color.White;
-            this.groupBox2.Location = new System.Drawing.Point(777, 221);
+            this.groupBox2.Location = new System.Drawing.Point(777, 201);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(483, 330);
+            this.groupBox2.Size = new System.Drawing.Size(483, 285);
             this.groupBox2.TabIndex = 5;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Gráfico";
@@ -229,7 +231,7 @@
             this.pictureBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
             this.pictureBox1.Location = new System.Drawing.Point(7, 20);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(469, 303);
+            this.pictureBox1.Size = new System.Drawing.Size(469, 260);
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
@@ -246,7 +248,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 25);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(753, 492);
+            this.tabPage1.Size = new System.Drawing.Size(753, 428);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Untitled_1";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -256,7 +258,7 @@
             this.pictureBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
             this.pictureBox2.Location = new System.Drawing.Point(0, 0);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(58, 493);
+            this.pictureBox2.Size = new System.Drawing.Size(58, 427);
             this.pictureBox2.TabIndex = 1;
             this.pictureBox2.TabStop = false;
             this.pictureBox2.Click += new System.EventHandler(this.pictureBox2_Click);
@@ -269,7 +271,7 @@
             this.tabControl1.Location = new System.Drawing.Point(9, 29);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(761, 521);
+            this.tabControl1.Size = new System.Drawing.Size(761, 457);
             this.tabControl1.TabIndex = 1;
             // 
             // groupBox3
@@ -279,7 +281,7 @@
             this.groupBox3.ForeColor = System.Drawing.Color.White;
             this.groupBox3.Location = new System.Drawing.Point(777, 84);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(483, 137);
+            this.groupBox3.Size = new System.Drawing.Size(483, 111);
             this.groupBox3.TabIndex = 6;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Contenido";
@@ -302,7 +304,7 @@
             treeNode4.Text = "Inicio";
             this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
             treeNode4});
-            this.treeView1.Size = new System.Drawing.Size(469, 107);
+            this.treeView1.Size = new System.Drawing.Size(469, 76);
             this.treeView1.TabIndex = 0;
             // 
             // btnLexemas
@@ -326,12 +328,26 @@
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // richTextBox1
+            // 
+            this.richTextBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
+            this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.richTextBox1.Font = new System.Drawing.Font("Cooper Black", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.richTextBox1.ForeColor = System.Drawing.SystemColors.Info;
+            this.richTextBox1.Location = new System.Drawing.Point(752, 20);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.ReadOnly = true;
+            this.richTextBox1.Size = new System.Drawing.Size(10, 140);
+            this.richTextBox1.TabIndex = 2;
+            this.richTextBox1.Text = "|\n|\n|\n|\n|\n|\n|\n|\n";
+            this.richTextBox1.WordWrap = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
-            this.ClientSize = new System.Drawing.Size(1274, 730);
+            this.ClientSize = new System.Drawing.Size(1269, 667);
             this.Controls.Add(this.btnLexemas);
             this.Controls.Add(this.btnAnalizar);
             this.Controls.Add(this.groupBox3);
@@ -387,6 +403,7 @@
         private System.Windows.Forms.Button btnLexemas;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.RichTextBox consolaLexico;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
 

@@ -12,10 +12,17 @@ namespace OLC1_PY1_201700988
 
     static class Program
     {
-        public static scanner analizador = new scanner();
+        //Variables funcionales
         public static int conteoAnalisis = 0;
-        public static string pathLexico = "";        
+        public static string pathLexico = "";
+
+        //Estructuras funcionales
         public static ArrayList listER = new ArrayList();
+        public static ArrayList listTokensAnalisis = new ArrayList();
+        public static ArrayList listConj = new ArrayList();
+
+        //Fuciones del programa
+        public static scanner analizador = new scanner();               
         public static cargarDatos upDate = new cargarDatos();
 
         [STAThread]

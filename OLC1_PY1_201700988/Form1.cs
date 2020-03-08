@@ -330,14 +330,14 @@ namespace OLC1_PY1_201700988
             TabPage newPage = new TabPage("Untitled_" + numPage);
 
             RichTextBox textBox = new RichTextBox();
-            textBox.SetBounds(50, 0, 594, 458);
+            textBox.SetBounds(58, 0, 695, 432);
             textBox.BackColor = Color.FromArgb(70, 70, 70);
             textBox.ForeColor = Color.White;
             textBox.Font = new Font("Tahoma", 10, FontStyle.Regular);
             textBox.WordWrap = false;
 
             PictureBox num = new PictureBox();
-            num.SetBounds(0, 0, 54, 458);
+            num.SetBounds(0, 0, 58, 427);
             num.BackColor = Color.FromArgb(50, 50, 50);
             num.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox2_Paint);
 
@@ -446,24 +446,25 @@ namespace OLC1_PY1_201700988
 
                     if (controlBox is RichTextBox)
                     {
-                        Program.analizador.scannerMethod(controlBox.Text);
+                        //Realizar analisis lexico
+                        Program.listTokensAnalisis = Program.analizador.scannerMethod(controlBox.Text);
                         Program.analizador.imprimirConsola(consolaLexico);
                         Program.analizador.reporteGlobal();
                         DisplayReportes reporteLexico = new DisplayReportes();
                         reporteLexico.Show();
 
+                        //Cargar las expresiones regulares
+                        Program.upDate.upDateEr(Program.listTokensAnalisis, ConsolaLexema);
+
                         //Prueba de salida de thompson
                         Program.listER.Add(new er("exp1",1));
                         foreach(er exp in Program.listER)
                         {
-                            exp.addNodoArbol(".",1);
-                            exp.addNodoArbol(".",1);
-                            exp.addNodoArbol("|", 1);
-                            exp.addNodoArbol("a", 0);
-                            exp.addNodoArbol("b", 0);                            
-                            exp.addNodoArbol("c", 0);
-                            exp.addNodoArbol("*", 2);
-                            exp.addNodoArbol("puto", 0);
+                            
+                            exp.addNodoArbol("+", 2);
+                            exp.addNodoArbol("D", 0);
+
+                            
 
                             exp.agregarEstados();                            
 

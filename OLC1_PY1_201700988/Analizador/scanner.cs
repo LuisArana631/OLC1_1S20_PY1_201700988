@@ -38,10 +38,11 @@ namespace OLC1_PY1_201700988.Analizador
                             if (Char.IsLetter(caracter))
                             {
                                 auxiliarLexico += caracter;
-                                char prevChar = entrada[i - 1];
-                                char posChar = entrada[i + 1];
                                 try
                                 {
+
+                                    char prevChar = entrada[i - 1];
+                                    char posChar = entrada[i + 1];
                                     if (posChar == 126 || prevChar == 126 || posChar == 44 || prevChar == 44)
                                     {
                                         addToken(tipo.CARACTER);
@@ -433,18 +434,18 @@ namespace OLC1_PY1_201700988.Analizador
 
         public void imprimirConsola(RichTextBox consola)
         {
-            consola.Text = "------------------------------------------------\n";
-            consola.Text += "          [Reporte de análisis léxico]          \n";
-            consola.Text += "------------------------------------------------\n";
+            consola.Text = "--------------------------------------------------------\n";
+            consola.Text += "              [Reporte de análisis léxico]              \n";
+            consola.Text += "--------------------------------------------------------\n";
 
             foreach(token item in listaTokens)
             {
                 consola.Text += item.getTipoString() + " <-> " + item.getValor() + " <-> "+ item.getLinea().ToString() +"\n";
-                consola.Text += "------------------------------------------------\n";
+                consola.Text += "--------------------------------------------------------\n";
             }
             
-            consola.Text += "                 [Fin de Reporte]               \n";
-            consola.Text += "------------------------------------------------\n";
+            consola.Text += "                     [Fin de Reporte]                   \n";
+            consola.Text += "--------------------------------------------------------\n";
         }
 
         public void reporteGlobal()
