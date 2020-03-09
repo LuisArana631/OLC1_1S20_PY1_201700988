@@ -145,8 +145,6 @@ namespace OLC1_PY1_201700988.Estructuras
         {
             try
             {
-                Console.WriteLine("dot: " + rutaDot);
-                Console.WriteLine("png: " + rutaPng);
                 string comando = "dot.exe -Tpng \"" +rutaDot+"\" -o \""+ rutaPng+"\" ";
                 var command = string.Format(comando);
                 var procInicio = new ProcessStartInfo("cmd","/C"+command);

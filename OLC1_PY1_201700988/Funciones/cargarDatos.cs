@@ -201,8 +201,7 @@ namespace OLC1_PY1_201700988.Funciones
                                     printError(consola, item.getValor(), "asignacion");
                                 }
                                 break;
-                            case 1:
-                                Console.WriteLine("Insertando en el arbol: " + item.getValor());
+                            case 1:                                
                                 if(item.getTipo() == token.tipo.CADENA || item.getTipo() == token.tipo.IDENTIFICADOR || item.getTipo() == token.tipo.TABULACION || item.getTipo() == token.tipo.SALTO_LINEA || item.getTipo() == token.tipo.COMILLA_DOBLE || item.getTipo() == token.tipo.COMILLA_SIMPLE || item.getTipo()==token.tipo.CUALQUIER_CARACTER)
                                 {
                                     //Si encontramos una cadena insertar un nodo hoja
