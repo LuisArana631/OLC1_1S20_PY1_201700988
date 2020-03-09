@@ -12,7 +12,17 @@ namespace OLC1_PY1_201700988.Estructuras.AFD
         private string idEstado;
         private ArrayList transiciones;
         private string conjuntoContenido;
+        private string conjuntoGuia; 
         private bool aceptacion;
+
+        public nodoCabecera(string id, string conjuntoGuia, bool aceptar)
+        {
+            this.idEstado = id;
+            this.conjuntoGuia = conjuntoGuia;
+            this.aceptacion = aceptar;
+            this.conjuntoContenido = "";
+            this.transiciones = new ArrayList();
+        }
 
         public void setIdEstado(string id)
         {
@@ -34,6 +44,11 @@ namespace OLC1_PY1_201700988.Estructuras.AFD
             this.aceptacion = aceptar;
         }
 
+        public void setConjuntoGuia(string conjunto)
+        {
+            this.conjuntoGuia = conjunto;
+        }
+
         public string getIdEstado()
         {
             return this.idEstado;
@@ -52,6 +67,21 @@ namespace OLC1_PY1_201700988.Estructuras.AFD
         public bool getAceptacion()
         {
             return aceptacion;
+        }
+
+        public string getConjuntoGuia()
+        {
+            return conjuntoGuia;
+        }
+
+        public void addTransicion()
+        {
+            transiciones.Add(new nodoTransicion());
+        }
+
+        public void addTransicion(string estado, string valor)
+        {
+            this.transiciones.Add(new nodoTransicion(estado,valor));
         }
 
 
