@@ -54,6 +54,8 @@
     <Compile Include="DisplayReportes.Designer.cs">
       <DependentUpon>DisplayReportes.cs</DependentUpon>
     </Compile>
+    <Compile Include="Estructuras\AFD\nodoCabecera.cs" />
+    <Compile Include="Estructuras\AFD\nodoTransicion.cs" />
     <Compile Include="Estructuras\ANFD\nodoSiguientes.cs" />
     <Compile Include="Estructuras\ANFD\nodoThompson.cs" />
     <Compile Include="Estructuras\arbol.cs" />

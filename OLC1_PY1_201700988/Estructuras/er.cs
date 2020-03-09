@@ -124,8 +124,15 @@ namespace OLC1_PY1_201700988.Estructuras
                 foreach(nodoThompson item in afn)
                 {
                     foreach(nodoSiguientes next in item.getTransiciones())
-                    {
-                        repAFND.WriteLine(item.getEstado() + " -> " + next.getEstadoNext() + "[label=\"" +next.getValor() +"\"];" );
+                    {                        
+                        if(next.getDir() == 1)
+                        {
+                            repAFND.Write(next.getEstadoNext() + " -> " + item.getEstado() + "[label=\"" + next.getValor() + "\", dir=back];");
+                        }
+                        else
+                        {
+                            repAFND.Write(item.getEstado() + " -> " + next.getEstadoNext() + "[label=\"" + next.getValor() + "\"];");
+                        }
                     }
                 }
                 repAFND.WriteLine("}");
@@ -149,6 +156,9 @@ namespace OLC1_PY1_201700988.Estructuras
                 var command = string.Format(comando);
                 var procInicio = new ProcessStartInfo("cmd","/C"+command);
                 var prc = new Process();
+
+                procInicio.CreateNoWindow = true;
+                procInicio.WindowStyle = ProcessWindowStyle.Hidden;
 
                 prc.StartInfo = procInicio;
                 prc.Start();

@@ -271,6 +271,10 @@ namespace OLC1_PY1_201700988.Analizador
                             {                                
                                 addToken(tipo.CADENA);
                             }
+                            else if(caracter == 92)
+                            {
+                                estado = 15;
+                            }
                             break;
 
                         case 6:
@@ -356,22 +360,16 @@ namespace OLC1_PY1_201700988.Analizador
                             break;
 
                         case 10:
-                            //Evaluar si no es ]
-                            if (caracter == 93)
+                            //Evaluar si no es :
+                            if (caracter == 58)
                             {
-                                auxiliarLexico += caracter;
-                                addToken(tipo.CUALQUIER_CARACTER);
+                                estado = 13;
+                                auxiliarLexico += caracter;                                
                             }
                             else
                             {
-                                if(caracter  == 10)
-                                {
-                                    addError(tipo.ERROR_LEXICO, Char.ToString(caracter));
-                                }
-                                else
-                                {
-                                    auxiliarLexico += caracter;
-                                }
+                                addError(tipo.ERROR_LEXICO, auxiliarLexico);
+                                i--;
                             }
                             break;
 
@@ -406,6 +404,46 @@ namespace OLC1_PY1_201700988.Analizador
                                 addToken(tipo.SIMBOLO);
                                 i--;
                             }
+                            break;
+                        case 13:
+                            //Evaluar si son dos puntos
+                            if (caracter == 58)
+                            {
+                                estado = 14;
+                                auxiliarLexico += caracter;
+                            }
+                            else
+                            {
+                                //Evitar salto de linea
+                                if (caracter == 10)
+                                {
+                                    addError(tipo.ERROR_LEXICO, Char.ToString(caracter));
+                                }
+                                else
+                                {
+                                    auxiliarLexico += caracter;
+                                }
+                            }
+
+                            break;
+                        case 14:
+                            //Evaluar si es ]
+                            if (caracter == 93)
+                            {
+                                //Insertar token
+                                auxiliarLexico += caracter;
+                                addToken(tipo.CUALQUIER_CARACTER);
+                            }
+                            else
+                            {
+                                auxiliarLexico += caracter;
+                                estado = 13;
+                            }
+                            break;
+                        case 15:
+                            //Evaluar si viene una comilla para aceptarla
+                            auxiliarLexico += caracter;
+                            estado = 5;
                             break;
 
                     }

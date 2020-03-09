@@ -10,11 +10,23 @@ namespace OLC1_PY1_201700988.Estructuras.ANFD
     {
         private int estadoNext;
         private string valor;
+        private int dir;
 
-        public nodoSiguientes(string valor, int estado)
+        public int getDir()
+        {
+            return dir;
+        }
+
+        public void setDir(int dir)
+        {
+            this.dir = dir;
+        }
+
+        public nodoSiguientes(string valor, int estado, int dir)
         {
             this.estadoNext = estado;
             this.valor = valor;
+            this.dir = dir;
         }
 
         public int getEstadoNext()
