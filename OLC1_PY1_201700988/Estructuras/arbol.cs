@@ -179,7 +179,7 @@ namespace OLC1_PY1_201700988.Estructuras
                     {
                         if (item.getEstado() == nodo.getEstadoInicio())
                         {
-                            item.addTransicion(nodo.getEstadoFin(), nodo.getValor());
+                            item.addTransicion(nodo.getEstadoFin(), nodo.getValor(), 0);
                         }
                     }                    
                     break;
@@ -196,18 +196,18 @@ namespace OLC1_PY1_201700988.Estructuras
                                 //Conexiones iniciales
                                 if (item.getEstado() == nodo.getEstadoInicio())
                                 {
-                                    item.addTransicion(nodo.getLeft().getEstadoInicio(), epsilon.ToString());
-                                    item.addTransicion(nodo.getRight().getEstadoInicio(), epsilon.ToString());
+                                    item.addTransicion(nodo.getLeft().getEstadoInicio(), epsilon.ToString(), 0);
+                                    item.addTransicion(nodo.getRight().getEstadoInicio(), epsilon.ToString(), 0);
                                 }
 
                                 //Conectar al final
                                 if (item.getEstado() == nodo.getLeft().getEstadoFin())
                                 {
-                                    item.addTransicion(nodo.getEstadoFin(), epsilon.ToString());
+                                    item.addTransicion(nodo.getEstadoFin(), epsilon.ToString(), 0);
                                 }
                                 if (item.getEstado() == nodo.getRight().getEstadoFin())
                                 {
-                                    item.addTransicion(nodo.getEstadoFin(), epsilon.ToString());
+                                    item.addTransicion(nodo.getEstadoFin(), epsilon.ToString(), 0);
                                 }
 
                             }
@@ -224,15 +224,15 @@ namespace OLC1_PY1_201700988.Estructuras
                                 //Conexiones iniciales
                                 if (item.getEstado() == nodo.getEstadoInicio())
                                 {
-                                    item.addTransicion(nodo.getEstadoFin(), epsilon.ToString());
-                                    item.addTransicion(nodo.getLeft().getEstadoInicio(), epsilon.ToString());
+                                    item.addTransicion(nodo.getEstadoFin(), epsilon.ToString(), 0);
+                                    item.addTransicion(nodo.getLeft().getEstadoInicio(), epsilon.ToString(), 0);
                                 }
 
                                 //Conexiones finales nodo hijo
                                 if (item.getEstado() == nodo.getLeft().getEstadoFin())
                                 {
-                                    item.addTransicion(nodo.getEstadoFin(), epsilon.ToString());
-                                    item.addTransicion(nodo.getLeft().getEstadoInicio(), epsilon.ToString());
+                                    item.addTransicion(nodo.getEstadoFin(), epsilon.ToString(), 0);
+                                    item.addTransicion(nodo.getLeft().getEstadoInicio(), epsilon.ToString(), 1);
                                 }
                             }
                             break;
@@ -243,14 +243,14 @@ namespace OLC1_PY1_201700988.Estructuras
                                 //Conexiones iniciales
                                 if (item.getEstado() == nodo.getEstadoInicio())
                                 {
-                                    item.addTransicion(nodo.getLeft().getEstadoInicio(), epsilon.ToString());
-                                    item.addTransicion(nodo.getEstadoFin(), epsilon.ToString());
+                                    item.addTransicion(nodo.getLeft().getEstadoInicio(), epsilon.ToString(), 0);
+                                    item.addTransicion(nodo.getEstadoFin(), epsilon.ToString(), 0);
                                 }
 
                                 //Conexiones finales
                                 if (item.getEstado() == nodo.getLeft().getEstadoFin())
                                 {
-                                    item.addTransicion(nodo.getEstadoFin(), epsilon.ToString());
+                                    item.addTransicion(nodo.getEstadoFin(), epsilon.ToString(), 0);
                                 }
 
                             }
@@ -262,14 +262,14 @@ namespace OLC1_PY1_201700988.Estructuras
                                 //Conexiones iniciales
                                 if (item.getEstado() == nodo.getEstadoInicio())
                                 {
-                                    item.addTransicion(nodo.getLeft().getEstadoInicio(), epsilon.ToString());
+                                    item.addTransicion(nodo.getLeft().getEstadoInicio(), epsilon.ToString(),0);
                                 }
 
                                 //Conexiones finales
                                 if (item.getEstado() == nodo.getLeft().getEstadoFin())
                                 {
-                                    item.addTransicion(nodo.getLeft().getEstadoInicio(), epsilon.ToString());
-                                    item.addTransicion(nodo.getEstadoFin(), epsilon.ToString());
+                                    item.addTransicion(nodo.getLeft().getEstadoInicio(), epsilon.ToString(),1);
+                                    item.addTransicion(nodo.getEstadoFin(), epsilon.ToString(),0);
                                 }
                             }
                             break;

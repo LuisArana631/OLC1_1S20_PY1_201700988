@@ -10,17 +10,17 @@ namespace OLC1_PY1_201700988.Estructuras.ANFD
     class nodoThompson
     {
         private int estado;
-        private ArrayList transiciones;
-        
+        private ArrayList transiciones;       
+
         public nodoThompson(int estado)
         {
             this.estado = estado;
             this.transiciones = new ArrayList();
         }
 
-        public void addTransicion(int estadoNext, string valor)
+        public void addTransicion(int estadoNext, string valor, int dir)
         {
-            this.transiciones.Add(new nodoSiguientes(valor,estadoNext));
+            this.transiciones.Add(new nodoSiguientes(valor,estadoNext, dir));
         }
 
         public bool transicionRepetida(int estado)
