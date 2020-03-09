@@ -15,6 +15,7 @@ namespace OLC1_PY1_201700988.Estructuras
         private int estado = 0;
         private Boolean insertBoolean = false;
         private ArrayList tablaAfnd;
+        private ArrayList tablaAfd;
 
         public arbol()
         {
@@ -353,6 +354,25 @@ namespace OLC1_PY1_201700988.Estructuras
             }
         }
         
+        public ArrayList creaAfd()
+        {
+            tablaAfd = new ArrayList();
+
+            
+
+            return tablaAfd;
+        }
+
+        private string getConjunto()
+        {
+            string conjunto = "";
+
+
+
+            return conjunto;
+        }
+
+
     }
     
     // 0 -> hoja
