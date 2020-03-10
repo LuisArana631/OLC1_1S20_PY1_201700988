@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Collections;
 using OLC1_PY1_201700988.Estructuras.ANFD;
 using System.IO;
+using OLC1_PY1_201700988.Estructuras.AFD;
 
 namespace OLC1_PY1_201700988.Estructuras
 {
@@ -354,16 +355,32 @@ namespace OLC1_PY1_201700988.Estructuras
             }
         }
         
-        public ArrayList creaAfd()
+        public ArrayList crearAfd()
         {
             tablaAfd = new ArrayList();
+            int estados = 0;
 
-            
+            //Extraer el inicio del AFND
+            tablaAfd.Add(new nodoCabecera("S0",raiz.getEstadoInicio().ToString(),false));
+
+            int repetirFor = 1;
+
+            while(repetirFor != 0){
+                repetirFor--;
+
+                //Desglozar los estados
+                foreach(nodoCabecera item in tablaAfd)
+                {
+                    //Extraer el conjunto de transiciones de epsilon y agregarlo al nodo
+                    item.setConjunto(getConjunto(item.getConjuntoGuia()));
+                    
+                }
+            }
 
             return tablaAfd;
         }
 
-        private string getConjunto()
+        private string getConjunto(string conjuntoGuia)
         {
             string conjunto = "";
 
