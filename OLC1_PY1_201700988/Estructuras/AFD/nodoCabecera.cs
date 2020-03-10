@@ -73,16 +73,14 @@ namespace OLC1_PY1_201700988.Estructuras.AFD
         {
             return conjuntoGuia;
         }
-
-        public void addTransicion()
-        {
-            transiciones.Add(new nodoTransicion());
-        }
-
+        
         public void addTransicion(string estado, string valor)
         {
             this.transiciones.Add(new nodoTransicion(estado,valor));
         }
+
+
+
 
 
 

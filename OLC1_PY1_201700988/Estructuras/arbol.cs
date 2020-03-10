@@ -373,7 +373,12 @@ namespace OLC1_PY1_201700988.Estructuras
                 {
                     //Extraer el conjunto de transiciones de epsilon y agregarlo al nodo
                     item.setConjunto(getConjunto(item.getConjuntoGuia()));
-                    
+
+                    //Crear los estados a la cabecera
+                    estados = crearCabeceras(item.getConjunto(), estados);
+
+                    //Agregar las transiciones al estado actual
+
                 }
             }
 
@@ -383,12 +388,127 @@ namespace OLC1_PY1_201700988.Estructuras
         private string getConjunto(string conjuntoGuia)
         {
             string conjunto = "";
+            string[] listaItems = conjuntoGuia.Split(',');
 
+            ArrayList numEstados = new ArrayList();
 
+            //Insertar los estados guia en el conjunto de estados 
+            foreach(string item in listaItems)
+            {
+                numEstados.Add(Int32.Parse(item));
+                conjunto += item; 
+            }
+            
+            int repetirWhile = 1;
+
+            //While para encontrar todos los estados que se pueden llegar 
+            while(repetirWhile != 0)
+            {
+                repetirWhile--;
+
+                //Recorrer los estados del conjunto (Arreglo)
+                foreach(int estadoNum in numEstados)
+                {
+                    //Evaluar los estados en mi afnd
+                    foreach(nodoThompson nodo in tablaAfnd)
+                    {
+                        //Si encuentro al estado de mi conjunto guia en mi tabla afnd
+                        if(estadoNum == nodo.getEstado())
+                        {
+                            //Tomar las transiciones y evaluar si ya existen en mi tabla de conjunto
+                            foreach(nodoSiguientes next in nodo.getTransiciones())
+                            {
+                                //Si la transicion es por medio de un epsilon agregar a mi arreglo de estados
+                                if (next.getValor().Equals(((char) 603).ToString()))
+                                {
+                                    //Si es con epsilon
+                                    //Evaluar si ya existe en mi arreglo para no duplicar
+                                    if (numEstados.Contains(next.getEstadoNext()))
+                                    {
+                                        //Si se encuentra en la lista ignorar
+                                    }
+                                    else
+                                    {
+                                        //Si no se encuentra insertar a arreglo
+                                        numEstados.Add(next.getEstadoNext());
+                                        repetirWhile++;
+                                    }
+                                }
+                                else
+                                {
+                                    //Continuar buscando
+                                }
+                                
+                            }
+                        }
+                    }
+                }
+                
+            }
+
+            //Concatenar el conjunto en un string
+            foreach(int numero in numEstados)
+            {
+                conjunto += "," + numero.ToString();
+            }
 
             return conjunto;
         }
 
+        private bool existeEstado(string id)
+        {
+            foreach (nodoCabecera cabecera in tablaAfd)
+            {
+                if (cabecera.getIdEstado().Equals(id))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        private int crearCabeceras(string conjunto, int estados)
+        {
+            string guiaNuevoEstado = "";
+            string[] stringNum = conjunto.Split(',');
+            ArrayList numEstados = new ArrayList();
+
+            //Pasar los estados a numero en arrayList
+            foreach(string num in stringNum)
+            {
+                numEstados.Add(Int32.Parse(num));
+            }
+
+            //Encontrar los estados a los que se puede ir por medio de las hojas
+            foreach(int state in numEstados)
+            {
+                //Extraer el estado del afnd definido por el state
+                nodoThompson auxAfnd = getEstadoAfnd(state);
+
+                //Evaluar las transiciones no iguales a epsilon
+                foreach(nodoSiguientes stateNext in auxAfnd.getTransiciones())
+                {
+                    
+                }
+            }    
+
+            return 0;
+
+        }
+
+        private nodoThompson getEstadoAfnd(int id)
+        {
+            foreach(nodoThompson nodo in tablaAfnd)
+            {
+                if(nodo.getEstado() == id)
+                {
+                    return nodo;
+                }
+            }
+
+            return null;
+        }
 
     }
     
