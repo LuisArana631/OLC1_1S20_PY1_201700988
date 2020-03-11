@@ -128,11 +128,11 @@ namespace OLC1_PY1_201700988.Estructuras
                     {                        
                         if(next.getDir() == 1)
                         {
-                            repAFND.Write(next.getEstadoNext() + " -> " + item.getEstado() + "[label=\"" + next.getValor() + "\", dir=back];");
+                            repAFND.Write(next.getEstadoNext() + " -> " + item.getEstado() + "[label=\"" + next.getValor() + "\", dir=back];\n");
                         }
                         else
                         {
-                            repAFND.Write(item.getEstado() + " -> " + next.getEstadoNext() + "[label=\"" + next.getValor() + "\"];");
+                            repAFND.Write(item.getEstado() + " -> " + next.getEstadoNext() + "[label=\"" + next.getValor() + "\"];\n");
                         }
                     }
                 }
@@ -204,12 +204,7 @@ namespace OLC1_PY1_201700988.Estructuras
                 //Escribir el archivo dot
                 repAFD.WriteLine("digraph AFD{");
                 repAFD.WriteLine("rankdir=LR;");
-                repAFD.WriteLine("size=\"13\";");
-                //Nodo de aceptacion
-                int numEstados = afd.Count - 1;
-                nodoCabecera aceptacion = (nodoCabecera)afd[numEstados];
-                
-                repAFD.WriteLine(aceptacion.getIdEstado() + "[peripheries = 2, shape=circle];");
+                repAFD.WriteLine("size=\"13\";");                
                 //Configuracion de los nodos
                 repAFD.WriteLine("node[shape=circle, peripheries=1];");
                 repAFD.WriteLine("node[fontcolor=black];");
@@ -217,10 +212,15 @@ namespace OLC1_PY1_201700988.Estructuras
                 //Insertar nodos transicion
                 foreach (nodoCabecera item in afd)
                 {
+                    if (item.getAceptacion())
+                    {
+                        repAFD.WriteLine(item.getIdEstado() + "[peripheries = 2, shape=circle];");
+                    }
+
                     foreach (nodoTransicion next in item.getTransiciones())
                     {
                         
-                        repAFD.Write(item.getIdEstado() + " -> " + next.getEstadoSiguientes() + "[label=\"" + next.getValor() + "\"];");
+                        repAFD.Write(item.getIdEstado() + " -> " + next.getEstadoSiguientes() + "[label=\"" + next.getValor() + "\"];\n");
                         
                     }
                 }

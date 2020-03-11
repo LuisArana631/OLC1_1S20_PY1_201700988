@@ -207,7 +207,7 @@ namespace OLC1_PY1_201700988.Funciones
                                     //Si encontramos una cadena insertar un nodo hoja
                                     if(item.getTipo() == token.tipo.CADENA)
                                     {
-                                        posEr(idActual).addNodoArbol(item.getValor().Replace('"', ' ').Trim(), 0);
+                                        posEr(idActual).addNodoArbol(item.getValor().Replace('"', ' '), 0);
                                     }
                                     else
                                     {
