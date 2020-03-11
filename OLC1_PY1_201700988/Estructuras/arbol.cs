@@ -323,7 +323,7 @@ namespace OLC1_PY1_201700988.Estructuras
 
             }
         }
-
+        
         private void crearArbol(StreamWriter write, nodoArbol nodo)
         {
             if (nodo != null)
@@ -374,7 +374,7 @@ namespace OLC1_PY1_201700988.Estructuras
                     //Extraer el conjunto de transiciones de epsilon y agregarlo al nodo
                     item.setConjunto(getConjunto(item.getConjuntoGuia()));
 
-                    //Crear los estados a la cabecera
+                    //Añadir los estados nuevos a la cabecera
                     estados = crearCabeceras(item.getConjunto(), estados);
 
                     //Agregar las transiciones al estado actual
@@ -473,6 +473,9 @@ namespace OLC1_PY1_201700988.Estructuras
             string guiaNuevoEstado = "";
             string[] stringNum = conjunto.Split(',');
             ArrayList numEstados = new ArrayList();
+                        
+            ArrayList valoresEvaluados = new ArrayList();
+            string valorActual = "";
 
             //Pasar los estados a numero en arrayList
             foreach(string num in stringNum)
@@ -480,18 +483,55 @@ namespace OLC1_PY1_201700988.Estructuras
                 numEstados.Add(Int32.Parse(num));
             }
 
-            //Encontrar los estados a los que se puede ir por medio de las hojas
-            foreach(int state in numEstados)
-            {
-                //Extraer el estado del afnd definido por el state
-                nodoThompson auxAfnd = getEstadoAfnd(state);
+            int repetirFor = 2;
 
-                //Evaluar las transiciones no iguales a epsilon
-                foreach(nodoSiguientes stateNext in auxAfnd.getTransiciones())
+            while(repetirFor != 0)
+            {
+                repetirFor--;
+
+                //Encontrar los estados a los que se puede ir por medio de las hojas
+                foreach (int state in numEstados)
                 {
-                    
+                    //Extraer el estado del afnd definido por el state
+                    nodoThompson auxAfnd = getEstadoAfnd(state);
+
+                    //Evaluar las transiciones no iguales a epsilon
+                    foreach (nodoSiguientes stateNext in auxAfnd.getTransiciones())
+                    {                        
+                        //Si el valor es igual al que estoy evaluando
+                        if (valorActual.Equals(stateNext.getValor()))
+                        {
+                            //Concatenar el estado a la guia de estados
+                            valorActual += ","+stateNext.getValor();
+                        }
+                        //Si el valor actual es nulo
+                        else if (valorActual.Equals(""))
+                        {
+                            //Verificar que aun no se haya evaluado 
+                            if (valoresEvaluados.Contains(stateNext.getValor()))
+                            {
+                                //Si ya esta evaluado pasar al siguiente nodo
+                            }
+                            else
+                            {
+                                //Asignar el valor evaluando
+                                valorActual = stateNext.getValor();
+                            }
+                        }
+                        //Si el valor es epsilon
+                        else
+                        {
+                            //Ignorar y continuar con los demas objetos
+                        }
+                    }
                 }
-            }    
+
+                //Vaciar el valorActual
+                valorActual = "";
+
+            }
+
+          
 
             return 0;
 
