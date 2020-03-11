@@ -234,6 +234,7 @@ namespace OLC1_PY1_201700988.Funciones
                                     {
                                         //Generar AFND
                                         posEr(idActual).funcionAFND();
+                                        posEr(idActual).funcionAFD();
                                         consola.Text += "---------------------------------------------------------------------------------\n";
                                         consola.Text += "                   [Expresion " +idActual+ " insertada con exito]                       \n";
                                         consola.Text += "---------------------------------------------------------------------------------\n";

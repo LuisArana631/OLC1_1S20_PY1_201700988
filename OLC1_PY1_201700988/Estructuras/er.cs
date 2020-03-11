@@ -7,6 +7,7 @@ using System.Collections;
 using System.IO;
 using OLC1_PY1_201700988.Estructuras.ANFD;
 using System.Diagnostics;
+using OLC1_PY1_201700988.Estructuras.AFD;
 
 namespace OLC1_PY1_201700988.Estructuras
 {
@@ -108,13 +109,13 @@ namespace OLC1_PY1_201700988.Estructuras
                 StreamWriter repAFND = new StreamWriter(pathRep);
                 
                 //Escribir el archivo dot
-                repAFND.WriteLine("digraph AFD{");
+                repAFND.WriteLine("digraph AFND{");
                 repAFND.WriteLine("rankdir=LR;");
                 repAFND.WriteLine("size=\"13\";");
                 //Nodo de aceptacion
                 int numEstados = afn.Count-1;
                 nodoThompson aceptacion = (nodoThompson) afn[numEstados];
-                Console.WriteLine(afn.Count);
+                
                 repAFND.WriteLine(aceptacion.getEstado() + "[peripheries = 2, shape=circle];");
                 //Configuracion de los nodos
                 repAFND.WriteLine("node[shape=circle, peripheries=1];");
@@ -179,8 +180,61 @@ namespace OLC1_PY1_201700988.Estructuras
             graficarAfnd();
         }
 
+        public void funcionAFD()
+        {
+            afd = arbolGuia.crearAfd();
+            graficarAfd();
+        }
 
+        private void graficarAfd()
+        {
+            string pathDesktop = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
+            string pathFolder = pathDesktop + "\\ER_Analisis\\" + Program.conteoAnalisis + "\\AFD";
 
+            try
+            {
+                if (!Directory.Exists(pathFolder))
+                {
+                    DirectoryInfo dir = Directory.CreateDirectory(pathFolder);
+                }
+
+                string pathRep = pathFolder + "\\AFD" + Program.conteoAnalisis + +numEr + ".dot";
+                StreamWriter repAFD = new StreamWriter(pathRep);
+
+                //Escribir el archivo dot
+                repAFD.WriteLine("digraph AFD{");
+                repAFD.WriteLine("rankdir=LR;");
+                repAFD.WriteLine("size=\"13\";");
+                //Nodo de aceptacion
+                int numEstados = afd.Count - 1;
+                nodoCabecera aceptacion = (nodoCabecera)afd[numEstados];
+                
+                repAFD.WriteLine(aceptacion.getIdEstado() + "[peripheries = 2, shape=circle];");
+                //Configuracion de los nodos
+                repAFD.WriteLine("node[shape=circle, peripheries=1];");
+                repAFD.WriteLine("node[fontcolor=black];");
+                repAFD.WriteLine("edge[color=black];");
+                //Insertar nodos transicion
+                foreach (nodoCabecera item in afd)
+                {
+                    foreach (nodoTransicion next in item.getTransiciones())
+                    {
+                        
+                        repAFD.Write(item.getIdEstado() + " -> " + next.getEstadoSiguientes() + "[label=\"" + next.getValor() + "\"];");
+                        
+                    }
+                }
+                repAFD.WriteLine("}");
+                repAFD.Close();
+
+                string pathPng = pathFolder + "\\AFD" + Program.conteoAnalisis + numEr + ".png";
+                this.crearImagen(pathRep, pathPng);
+            }
+            catch (Exception e)
+            {
+
+            }
+        }
 
     }
 }

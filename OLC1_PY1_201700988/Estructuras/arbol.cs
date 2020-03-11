@@ -367,36 +367,38 @@ namespace OLC1_PY1_201700988.Estructuras
 
             while(repetirFor != 0){
                 repetirFor--;
-
+                
                 //Desglozar los estados
-                foreach(nodoCabecera item in tablaAfd)
+                for(int i = 0; i<tablaAfd.Count; i++)
                 {
-                    //Extraer el conjunto de transiciones de epsilon y agregarlo al nodo
-                    item.setConjunto(getConjunto(item.getConjuntoGuia()));
+                    nodoCabecera aux = (nodoCabecera) tablaAfd[i];
 
-                    //Añadir los estados nuevos a la cabecera
-                    estados = crearCabeceras(item.getConjunto(), estados);
+                    Console.WriteLine("Estado " + aux.getIdEstado());
+                    Console.WriteLine("-------------------------------------------");
 
-                    //Agregar las transiciones al estado actual
+                    aux.setConjunto(getConjunto(aux.getConjuntoGuia()));
+                    estados = crearCabeceras(aux.getConjunto(), estados, getEstadoAfd(aux.getIdEstado()));
 
                 }
+                
             }
 
             return tablaAfd;
         }
 
         private string getConjunto(string conjuntoGuia)
-        {
+        {            
             string conjunto = "";
             string[] listaItems = conjuntoGuia.Split(',');
 
             ArrayList numEstados = new ArrayList();
 
+            Console.WriteLine("Conjunto guia: " + conjuntoGuia);
+            Console.WriteLine("Estados: " + listaItems.Length);
             //Insertar los estados guia en el conjunto de estados 
             foreach(string item in listaItems)
-            {
-                numEstados.Add(Int32.Parse(item));
-                conjunto += item; 
+            {                
+                numEstados.Add(Int32.Parse(item));                
             }
             
             int repetirWhile = 1;
@@ -406,20 +408,20 @@ namespace OLC1_PY1_201700988.Estructuras
             {
                 repetirWhile--;
 
-                //Recorrer los estados del conjunto (Arreglo)
-                foreach(int estadoNum in numEstados)
+                for(int iteradorEstados = 0; iteradorEstados < numEstados.Count; iteradorEstados++)
                 {
+                    int auxNumEstado = (int) numEstados[iteradorEstados];
                     //Evaluar los estados en mi afnd
-                    foreach(nodoThompson nodo in tablaAfnd)
+                    foreach (nodoThompson nodo in tablaAfnd)
                     {
                         //Si encuentro al estado de mi conjunto guia en mi tabla afnd
-                        if(estadoNum == nodo.getEstado())
+                        if (auxNumEstado == nodo.getEstado())
                         {
                             //Tomar las transiciones y evaluar si ya existen en mi tabla de conjunto
-                            foreach(nodoSiguientes next in nodo.getTransiciones())
+                            foreach (nodoSiguientes next in nodo.getTransiciones())
                             {
                                 //Si la transicion es por medio de un epsilon agregar a mi arreglo de estados
-                                if (next.getValor().Equals(((char) 603).ToString()))
+                                if (next.getValor().Equals(((char)603).ToString()))
                                 {
                                     //Si es con epsilon
                                     //Evaluar si ya existe en mi arreglo para no duplicar
@@ -438,19 +440,31 @@ namespace OLC1_PY1_201700988.Estructuras
                                 {
                                     //Continuar buscando
                                 }
-                                
+
                             }
                         }
                     }
                 }
                 
+                
             }
 
+            
             //Concatenar el conjunto en un string
-            foreach(int numero in numEstados)
+            for(int j = 0; j <numEstados.Count; j++)
             {
-                conjunto += "," + numero.ToString();
+                if (j > 0)
+                {
+                    conjunto += "," + numEstados[j].ToString();
+                }
+                else
+                {
+                    conjunto = numEstados[j].ToString();
+                }
             }
+
+            Console.WriteLine("Conjunto resultante: " + conjunto);
+            Console.WriteLine("-------------------------------------------");
 
             return conjunto;
         }
@@ -468,7 +482,7 @@ namespace OLC1_PY1_201700988.Estructuras
             return false;
         }
 
-        private int crearCabeceras(string conjunto, int estados)
+        private int crearCabeceras(string conjunto, int estados, nodoCabecera actualEstado)
         {
             string guiaNuevoEstado = "";
             string[] stringNum = conjunto.Split(',');
@@ -477,9 +491,14 @@ namespace OLC1_PY1_201700988.Estructuras
             ArrayList valoresEvaluados = new ArrayList();
             string valorActual = "";
 
+            char epsilon = (char)603;
+
+            //Console.WriteLine("Conjunto guia: " + conjunto);
+            //Console.WriteLine("estados guia: " + stringNum.Length);
             //Pasar los estados a numero en arrayList
-            foreach(string num in stringNum)
+            foreach (string num in stringNum)
             {
+                //Console.WriteLine("numero: " + num);
                 numEstados.Add(Int32.Parse(num));
             }
 
@@ -487,54 +506,98 @@ namespace OLC1_PY1_201700988.Estructuras
 
             while(repetirFor != 0)
             {
+                
                 repetirFor--;
 
                 //Encontrar los estados a los que se puede ir por medio de las hojas
                 foreach (int state in numEstados)
                 {
                     //Extraer el estado del afnd definido por el state
-                    nodoThompson auxAfnd = getEstadoAfnd(state);
+                    nodoThompson auxAfnd = getEstadoAfnd(state);                    
 
-                    //Evaluar las transiciones no iguales a epsilon
-                    foreach (nodoSiguientes stateNext in auxAfnd.getTransiciones())
-                    {                        
-                        //Si el valor es igual al que estoy evaluando
-                        if (valorActual.Equals(stateNext.getValor()))
-                        {
-                            //Concatenar el estado a la guia de estados
-                            valorActual += ","+stateNext.getValor();
-                        }
-                        //Si el valor actual es nulo
-                        else if (valorActual.Equals(""))
-                        {
-                            //Verificar que aun no se haya evaluado 
-                            if (valoresEvaluados.Contains(stateNext.getValor()))
+                    if(auxAfnd.getTransiciones() != null)
+                    {
+                        //Evaluar las transiciones no iguales a epsilon
+                        foreach (nodoSiguientes stateNext in auxAfnd.getTransiciones())
+                        {                            
+                            //Si el valor es igual al que estoy evaluando
+                            if (valorActual.Equals(stateNext.getValor()))
                             {
-                                //Si ya esta evaluado pasar al siguiente nodo
+                                //Concatenar el estado a la guia de estados
+                                guiaNuevoEstado += "," + stateNext.getEstadoNext().ToString();
                             }
+                            //Si el valor actual es nulo
+                            else if (valorActual.Equals(""))
+                            {
+                                //Verificar que aun no se haya evaluado 
+                                if (valoresEvaluados.Contains(stateNext.getValor()))
+                                {
+                                    //Si ya esta evaluado pasar al siguiente nodo
+                                }
+                                else
+                                {
+                                    //Si no es igual a epsilon
+                                    if (!epsilon.ToString().Equals(stateNext.getValor()))
+                                    {
+                                        //Asignar el valor evaluando
+                                        valorActual = stateNext.getValor();
+                                        guiaNuevoEstado = stateNext.getEstadoNext().ToString();
+                                        valoresEvaluados.Add(valorActual);
+                                    }
+                                }
+                            }
+                            //Si el valor es epsilon
                             else
                             {
-                                //Asignar el valor evaluando
-                                valorActual = stateNext.getValor();
+                                //Ignorar y continuar con los demas objetos
                             }
                         }
-                        //Si el valor es epsilon
-                        else
-                        {
-                            //Ignorar y continuar con los demas objetos
-                        }
                     }
+                    
                 }
 
-                //Vaciar el valorActual
-                valorActual = "";
 
+                if (!valorActual.Equals(""))
+                {
+                    //Evaluar si existe el estado encontrado con el conjunto guia
+                    if (!existeEstadoAfd(guiaNuevoEstado))
+                    {
+                        estados++;
+                        //Si no existe insertarlo en la cabecera
+                        tablaAfd.Add(new nodoCabecera("S" + estados.ToString(), guiaNuevoEstado, false));
+                        //Insertar transiciones
+                        actualEstado.addTransicion("S" + estados.ToString(), valorActual);
+                        //Revisar nuevamente los conjuntos
+                        repetirFor++;
+                    }
+                    else
+                    {
+                        //Insertar transiciones
+                        actualEstado.addTransicion(getEstadoAfdGuia(guiaNuevoEstado).getIdEstado(), valorActual);
+                    }
+                }                
+
+                //Limpiar los valores
+                valorActual = "";
+                guiaNuevoEstado = "";
+
+            }          
+
+            return estados;
+
+        }
+
+        private bool existeEstadoAfd(string conjunto)
+        {
+            foreach (nodoCabecera nodo in tablaAfd)
+            {
+                if (conjunto.Equals(nodo.getConjuntoGuia()))
+                {
+                    return true;
+                }
             }
 
-          
-
-            return 0;
-
+            return false;
         }
 
         private nodoThompson getEstadoAfnd(int id)
@@ -542,6 +605,31 @@ namespace OLC1_PY1_201700988.Estructuras
             foreach(nodoThompson nodo in tablaAfnd)
             {
                 if(nodo.getEstado() == id)
+                {
+                    return nodo;
+                }
+            }
+
+            return null;
+        }
+
+        private nodoCabecera getEstadoAfd(string id)
+        {
+            foreach(nodoCabecera nodo in tablaAfd)
+            {
+                if (nodo.getIdEstado().Equals(id))
+                {
+                    return nodo;
+                }
+            }
+            return null;
+        }
+
+        private nodoCabecera getEstadoAfdGuia(string conjunto)
+        {
+            foreach (nodoCabecera nodo in tablaAfd)
+            {
+                if (conjunto.Equals(nodo.getConjuntoGuia()))
                 {
                     return nodo;
                 }
