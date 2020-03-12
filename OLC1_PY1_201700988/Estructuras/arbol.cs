@@ -294,10 +294,10 @@ namespace OLC1_PY1_201700988.Estructuras
             return false;
         }
 
-        public void graficarArbol(int er)
+        public void graficarArbol(int er, int conteo)
         {
             string pathDesktop = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
-            string pathFolder = pathDesktop + "\\ER_Analisis\\Arbol";
+            string pathFolder = pathDesktop + "\\ER_Analisis\\" + conteo + "\\Arbol";
 
             try
             {

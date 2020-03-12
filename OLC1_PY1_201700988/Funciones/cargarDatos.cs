@@ -51,7 +51,7 @@ namespace OLC1_PY1_201700988.Funciones
                                     //Si no existe la expresion insertarla
                                     if (!existeER(idActual))
                                     {
-                                        Program.listER.Add(new er(idActual, Program.listER.Count + 1));
+                                        Program.listER.Add(new er(idActual, Program.listER.Count + 1, Program.conteoAnalisis));
                                     }
                                     else
                                     {

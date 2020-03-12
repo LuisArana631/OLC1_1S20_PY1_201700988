@@ -45,7 +45,11 @@
             this.guardarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.guardarComoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ayudaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.acercaDeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.herramientasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.borrarExpresionesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.consolaLexico = new System.Windows.Forms.RichTextBox();
             this.ConsolaLexema = new System.Windows.Forms.RichTextBox();
             this.richTextBox2 = new System.Windows.Forms.RichTextBox();
@@ -60,7 +64,6 @@
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.btnLexemas = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -77,7 +80,8 @@
             this.menuStrip1.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.archivoToolStripMenuItem,
-            this.ayudaToolStripMenuItem});
+            this.ayudaToolStripMenuItem,
+            this.herramientasToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(7, 2, 0, 2);
@@ -135,10 +139,35 @@
             // 
             // ayudaToolStripMenuItem
             // 
+            this.ayudaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.acercaDeToolStripMenuItem});
             this.ayudaToolStripMenuItem.Name = "ayudaToolStripMenuItem";
             this.ayudaToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.H)));
             this.ayudaToolStripMenuItem.Size = new System.Drawing.Size(55, 20);
             this.ayudaToolStripMenuItem.Text = "Ayuda";
+            // 
+            // acercaDeToolStripMenuItem
+            // 
+            this.acercaDeToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
+            this.acercaDeToolStripMenuItem.Name = "acercaDeToolStripMenuItem";
+            this.acercaDeToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
+            this.acercaDeToolStripMenuItem.Text = "Acerca De";
+            // 
+            // herramientasToolStripMenuItem
+            // 
+            this.herramientasToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.borrarExpresionesToolStripMenuItem});
+            this.herramientasToolStripMenuItem.Name = "herramientasToolStripMenuItem";
+            this.herramientasToolStripMenuItem.Size = new System.Drawing.Size(97, 20);
+            this.herramientasToolStripMenuItem.Text = "Herramientas";
+            // 
+            // borrarExpresionesToolStripMenuItem
+            // 
+            this.borrarExpresionesToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
+            this.borrarExpresionesToolStripMenuItem.Name = "borrarExpresionesToolStripMenuItem";
+            this.borrarExpresionesToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
+            this.borrarExpresionesToolStripMenuItem.Text = "Borrar Expresiones";
+            this.borrarExpresionesToolStripMenuItem.Click += new System.EventHandler(this.borrarExpresionesToolStripMenuItem_Click);
             // 
             // groupBox1
             // 
@@ -154,6 +183,20 @@
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Consola";
+            // 
+            // richTextBox1
+            // 
+            this.richTextBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
+            this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.richTextBox1.Font = new System.Drawing.Font("Cooper Black", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.richTextBox1.ForeColor = System.Drawing.SystemColors.Info;
+            this.richTextBox1.Location = new System.Drawing.Point(752, 20);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.ReadOnly = true;
+            this.richTextBox1.Size = new System.Drawing.Size(10, 140);
+            this.richTextBox1.TabIndex = 2;
+            this.richTextBox1.Text = "|\n|\n|\n|\n|\n|\n|\n|\n";
+            this.richTextBox1.WordWrap = false;
             // 
             // consolaLexico
             // 
@@ -205,7 +248,7 @@
             this.btnAnalizar.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAnalizar.ForeColor = System.Drawing.Color.White;
             this.btnAnalizar.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.btnAnalizar.Location = new System.Drawing.Point(892, 31);
+            this.btnAnalizar.Location = new System.Drawing.Point(807, 54);
             this.btnAnalizar.Name = "btnAnalizar";
             this.btnAnalizar.Size = new System.Drawing.Size(180, 46);
             this.btnAnalizar.TabIndex = 3;
@@ -219,9 +262,9 @@
             this.groupBox2.Controls.Add(this.pictureBox1);
             this.groupBox2.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox2.ForeColor = System.Drawing.Color.White;
-            this.groupBox2.Location = new System.Drawing.Point(777, 201);
+            this.groupBox2.Location = new System.Drawing.Point(777, 175);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(483, 285);
+            this.groupBox2.Size = new System.Drawing.Size(483, 311);
             this.groupBox2.TabIndex = 5;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Gráfico";
@@ -231,9 +274,13 @@
             this.pictureBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
             this.pictureBox1.Location = new System.Drawing.Point(7, 20);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(469, 260);
+            this.pictureBox1.Size = new System.Drawing.Size(469, 285);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
+            this.pictureBox1.DoubleClick += new System.EventHandler(this.pictureBox1_Click);
+            this.pictureBox1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseClick);
             // 
             // imageList1
             // 
@@ -279,9 +326,9 @@
             this.groupBox3.Controls.Add(this.treeView1);
             this.groupBox3.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox3.ForeColor = System.Drawing.Color.White;
-            this.groupBox3.Location = new System.Drawing.Point(777, 84);
+            this.groupBox3.Location = new System.Drawing.Point(1014, 29);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(483, 111);
+            this.groupBox3.Size = new System.Drawing.Size(246, 140);
             this.groupBox3.TabIndex = 6;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Contenido";
@@ -292,7 +339,7 @@
             this.treeView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.treeView1.ForeColor = System.Drawing.SystemColors.Info;
             this.treeView1.LineColor = System.Drawing.Color.SkyBlue;
-            this.treeView1.Location = new System.Drawing.Point(7, 24);
+            this.treeView1.Location = new System.Drawing.Point(6, 22);
             this.treeView1.Name = "treeView1";
             treeNode1.Name = "Nodo1";
             treeNode1.Text = "AFND";
@@ -304,8 +351,11 @@
             treeNode4.Text = "Inicio";
             this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
             treeNode4});
-            this.treeView1.Size = new System.Drawing.Size(469, 76);
+            this.treeView1.Size = new System.Drawing.Size(233, 112);
             this.treeView1.TabIndex = 0;
+            this.treeView1.Click += new System.EventHandler(this.treeView1_Click);
+            this.treeView1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.treeView1_MouseClick);
+            this.treeView1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.treeView1_MouseClick);
             // 
             // btnLexemas
             // 
@@ -316,7 +366,7 @@
             this.btnLexemas.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLexemas.ForeColor = System.Drawing.Color.White;
             this.btnLexemas.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.btnLexemas.Location = new System.Drawing.Point(1079, 31);
+            this.btnLexemas.Location = new System.Drawing.Point(806, 106);
             this.btnLexemas.Name = "btnLexemas";
             this.btnLexemas.Size = new System.Drawing.Size(181, 46);
             this.btnLexemas.TabIndex = 7;
@@ -327,20 +377,6 @@
             // timer1
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // richTextBox1
-            // 
-            this.richTextBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
-            this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.richTextBox1.Font = new System.Drawing.Font("Cooper Black", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.richTextBox1.ForeColor = System.Drawing.SystemColors.Info;
-            this.richTextBox1.Location = new System.Drawing.Point(752, 20);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.ReadOnly = true;
-            this.richTextBox1.Size = new System.Drawing.Size(10, 140);
-            this.richTextBox1.TabIndex = 2;
-            this.richTextBox1.Text = "|\n|\n|\n|\n|\n|\n|\n|\n";
-            this.richTextBox1.WordWrap = false;
             // 
             // Form1
             // 
@@ -404,6 +440,9 @@
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.RichTextBox consolaLexico;
         private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.ToolStripMenuItem herramientasToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem acercaDeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem borrarExpresionesToolStripMenuItem;
     }
 }
 

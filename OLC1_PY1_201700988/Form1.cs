@@ -25,14 +25,19 @@ namespace OLC1_PY1_201700988
             nuevoToolStripMenuItem.ForeColor = Color.White;
             guardarComoToolStripMenuItem.ForeColor = Color.White;
             guardarToolStripMenuItem.ForeColor = Color.White;
+            herramientasToolStripMenuItem.ForeColor = Color.White;
+            acercaDeToolStripMenuItem.ForeColor = Color.White;
+            borrarExpresionesToolStripMenuItem.ForeColor = Color.White;
 
             menuStrip1.Renderer = new ToolStripProfessionalRenderer(new MyColorTable());
+
+            treeView1.ExpandAll();
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
             timer1.Interval = 10;
-            timer1.Start();
+            timer1.Start();            
         }
 
         private void archivoToolStripMenuItem_Click(object sender, EventArgs e)
@@ -380,6 +385,7 @@ namespace OLC1_PY1_201700988
                     }
                 }
             }
+            pictureBox1.Refresh();
         }
 
         private void pictureBox2_Click(object sender, EventArgs e)
@@ -459,13 +465,117 @@ namespace OLC1_PY1_201700988
                     }
                 }
             }
-                        
+
+            //Actualiza el tree view
+            treeNodos();
+
+        }
+
+        private void treeNodos()
+        {
+            treeView1.Nodes.Clear();
+            //Raiz del tree
+            treeView1.Nodes.Add("Inicio");
+            //Divisiones del tree
+            treeView1.Nodes[0].Nodes.Add("AFND");
+            treeView1.Nodes[0].Nodes.Add("AFD");
+            treeView1.Nodes[0].Nodes.Add("Tabla de Transiciones");
+
+            //Insertar los hijos
+            foreach(er expresiones in Program.listER)
+            {
+                treeView1.Nodes[0].Nodes[0].Nodes.Add(expresiones.getId());
+                treeView1.Nodes[0].Nodes[1].Nodes.Add(expresiones.getId());
+                treeView1.Nodes[0].Nodes[2].Nodes.Add(expresiones.getId());
+            }
+
+            //Expandir el tree
+            treeView1.ExpandAll();
         }
 
         private void btnLexemas_Click(object sender, EventArgs e)
         {
             char epsilon = (char)603;
             ConsolaLexema.Text = epsilon.ToString();
+        }
+
+        private void pictureBox1_MouseClick(object sender, MouseEventArgs e)
+        {
+            
+           
+        }
+
+        private void treeView1_MouseClick(object sender, MouseEventArgs e)
+        {
+            String path = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
+            
+            try
+            {                
+                foreach (er item in Program.listER)
+                {
+                    if (item.getId().Equals(treeView1.SelectedNode.Text))
+                    {
+                        pictureBox1.Refresh();
+                        path += "\\ER_Analisis\\"+item.getConteoAnalisis()+"\\"+treeView1.SelectedNode.Parent.Text +"\\" + treeView1.SelectedNode.Parent.Text + item.getConteoAnalisis()+item.getNumEr()+".png";
+                        Program.pathImgActual = path;
+                        pictureBox1.Image = Image.FromFile(path);
+                        pictureBox1.Refresh();
+                    }
+                }
+            }
+            catch (Exception error)
+            {
+
+            }
+        }
+
+        private void treeView1_Click(object sender, EventArgs e)
+        {
+            String path = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
+
+            try
+            {
+                foreach (er item in Program.listER)
+                {
+                    if (item.getId().Equals(treeView1.SelectedNode.Text))
+                    {
+                        pictureBox1.Refresh();
+                        path += "\\ER_Analisis\\" + item.getConteoAnalisis() + "\\" + treeView1.SelectedNode.Parent.Text + "\\" + treeView1.SelectedNode.Parent.Text + item.getConteoAnalisis() + item.getNumEr() + ".png";
+                        pictureBox1.Image = Image.FromFile(path);
+                        pictureBox1.Refresh();
+                    }
+                }
+            }
+            catch (Exception error)
+            {
+
+            }
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                verImagen imgForm = new verImagen();
+                imgForm.Text = treeView1.SelectedNode.Text;                
+                imgForm.Show();
+                imgForm.pictureBox1.Image = Image.FromFile(Program.pathImgActual);                
+            }
+            catch(Exception error)
+            {
+
+            }
+        }
+
+        private void borrarExpresionesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Program.listConj = new System.Collections.ArrayList();
+            Program.listER = new System.Collections.ArrayList();
+            Program.listTokensAnalisis = new System.Collections.ArrayList();
+            treeNodos();
+            pictureBox1.Image = null;
+            consolaLexico.Clear();
+            ConsolaLexema.Clear();
         }
     }
 }

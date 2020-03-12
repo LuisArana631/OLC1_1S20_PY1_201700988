@@ -15,6 +15,7 @@ namespace OLC1_PY1_201700988
         //Variables funcionales
         public static int conteoAnalisis = 0;
         public static string pathLexico = "";
+        public static string pathImgActual = "";
 
         //Estructuras funcionales
         public static ArrayList listER = new ArrayList();

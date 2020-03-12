@@ -18,6 +18,12 @@ namespace OLC1_PY1_201700988.Estructuras
         private ArrayList afn;
         private ArrayList afd;
         private int numEr;
+        private int conteoAnalisis;
+
+        public int getConteoAnalisis()
+        {
+            return conteoAnalisis;
+        }
 
         public string getId()
         {
@@ -64,13 +70,14 @@ namespace OLC1_PY1_201700988.Estructuras
             this.afd = afd;
         }
 
-        public er(string id, int numEr)
+        public er(string id, int numEr, int conteo)
         {
             this.id = id;            
             this.arbolGuia = new arbol();
             this.afn = new ArrayList();
             this.afd = new ArrayList();
             this.numEr = numEr;
+            this.conteoAnalisis = conteo;
         }
 
         public void addNodoArbol(string valor, int tipo)
@@ -90,13 +97,13 @@ namespace OLC1_PY1_201700988.Estructuras
 
         private void graficarArbol()
         {
-            this.arbolGuia.graficarArbol(numEr);
+            this.arbolGuia.graficarArbol(numEr, conteoAnalisis);
         }
 
         private void graficarAfnd()
         {
             string pathDesktop = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
-            string pathFolder = pathDesktop + "\\ER_Analisis\\"+Program.conteoAnalisis+"\\AFND";
+            string pathFolder = pathDesktop + "\\ER_Analisis\\"+conteoAnalisis+"\\AFND";
 
             try
             {
@@ -105,7 +112,7 @@ namespace OLC1_PY1_201700988.Estructuras
                     DirectoryInfo dir = Directory.CreateDirectory(pathFolder);
                 }
 
-                string pathRep = pathFolder + "\\AFND"+Program.conteoAnalisis + +numEr+".dot";
+                string pathRep = pathFolder + "\\AFND"+ conteoAnalisis + +numEr+".dot";
                 StreamWriter repAFND = new StreamWriter(pathRep);
                 
                 //Escribir el archivo dot
@@ -139,7 +146,7 @@ namespace OLC1_PY1_201700988.Estructuras
                 repAFND.WriteLine("}");
                 repAFND.Close();
 
-                string pathPng = pathFolder + "\\AFND"+Program.conteoAnalisis  +numEr +".png";
+                string pathPng = pathFolder + "\\AFND"+ conteoAnalisis  +numEr +".png";
                 this.crearImagen(pathRep,pathPng);
             }
             catch (Exception e)
@@ -189,7 +196,7 @@ namespace OLC1_PY1_201700988.Estructuras
         private void graficarAfd()
         {
             string pathDesktop = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
-            string pathFolder = pathDesktop + "\\ER_Analisis\\" + Program.conteoAnalisis + "\\AFD";
+            string pathFolder = pathDesktop + "\\ER_Analisis\\" + conteoAnalisis + "\\AFD";
 
             try
             {
@@ -198,7 +205,7 @@ namespace OLC1_PY1_201700988.Estructuras
                     DirectoryInfo dir = Directory.CreateDirectory(pathFolder);
                 }
 
-                string pathRep = pathFolder + "\\AFD" + Program.conteoAnalisis + +numEr + ".dot";
+                string pathRep = pathFolder + "\\AFD" + conteoAnalisis +numEr + ".dot";
                 StreamWriter repAFD = new StreamWriter(pathRep);
 
                 //Escribir el archivo dot
@@ -227,7 +234,57 @@ namespace OLC1_PY1_201700988.Estructuras
                 repAFD.WriteLine("}");
                 repAFD.Close();
 
-                string pathPng = pathFolder + "\\AFD" + Program.conteoAnalisis + numEr + ".png";
+                string pathPng = pathFolder + "\\AFD" + conteoAnalisis + numEr + ".png";
+                this.crearImagen(pathRep, pathPng);
+            }
+            catch (Exception e)
+            {
+
+            }
+        }
+
+        public void graficarTablaTransiciones()
+        {
+            string pathDesktop = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
+            string pathFolder = pathDesktop + "\\ER_Analisis\\" + conteoAnalisis + "\\Tabla Transiciones";
+
+            try
+            {
+                if (!Directory.Exists(pathFolder))
+                {
+                    DirectoryInfo dir = Directory.CreateDirectory(pathFolder);
+                }
+
+                string pathRep = pathFolder + "\\AFD" + conteoAnalisis + numEr + ".dot";
+                StreamWriter repAFD = new StreamWriter(pathRep);
+
+                //Escribir el archivo dot
+                repAFD.WriteLine("digraph AFD{");
+                repAFD.WriteLine("rankdir=LR;");
+                repAFD.WriteLine("size=\"13\";");
+                //Configuracion de los nodos
+                repAFD.WriteLine("node[shape=circle, peripheries=1];");
+                repAFD.WriteLine("node[fontcolor=black];");
+                repAFD.WriteLine("edge[color=black];");
+                //Insertar nodos transicion
+                foreach (nodoCabecera item in afd)
+                {
+                    if (item.getAceptacion())
+                    {
+                        repAFD.WriteLine(item.getIdEstado() + "[peripheries = 2, shape=circle];");
+                    }
+
+                    foreach (nodoTransicion next in item.getTransiciones())
+                    {
+
+                        repAFD.Write(item.getIdEstado() + " -> " + next.getEstadoSiguientes() + "[label=\"" + next.getValor() + "\"];\n");
+
+                    }
+                }
+                repAFD.WriteLine("}");
+                repAFD.Close();
+
+                string pathPng = pathFolder + "\\AFD" + conteoAnalisis + numEr + ".png";
                 this.crearImagen(pathRep, pathPng);
             }
             catch (Exception e)
