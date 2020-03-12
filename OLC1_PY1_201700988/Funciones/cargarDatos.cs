@@ -316,6 +316,32 @@ namespace OLC1_PY1_201700988.Funciones
             return null;
         }
 
+        public void upDateLexema(ArrayList listaToken, RichTextBox consola)
+        {
+            int estado = 0;
+
+            consola.Text += "---------------------------------------------------------------------------------\n";
+            consola.Text += "                               [Validando Lexemas]                        \n";
+            consola.Text += "---------------------------------------------------------------------------------\n";
+
+            for (int i = 0; i < listaToken.Count; i++)
+            {
+                token item = (token)listaToken[i];
+                switch (estado)
+                {
+                    //Debemos encontrar un identificador para continuar con el analisis
+                    case 0:
+                        switch (item.getTipo())
+                        {
+                            case token.tipo.IDENTIFICADOR:
+                                token auxEval = (token)listaToken[i + 1];
+                                break;
+                        }
+                        break;
+                }
+            }
+        }
+
 
     }
 }

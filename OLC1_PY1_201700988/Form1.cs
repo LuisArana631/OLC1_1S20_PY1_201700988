@@ -495,8 +495,29 @@ namespace OLC1_PY1_201700988
 
         private void btnLexemas_Click(object sender, EventArgs e)
         {
-            char epsilon = (char)603;
-            ConsolaLexema.Text = epsilon.ToString();
+            if(Program.listER.Count != 0)
+            {
+                Control controlBox;
+                if (tabControl1.SelectedTab.HasChildren)
+                {
+                    foreach (Control item in tabControl1.SelectedTab.Controls)
+                    {
+                        controlBox = item;
+
+                        if (controlBox is RichTextBox)
+                        {
+                            //Realizar analisis lexico
+                            Program.listTokensAnalisis = Program.analizador.scannerMethod(controlBox.Text);
+
+                            Program.upDate.upDateLexema(Program.listTokensAnalisis, ConsolaLexema);
+                        }
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Debes cargar alguna expresion regular antes de validar lexemas.","No tienes expresiones cargadas",MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
         }
 
         private void pictureBox1_MouseClick(object sender, MouseEventArgs e)
