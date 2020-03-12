@@ -265,21 +265,35 @@ namespace OLC1_PY1_201700988.Estructuras
                 repTT.WriteLine("shape =  plaintext");
                 repTT.WriteLine("label = <");
                 repTT.WriteLine("<table border='0' cellborder='1' color='black' cellspacing='0'>");
-                                
-                //Crear cabecera                
-                
 
+                //Crear cabecera 
+                repTT.Write("<tr><td></td>");
+                ArrayList listSimbolos = generarEncabezado(repTT);
+                repTT.WriteLine("</tr>");                                          
+                                
                 //Insertar nodos transicion
                 foreach (nodoCabecera item in afd)
-                {
-                    repTT.WriteLine("<tr>");
-                    //Insertar transiciones
-                    foreach(nodoTransicion node in item.getTransiciones())
+                {                    
+                    if(item.getTransiciones().Count != 0)
                     {
-                        
+                        repTT.Write("<tr><td>" + item.getIdEstado() + "</td>");
+                        ArrayList fila = generarFilaEStados(listSimbolos.Count);
+                        //Insertar transiciones
+                        foreach (nodoTransicion node in item.getTransiciones())
+                        {
+                            fila[listSimbolos.IndexOf(node.getValor())] = "<td>" + node.getEstadoSiguientes() + "</td>";
+                        }
+
+                        foreach (string td in fila)
+                        {
+                            repTT.Write(td);
+                        }
+
+                        repTT.WriteLine("</tr>");
                     }
-                    repTT.WriteLine("</tr>");
+                    
                 }
+                
 
                 repTT.WriteLine("</table>");
                 repTT.WriteLine(">];");
@@ -295,5 +309,41 @@ namespace OLC1_PY1_201700988.Estructuras
             }
         }
 
+        private ArrayList generarEncabezado(StreamWriter escritor)
+        {
+            ArrayList hojasPng = new ArrayList();            
+
+            //arbolGuia.cabeceraPng(escritor, arbolGuia.getRaiz());
+            foreach (nodoCabecera item in afd)
+            {
+                foreach (nodoTransicion node in item.getTransiciones())
+                {
+                    if (!hojasPng.Contains(node.getValor()))
+                    {
+                        string arreglarValores = node.getValor();
+                        arreglarValores = arreglarValores.Replace("&", "&amp;");
+                        arreglarValores = arreglarValores.Replace(">","&gt;");
+                        arreglarValores = arreglarValores.Replace("<", "&lt;");                        
+                        
+                        escritor.Write("<td>" + arreglarValores + "</td>");
+                        hojasPng.Add(node.getValor());
+                    }
+                }
+            }
+
+            return hojasPng;
+        }
+        
+        private ArrayList generarFilaEStados(int simbolos)
+        {
+            ArrayList listReturn = new ArrayList();
+            
+            for(int i = 0; i < simbolos; i++)
+            {
+                listReturn.Add("<td></td>");
+            }
+
+            return listReturn;
+        }
     }
 }

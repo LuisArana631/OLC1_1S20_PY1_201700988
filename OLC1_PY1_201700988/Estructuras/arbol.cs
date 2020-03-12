@@ -643,6 +643,23 @@ namespace OLC1_PY1_201700988.Estructuras
             return null;
         }
 
+        public void cabeceraPng(StreamWriter escritor, nodoArbol nodo)
+        {
+            if (nodo.getLeft() != null)
+            {
+                cabeceraPng(escritor, nodo.getLeft());
+            }
+
+            if (nodo.getRight() != null)
+            {
+                cabeceraPng(escritor, nodo.getRight());
+            }
+
+            if(nodo.getTipo() == 0)
+            {
+                escritor.Write("<td>"+nodo.getValor()+"</td>");
+            }
+        }
     }
     
     // 0 -> hoja
