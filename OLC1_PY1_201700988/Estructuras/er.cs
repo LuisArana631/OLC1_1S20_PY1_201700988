@@ -191,6 +191,7 @@ namespace OLC1_PY1_201700988.Estructuras
         {
             afd = arbolGuia.crearAfd();
             graficarAfd();
+            graficarTablaTransiciones();
         }
 
         private void graficarAfd()
@@ -246,7 +247,7 @@ namespace OLC1_PY1_201700988.Estructuras
         public void graficarTablaTransiciones()
         {
             string pathDesktop = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
-            string pathFolder = pathDesktop + "\\ER_Analisis\\" + conteoAnalisis + "\\Tabla Transiciones";
+            string pathFolder = pathDesktop + "\\ER_Analisis\\" + conteoAnalisis + "\\Tabla de Transiciones";
 
             try
             {
@@ -255,36 +256,37 @@ namespace OLC1_PY1_201700988.Estructuras
                     DirectoryInfo dir = Directory.CreateDirectory(pathFolder);
                 }
 
-                string pathRep = pathFolder + "\\AFD" + conteoAnalisis + numEr + ".dot";
-                StreamWriter repAFD = new StreamWriter(pathRep);
+                string pathRep = pathFolder + "\\Tabla de Transiciones" + conteoAnalisis + numEr + ".dot";
+                StreamWriter repTT = new StreamWriter(pathRep);
 
                 //Escribir el archivo dot
-                repAFD.WriteLine("digraph AFD{");
-                repAFD.WriteLine("rankdir=LR;");
-                repAFD.WriteLine("size=\"13\";");
-                //Configuracion de los nodos
-                repAFD.WriteLine("node[shape=circle, peripheries=1];");
-                repAFD.WriteLine("node[fontcolor=black];");
-                repAFD.WriteLine("edge[color=black];");
+                repTT.WriteLine("digraph Tabla_Transiciones{");
+                repTT.WriteLine("tbl [");
+                repTT.WriteLine("shape =  plaintext");
+                repTT.WriteLine("label = <");
+                repTT.WriteLine("<table border='0' cellborder='1' color='black' cellspacing='0'>");
+                                
+                //Crear cabecera                
+                
+
                 //Insertar nodos transicion
                 foreach (nodoCabecera item in afd)
                 {
-                    if (item.getAceptacion())
+                    repTT.WriteLine("<tr>");
+                    //Insertar transiciones
+                    foreach(nodoTransicion node in item.getTransiciones())
                     {
-                        repAFD.WriteLine(item.getIdEstado() + "[peripheries = 2, shape=circle];");
+                        
                     }
-
-                    foreach (nodoTransicion next in item.getTransiciones())
-                    {
-
-                        repAFD.Write(item.getIdEstado() + " -> " + next.getEstadoSiguientes() + "[label=\"" + next.getValor() + "\"];\n");
-
-                    }
+                    repTT.WriteLine("</tr>");
                 }
-                repAFD.WriteLine("}");
-                repAFD.Close();
 
-                string pathPng = pathFolder + "\\AFD" + conteoAnalisis + numEr + ".png";
+                repTT.WriteLine("</table>");
+                repTT.WriteLine(">];");
+                repTT.WriteLine("}");
+                repTT.Close();
+
+                string pathPng = pathFolder + "\\Tabla de Transiciones" + conteoAnalisis + numEr + ".png";
                 this.crearImagen(pathRep, pathPng);
             }
             catch (Exception e)
