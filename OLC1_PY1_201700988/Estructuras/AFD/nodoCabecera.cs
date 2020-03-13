@@ -101,12 +101,15 @@ namespace OLC1_PY1_201700988.Estructuras.AFD
                 //Console.WriteLine("valor: \"" + next.getValor() + "\" char: \"" + caracter+ "\"");
                 //Si es conjunto
                 if (esConjunto)
-                {
-                    if (getConjEvaluar(next.getValor()).existeChar(caracter))
+                {                    
+                    if(getConjEvaluar(next.getValor()) != null)
                     {
-                        //Console.WriteLine("Retornando desde aca conjs");
-                        return next.getEstadoSiguientes();
-                    }
+                        if (getConjEvaluar(next.getValor()).existeChar(caracter))
+                        {
+                            //Console.WriteLine("Retornando desde aca conjs");
+                            return next.getEstadoSiguientes();
+                        }
+                    }                
                 }                
                 //Si no es un conjunto y si el caracter es igual al que se encuentra en la expresion
                 else if (next.getValor().Equals(caracter))

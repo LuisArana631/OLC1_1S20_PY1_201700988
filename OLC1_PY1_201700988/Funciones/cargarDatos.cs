@@ -148,7 +148,7 @@ namespace OLC1_PY1_201700988.Funciones
                                     //Insertar el conjunto de numeros
                                     int itemInicio = Int32.Parse((string) posConj(idActual).getConjunto()[0]);
 
-                                    for (int j  = itemInicio+1; j < int.Parse(item.getValor()); j++)
+                                    for (int j  = itemInicio+1; j <= int.Parse(item.getValor()); j++)
                                     {
                                         posConj(idActual).getConjunto().Add(j.ToString());
                                     }
@@ -159,7 +159,7 @@ namespace OLC1_PY1_201700988.Funciones
                                     string itemInicio = (string)posConj(idActual).getConjunto()[0];
                                     char caracterInicial = itemInicio[0];
 
-                                    for (int j = caracterInicial + 1; j < (char)item.getValor()[0]; j++)
+                                    for (int j = caracterInicial + 1; j <= (char)item.getValor()[0]; j++)
                                     {
                                         char charInsert = (char)j;
                                         if (!char.IsLetterOrDigit(charInsert))

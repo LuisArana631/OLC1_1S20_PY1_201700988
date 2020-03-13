@@ -32,17 +32,20 @@ namespace OLC1_PY1_201700988.Funciones
 
             Console.WriteLine("--------------------------------------------------------------");
             Console.WriteLine("cadena:\"" + cadena+"\" de la expresion "+expresion.getId());
-            
+
+            ArrayList reporteCadena = new ArrayList();
+
             for(int i = 0; i < cadena.Length; i++)
             {
                 string caracter = Char.ToString(cadena[i]);
                 concatenado += caracter;
-                string estadoSiguiente = estadoActual.permitirPaso(caracter, estadoActual.getIdEstado(), concatenado);                
+                string estadoSiguiente = estadoActual.permitirPaso(caracter, estadoActual.getIdEstado(), concatenado);
 
+                Console.WriteLine("i" + i + ": " + estadoActual.getIdEstado() + "->" + caracter + "->" + estadoSiguiente);
                 if (!estadoSiguiente.Equals("-----Error-----"))
                 {
                     
-                    Console.WriteLine("i"+i+": "+ estadoActual.getIdEstado() +"->"+caracter+ "->"+estadoSiguiente);                    
+                                      
                     if (!estadoSiguiente.Equals(estadoActual.getIdEstado()))
                     {
                         concatenado = "";
