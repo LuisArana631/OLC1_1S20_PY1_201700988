@@ -98,13 +98,13 @@ namespace OLC1_PY1_201700988.Estructuras.AFD
                         break;
                 }
 
-                Console.WriteLine("valor: \"" + next.getValor() + "\" char: \"" + caracter+ "\"");
+                //Console.WriteLine("valor: \"" + next.getValor() + "\" char: \"" + caracter+ "\"");
                 //Si es conjunto
                 if (esConjunto)
                 {
                     if (getConjEvaluar(next.getValor()).existeChar(caracter))
                     {
-                        Console.WriteLine("Retornando desde aca conjs");
+                        //Console.WriteLine("Retornando desde aca conjs");
                         return next.getEstadoSiguientes();
                     }
                 }                
@@ -116,6 +116,7 @@ namespace OLC1_PY1_201700988.Estructuras.AFD
                 //Evaluar si la cadena es de mas caracteres
                 else if(next.getValor().Length > 1 && cadena.Length <= next.getValor().Length)
                 {
+                    //Console.WriteLine("Cadena: " + cadena + " valor: " + next.getValor());
                     if (cadena.Equals(next.getValor()))
                     {
                         return next.getEstadoSiguientes();
@@ -125,7 +126,7 @@ namespace OLC1_PY1_201700988.Estructuras.AFD
                         //Saber si estamos en la ultima transicion a evaluar
                         if (movs == transiciones.Count)
                         {
-                            Console.WriteLine("Retornando desde aca movs");
+                            //Console.WriteLine("Retornando desde aca movs");
                             return estadoActual;
                         }                        
                         

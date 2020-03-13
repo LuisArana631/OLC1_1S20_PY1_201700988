@@ -22,6 +22,7 @@ namespace OLC1_PY1_201700988.Estructuras.Conjunto
         {
             foreach(string item in conjunto)
             {
+                //Console.WriteLine("Conjunto: evaluar:"+caracter+" item:"+item);
                 if (item.Equals(caracter))
                 {
                     return true;

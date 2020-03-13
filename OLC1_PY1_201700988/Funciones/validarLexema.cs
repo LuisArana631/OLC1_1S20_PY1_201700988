@@ -36,18 +36,17 @@ namespace OLC1_PY1_201700988.Funciones
             for(int i = 0; i < cadena.Length; i++)
             {
                 string caracter = Char.ToString(cadena[i]);
-                string estadoSiguiente = estadoActual.permitirPaso(caracter, estadoActual.getIdEstado(), concatenado);
+                concatenado += caracter;
+                string estadoSiguiente = estadoActual.permitirPaso(caracter, estadoActual.getIdEstado(), concatenado);                
 
                 if (!estadoSiguiente.Equals("-----Error-----"))
                 {
-                    //Console.WriteLine("i"+i+": "+ estadoActual.getIdEstado() +"->"+caracter+ "->"+estadoSiguiente);                    
-                    if (estadoSiguiente.Equals(estadoActual.getIdEstado()))
-                    {
-                        concatenado += caracter;
-                    }
-                    else
+                    
+                    Console.WriteLine("i"+i+": "+ estadoActual.getIdEstado() +"->"+caracter+ "->"+estadoSiguiente);                    
+                    if (!estadoSiguiente.Equals(estadoActual.getIdEstado()))
                     {
                         concatenado = "";
+                        
                     }
 
                     estadoActual = expresion.getEstadoActual(estadoSiguiente);
