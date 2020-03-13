@@ -25,6 +25,7 @@ namespace OLC1_PY1_201700988
         //Fuciones del programa
         public static scanner analizador = new scanner();               
         public static cargarDatos upDate = new cargarDatos();
+        public static validarLexema validar = new validarLexema();
 
         [STAThread]
         static void Main()

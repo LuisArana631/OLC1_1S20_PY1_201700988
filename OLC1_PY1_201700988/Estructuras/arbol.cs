@@ -16,7 +16,7 @@ namespace OLC1_PY1_201700988.Estructuras
         private int estado = 0;
         private Boolean insertBoolean = false;
         private ArrayList tablaAfnd;
-        private ArrayList tablaAfd;
+        private ArrayList tablaAfd;        
 
         public arbol()
         {
@@ -28,29 +28,29 @@ namespace OLC1_PY1_201700988.Estructuras
             return raiz;
         }
 
-        public void insert(string valor, int tipo)
+        public void insert(string valor, int tipo, int esConj)
         {
             if(raiz != null)
             {
                 insertBoolean = false;
-                insertNodo(valor, tipo, raiz);
+                insertNodo(valor, tipo, raiz, esConj);
             }
             else
             {                
-                this.raiz = new nodoArbol(valor, tipo);
+                this.raiz = new nodoArbol(valor, tipo, esConj);
             }
         }
 
-        private void insertNodo(string valor, int tipo, nodoArbol nodo)
+        private void insertNodo(string valor, int tipo, nodoArbol nodo, int esConj)
         {
             if(nodo.getLeft() != null)
             {
-                insertNodo(valor, tipo, nodo.getLeft());
+                insertNodo(valor, tipo, nodo.getLeft(),esConj);
             }
 
             if(nodo.getRight() != null)
             {
-                insertNodo(valor, tipo, nodo.getRight());
+                insertNodo(valor, tipo, nodo.getRight(), esConj);
             }
 
             if (!insertBoolean)
@@ -62,19 +62,19 @@ namespace OLC1_PY1_201700988.Estructuras
                     case 1:
                         if (nodo.getLeft() == null)
                         {
-                            insertLeft(valor, tipo, nodo);
+                            insertLeft(valor, tipo, nodo, esConj);
                             insertBoolean = true;
                         }
                         else if (nodo.getRight() == null)
                         {
-                            insertRight(valor, tipo, nodo);
+                            insertRight(valor, tipo, nodo, esConj);
                             insertBoolean = true;
                         }
                         break;
                     case 2:
                         if(nodo.getLeft() == null)
                         {
-                            insertLeft(valor, tipo, nodo);
+                            insertLeft(valor, tipo, nodo, esConj);
                             insertBoolean = true;
                         }
                         break;
@@ -84,15 +84,15 @@ namespace OLC1_PY1_201700988.Estructuras
             }
         }
 
-        private void insertLeft(string valor, int tipo, nodoArbol nodo)
+        private void insertLeft(string valor, int tipo, nodoArbol nodo, int esConj)
         {
-            nodoArbol nodoInsert = new nodoArbol(valor, tipo);
+            nodoArbol nodoInsert = new nodoArbol(valor, tipo, esConj);
             nodo.setLeft(nodoInsert);
         }
 
-        private void insertRight(string valor, int tipo, nodoArbol nodo)
+        private void insertRight(string valor, int tipo, nodoArbol nodo, int esConj)
         {
-            nodoArbol nodoInsert = new nodoArbol(valor, tipo);
+            nodoArbol nodoInsert = new nodoArbol(valor, tipo, esConj);
             nodo.setRight(nodoInsert);
         }
 
@@ -181,7 +181,7 @@ namespace OLC1_PY1_201700988.Estructuras
                     {
                         if (item.getEstado() == nodo.getEstadoInicio())
                         {
-                            item.addTransicion(nodo.getEstadoFin(), nodo.getValor(), 0);
+                            item.addTransicion(nodo.getEstadoFin(), nodo.getValor(), 0,nodo.getEsConj());
                         }
                     }                    
                     break;
@@ -198,18 +198,18 @@ namespace OLC1_PY1_201700988.Estructuras
                                 //Conexiones iniciales
                                 if (item.getEstado() == nodo.getEstadoInicio())
                                 {
-                                    item.addTransicion(nodo.getLeft().getEstadoInicio(), epsilon.ToString(), 0);
-                                    item.addTransicion(nodo.getRight().getEstadoInicio(), epsilon.ToString(), 0);
+                                    item.addTransicion(nodo.getLeft().getEstadoInicio(), epsilon.ToString(), 0,0);
+                                    item.addTransicion(nodo.getRight().getEstadoInicio(), epsilon.ToString(), 0,0);
                                 }
 
                                 //Conectar al final
                                 if (item.getEstado() == nodo.getLeft().getEstadoFin())
                                 {
-                                    item.addTransicion(nodo.getEstadoFin(), epsilon.ToString(), 0);
+                                    item.addTransicion(nodo.getEstadoFin(), epsilon.ToString(), 0,0);
                                 }
                                 if (item.getEstado() == nodo.getRight().getEstadoFin())
                                 {
-                                    item.addTransicion(nodo.getEstadoFin(), epsilon.ToString(), 0);
+                                    item.addTransicion(nodo.getEstadoFin(), epsilon.ToString(), 0,0);
                                 }
 
                             }
@@ -226,15 +226,15 @@ namespace OLC1_PY1_201700988.Estructuras
                                 //Conexiones iniciales
                                 if (item.getEstado() == nodo.getEstadoInicio())
                                 {
-                                    item.addTransicion(nodo.getEstadoFin(), epsilon.ToString(), 0);
-                                    item.addTransicion(nodo.getLeft().getEstadoInicio(), epsilon.ToString(), 0);
+                                    item.addTransicion(nodo.getEstadoFin(), epsilon.ToString(), 0,0);
+                                    item.addTransicion(nodo.getLeft().getEstadoInicio(), epsilon.ToString(), 0,0);
                                 }
 
                                 //Conexiones finales nodo hijo
                                 if (item.getEstado() == nodo.getLeft().getEstadoFin())
                                 {
-                                    item.addTransicion(nodo.getEstadoFin(), epsilon.ToString(), 0);
-                                    item.addTransicion(nodo.getLeft().getEstadoInicio(), epsilon.ToString(), 1);
+                                    item.addTransicion(nodo.getEstadoFin(), epsilon.ToString(), 0,0);
+                                    item.addTransicion(nodo.getLeft().getEstadoInicio(), epsilon.ToString(), 1,0);
                                 }
                             }
                             break;
@@ -245,14 +245,14 @@ namespace OLC1_PY1_201700988.Estructuras
                                 //Conexiones iniciales
                                 if (item.getEstado() == nodo.getEstadoInicio())
                                 {
-                                    item.addTransicion(nodo.getLeft().getEstadoInicio(), epsilon.ToString(), 0);
-                                    item.addTransicion(nodo.getEstadoFin(), epsilon.ToString(), 0);
+                                    item.addTransicion(nodo.getLeft().getEstadoInicio(), epsilon.ToString(), 0,0);
+                                    item.addTransicion(nodo.getEstadoFin(), epsilon.ToString(), 0,0);
                                 }
 
                                 //Conexiones finales
                                 if (item.getEstado() == nodo.getLeft().getEstadoFin())
                                 {
-                                    item.addTransicion(nodo.getEstadoFin(), epsilon.ToString(), 0);
+                                    item.addTransicion(nodo.getEstadoFin(), epsilon.ToString(), 0,0);
                                 }
 
                             }
@@ -264,14 +264,14 @@ namespace OLC1_PY1_201700988.Estructuras
                                 //Conexiones iniciales
                                 if (item.getEstado() == nodo.getEstadoInicio())
                                 {
-                                    item.addTransicion(nodo.getLeft().getEstadoInicio(), epsilon.ToString(),0);
+                                    item.addTransicion(nodo.getLeft().getEstadoInicio(), epsilon.ToString(),0,0);
                                 }
 
                                 //Conexiones finales
                                 if (item.getEstado() == nodo.getLeft().getEstadoFin())
                                 {
-                                    item.addTransicion(nodo.getLeft().getEstadoInicio(), epsilon.ToString(),1);
-                                    item.addTransicion(nodo.getEstadoFin(), epsilon.ToString(),0);
+                                    item.addTransicion(nodo.getLeft().getEstadoInicio(), epsilon.ToString(),1,0);
+                                    item.addTransicion(nodo.getEstadoFin(), epsilon.ToString(),0,0);
                                 }
                             }
                             break;
@@ -482,6 +482,7 @@ namespace OLC1_PY1_201700988.Estructuras
             return false;
         }
 
+        //Arreglar el dato de conjunto
         private int crearCabeceras(string conjunto, int estados, nodoCabecera actualEstado)
         {
             string guiaNuevoEstado = "";
@@ -509,6 +510,7 @@ namespace OLC1_PY1_201700988.Estructuras
             }
 
             int repetirFor = 2;
+            int esConj = 0;
 
             while(repetirFor != 0)
             {
@@ -549,6 +551,7 @@ namespace OLC1_PY1_201700988.Estructuras
                                         valorActual = stateNext.getValor();
                                         guiaNuevoEstado = stateNext.getEstadoNext().ToString();
                                         valoresEvaluados.Add(valorActual);
+                                        esConj = stateNext.getEsConj();
                                     }                                    
                                 }
                             }
@@ -572,14 +575,15 @@ namespace OLC1_PY1_201700988.Estructuras
                         //Si no existe insertarlo en la cabecera
                         tablaAfd.Add(new nodoCabecera("S" + estados.ToString(), guiaNuevoEstado, false));
                         //Insertar transiciones
-                        actualEstado.addTransicion("S" + estados.ToString(), valorActual);                                                
+                        actualEstado.addTransicion("S" + estados.ToString(), valorActual,esConj);                                                
                     }
                     else
                     {
                         //Insertar transiciones
-                        actualEstado.addTransicion(getEstadoAfdGuia(guiaNuevoEstado).getIdEstado(), valorActual);                        
+                        actualEstado.addTransicion(getEstadoAfdGuia(guiaNuevoEstado).getIdEstado(), valorActual,esConj);                        
                     }
-                    repetirFor++;                    
+                    repetirFor++;
+                    esConj = 0;
                 }                
 
                 //Limpiar los valores

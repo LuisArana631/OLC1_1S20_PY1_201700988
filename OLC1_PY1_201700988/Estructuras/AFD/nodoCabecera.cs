@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Collections;
+using OLC1_PY1_201700988.Estructuras.Conjunto;
 
 namespace OLC1_PY1_201700988.Estructuras.AFD
 {
@@ -74,15 +75,82 @@ namespace OLC1_PY1_201700988.Estructuras.AFD
             return conjuntoGuia;
         }
         
-        public void addTransicion(string estado, string valor)
+        public void addTransicion(string estado, string valor, int esConj)
         {
-            this.transiciones.Add(new nodoTransicion(estado,valor));
+            this.transiciones.Add(new nodoTransicion(estado,valor, esConj));
         }
 
+        public string permitirPaso(string caracter, string estadoActual, string cadena)
+        {
+            Console.WriteLine("Evaluando " + caracter + " con la cadena " + cadena + " en el estado "+ estadoActual);
+            int movs = 1;
+            foreach(nodoTransicion next in transiciones)
+            {
+                bool esConjunto = false;                
 
+                //Reconocer si es conjunto
+                switch (next.getEsConj())
+                {
+                    case 0:
+                        break;
+                    case 1:
+                        esConjunto = true;
+                        break;
+                }
 
+                Console.WriteLine("valor: \"" + next.getValor() + "\" char: \"" + caracter+ "\"");
+                //Si es conjunto
+                if (esConjunto)
+                {
+                    if (getConjEvaluar(next.getValor()).existeChar(caracter))
+                    {
+                        Console.WriteLine("Retornando desde aca conjs");
+                        return next.getEstadoSiguientes();
+                    }
+                }                
+                //Si no es un conjunto y si el caracter es igual al que se encuentra en la expresion
+                else if (next.getValor().Equals(caracter))
+                {                    
+                    return next.getEstadoSiguientes();
+                }
+                //Evaluar si la cadena es de mas caracteres
+                else if(next.getValor().Length > 1 && cadena.Length <= next.getValor().Length)
+                {
+                    if (cadena.Equals(next.getValor()))
+                    {
+                        return next.getEstadoSiguientes();
+                    }
+                    else
+                    {
+                        //Saber si estamos en la ultima transicion a evaluar
+                        if (movs == transiciones.Count)
+                        {
+                            Console.WriteLine("Retornando desde aca movs");
+                            return estadoActual;
+                        }                        
+                        
+                    }
+                }
 
+                movs++;
+            }
 
+            return "-----Error-----";
+        }
 
+        private nodoConj getConjEvaluar(string id)
+        {
+            foreach (nodoConj conjunto in Program.listConj)
+            {
+                if (conjunto.getId().Equals(id))
+                {
+                    return conjunto;
+                }
+            }
+
+            return null;
+
+        }        
+        
     }
 }

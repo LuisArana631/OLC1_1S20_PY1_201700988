@@ -21,9 +21,9 @@ namespace OLC1_PY1_201700988.Funciones
             int conjEstado = 0;
             int erEstado = 0;
 
-            consola.Text += "---------------------------------------------------------------------------------\n";
+            consola.Text += "-------------------------------------------------------------------------------\n";
             consola.Text += "                       [Insertando expresiones regulares]                        \n";
-            consola.Text += "---------------------------------------------------------------------------------\n";
+            consola.Text += "-------------------------------------------------------------------------------\n";
             
 
             for (int i=0; i<listaToken.Count; i++)
@@ -207,22 +207,26 @@ namespace OLC1_PY1_201700988.Funciones
                                     //Si encontramos una cadena insertar un nodo hoja
                                     if(item.getTipo() == token.tipo.CADENA)
                                     {
-                                        posEr(idActual).addNodoArbol(item.getValor().Replace('"', ' '), 0);
+                                        posEr(idActual).addNodoArbol(item.getValor().Replace('"'.ToString(), ""), 0,0);
+                                    }
+                                    else if(item.getTipo() == token.tipo.IDENTIFICADOR)
+                                    {
+                                        posEr(idActual).addNodoArbol(item.getValor(), 0,1);
                                     }
                                     else
                                     {
-                                        posEr(idActual).addNodoArbol(item.getValor(), 0);
+                                        posEr(idActual).addNodoArbol(item.getValor(), 0,0);
                                     }                                    
                                 }
                                 else if (item.getTipo() == token.tipo.CERRADURA_DUDA || item.getTipo() == token.tipo.CERRADURA_KLEENE || item.getTipo() == token.tipo.CERRADURA_POSITIVA)
                                 {
                                     //Si insertamos una cerradura, ingresar un nodo cerradura
-                                    posEr(idActual).addNodoArbol(item.getValor(), 2);
+                                    posEr(idActual).addNodoArbol(item.getValor(), 2,0);
                                 }
                                 else if(item.getTipo() == token.tipo.CONCATENACION || item.getTipo() == token.tipo.DISYUNCION)
                                 {
                                     //Si encontramos una operacion insertar el nodo
-                                    posEr(idActual).addNodoArbol(item.getValor(), 1);
+                                    posEr(idActual).addNodoArbol(item.getValor(), 1,0);
                                 }
                                 else if(item.getTipo() == token.tipo.LLAVE_DER || item.getTipo() == token.tipo.LLAVE_IZQ)
                                 {
@@ -235,9 +239,9 @@ namespace OLC1_PY1_201700988.Funciones
                                         //Generar AFND
                                         posEr(idActual).funcionAFND();
                                         posEr(idActual).funcionAFD();
-                                        consola.Text += "---------------------------------------------------------------------------------\n";
+                                        consola.Text += "-------------------------------------------------------------------------------\n";
                                         consola.Text += "                   [Expresion " +idActual+ " insertada con exito]                       \n";
-                                        consola.Text += "---------------------------------------------------------------------------------\n";
+                                        consola.Text += "-------------------------------------------------------------------------------\n";
                                     }
                                     catch(Exception e)
                                     {
@@ -320,9 +324,9 @@ namespace OLC1_PY1_201700988.Funciones
         {
             int estado = 0;
 
-            consola.Text += "---------------------------------------------------------------------------------\n";
+            consola.Text += "-------------------------------------------------------------------------------\n";
             consola.Text += "                               [Validando Lexemas]                        \n";
-            consola.Text += "---------------------------------------------------------------------------------\n";
+            consola.Text += "-------------------------------------------------------------------------------\n";
 
             for (int i = 0; i < listaToken.Count; i++)
             {
@@ -333,9 +337,55 @@ namespace OLC1_PY1_201700988.Funciones
                     case 0:
                         switch (item.getTipo())
                         {
+                            case token.tipo.CONJ:
+                                estado = 1;
+                                break;
                             case token.tipo.IDENTIFICADOR:
                                 token auxEval = (token)listaToken[i + 1];
+                                if (auxEval.getTipo() == token.tipo.DOS_PUNTOS)
+                                {
+                                    //Ir a estado para controlar ingreso de expresionRegular
+                                    estado = 2;
+                                    idActual = item.getValor();
+                                    //Si no existe la expresion insertarla
+                                    if (!existeER(idActual))
+                                    {
+                                        //Notificar que no existe esa expresion regular
+                                        consola.Text += "(ID No Existe) *No se encontro una expresion regular con ese identificador -" + idActual + "-* \n";
+                                        estado = 1;
+                                    }
+                                }
                                 break;
+                        }
+                        break;
+                    case 1:
+                        if(item.getTipo() == token.tipo.PUNTO_COMA)
+                        {
+                            //Hasta encontrar un punto y coma omitir lo que viene
+                            estado = 0;
+                        }
+                        break;
+                    case 2:
+                        //Si encontramos una cadena
+                        if(item.getTipo() == token.tipo.CADENA)
+                        {
+                            posEr(idActual).addLexema(item.getValor().Replace('"'.ToString(),""));
+                            consola.Text += "Cadena: "+item.getValor()+" insertada en la expresion: "+idActual+"\n";
+                        }
+                        //Si encontramos un punto y coma
+                        else if(item.getTipo() == token.tipo.PUNTO_COMA)
+                        {
+                            estado = 0;
+                        }
+                        //Ignorar los dos puntos
+                        else if(item.getTipo() == token.tipo.DOS_PUNTOS)
+                        {
+                            //No hacer nada
+                        }
+                        //Cualquier otro tipo de token
+                        else
+                        {
+                            printError(consola,item.getValor(),"cadena");
                         }
                         break;
                 }
