@@ -80,9 +80,10 @@ namespace OLC1_PY1_201700988.Estructuras.AFD
             this.transiciones.Add(new nodoTransicion(estado,valor, esConj));
         }
 
-        public string permitirPaso(string caracter, string estadoActual, string cadena)
+        public string permitirPaso(string caracter, string estadoActual, string cadena, ArrayList reporte)
         {
-            Console.WriteLine("Evaluando " + caracter + " con la cadena " + cadena + " en el estado "+ estadoActual);
+            Console.WriteLine("Evaluando " + caracter + " con la cadena " + cadena + " en el estado "+ estadoActual);            
+
             int movs = 1;
             foreach(nodoTransicion next in transiciones)
             {
@@ -107,13 +108,15 @@ namespace OLC1_PY1_201700988.Estructuras.AFD
                         if (getConjEvaluar(next.getValor()).existeChar(caracter))
                         {
                             //Console.WriteLine("Retornando desde aca conjs");
+                            reporte.Add(new nodoReporte(caracter , next.getValor(), estadoActual + "->" + next.getEstadoSiguientes()));
                             return next.getEstadoSiguientes();
                         }
                     }                
                 }                
                 //Si no es un conjunto y si el caracter es igual al que se encuentra en la expresion
                 else if (next.getValor().Equals(caracter))
-                {                    
+                {
+                    reporte.Add(new nodoReporte(caracter, next.getValor(), estadoActual + "->" + next.getEstadoSiguientes()));
                     return next.getEstadoSiguientes();
                 }
                 //Evaluar si la cadena es de mas caracteres
@@ -139,7 +142,9 @@ namespace OLC1_PY1_201700988.Estructuras.AFD
                 movs++;
             }
 
-            return "-----Error-----";
+            //Insertar error
+            reporte.Add(new nodoReporte(caracter,"Error Lexico", "Se vuelve al estado inicial por el error"));
+            return "S0";
         }
 
         private nodoConj getConjEvaluar(string id)

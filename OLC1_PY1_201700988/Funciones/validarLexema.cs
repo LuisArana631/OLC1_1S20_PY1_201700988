@@ -39,36 +39,19 @@ namespace OLC1_PY1_201700988.Funciones
             {
                 string caracter = Char.ToString(cadena[i]);
                 concatenado += caracter;
-                string estadoSiguiente = estadoActual.permitirPaso(caracter, estadoActual.getIdEstado(), concatenado);
+                string estadoSiguiente = estadoActual.permitirPaso(caracter, estadoActual.getIdEstado(), concatenado, reporteCadena);
 
                 Console.WriteLine("i" + i + ": " + estadoActual.getIdEstado() + "->" + caracter + "->" + estadoSiguiente);
-                if (!estadoSiguiente.Equals("-----Error-----"))
-                {
-                    
+                
                                       
-                    if (!estadoSiguiente.Equals(estadoActual.getIdEstado()))
-                    {
-                        concatenado = "";
-                        
-                    }
-
-                    estadoActual = expresion.getEstadoActual(estadoSiguiente);
-
-                    if (estadoActual.getAceptacion())
-                    {
-                        siNo = true;
-                    }
-                    else
-                    {
-                        siNo = false;
-                    }
-
-                }
-                else
+                if (!estadoSiguiente.Equals(estadoActual.getIdEstado()))
                 {
-                    siNo = false;
-                    break;
+                    concatenado = "";
+                        
                 }
+
+                estadoActual = expresion.getEstadoActual(estadoSiguiente);
+
             }
 
             if (siNo)
