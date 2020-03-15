@@ -511,7 +511,7 @@ namespace OLC1_PY1_201700988
 
                             Program.upDate.upDateLexema(Program.listTokensAnalisis, ConsolaLexema);
                             ConsolaLexema.Text += "-------------------------------------------------------------------------------\n";
-                            Program.validar.validarLexemas(ConsolaLexema);
+                            Program.validar.validarLexemas(ConsolaLexema);                            
 
                         }
                     }

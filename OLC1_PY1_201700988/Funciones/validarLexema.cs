@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using System.Collections;
 using OLC1_PY1_201700988.Estructuras.AFD;
 using System.IO;
+using System.Xml;
 
 namespace OLC1_PY1_201700988.Funciones
 {
@@ -16,6 +17,7 @@ namespace OLC1_PY1_201700988.Funciones
         public void validarLexemas(RichTextBox consola)
         {            
 
+            //Crear los archivos xml
             foreach(er expresion in Program.listER)
             {
                 int conteoLexemas = 1;
@@ -26,6 +28,36 @@ namespace OLC1_PY1_201700988.Funciones
                     conteoLexemas++;
                 }
             }
+
+            //Cargar los archivos a la app
+            reporteLexemas ventanaReporte = new reporteLexemas();
+
+            foreach (er expresion in Program.listER)
+            {
+                int conteoLexemas = 1;
+
+                foreach (string cadena in expresion.getLexemas())
+                {
+                    TabPage nuevaTab = new TabPage(expresion.getId()+"_"+conteoLexemas.ToString());
+
+                    string pathDesktop = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
+                    string pathFolder = pathDesktop + "\\ER_Analisis\\" + Program.conteoAnalisis + "\\ReporteLexemas";
+                    string pathRep = pathFolder + "\\ReporteLexema" + conteoLexemas + "_" + expresion.getId() + ".xml";
+
+                    WebBrowser pestaña = new WebBrowser();
+                    pestaña.Dock = DockStyle.Fill;
+                    pestaña.Size = nuevaTab.Size;
+                    pestaña.Url = new Uri(pathRep);
+
+                    nuevaTab.Controls.Add(pestaña);
+                    ventanaReporte.tabControl1.TabPages.Add(nuevaTab);
+
+                    conteoLexemas++;
+                }
+            }
+
+            ventanaReporte.Show();
+
         }
 
 
@@ -39,6 +71,7 @@ namespace OLC1_PY1_201700988.Funciones
             //Console.WriteLine("cadena:\"" + cadena+"\" de la expresion "+expresion.getId());
 
             ArrayList reporteCadena = new ArrayList();
+
 
             //Analizar cada caracter
             for(int i = 0; i < cadena.Length; i++)
@@ -95,15 +128,58 @@ namespace OLC1_PY1_201700988.Funciones
                 }
 
                 string pathRep = pathFolder + "\\ReporteLexema"+lexemaCount+"_" + expresion.getId() + ".xml";
-                StreamWriter repTT = new StreamWriter(pathRep);
+                XmlDocument doc = new XmlDocument();
 
-                foreach(nodoReporte rep in reporte)
-                {
-                    repTT.WriteLine(rep.getTipo() + " -> " + rep.getToken() + " -> " + rep.getTransicion());
+                XmlDeclaration xmlDeclarar = doc.CreateXmlDeclaration("1.0", "UTF-8", null);
+                XmlElement root = doc.DocumentElement;
+                doc.InsertBefore(xmlDeclarar, root);
+
+                //Crear el primer contenedor
+                XmlElement analisisLexico = doc.CreateElement(string.Empty, "Analisis_Lexico",string.Empty);
+                doc.AppendChild(analisisLexico);
+
+                // XmlElement errores = doc.CreateElement(string.Empty, "Error_Lexico", string.Empty);
+                //doc.AppendChild(errores);
+
+                int conteo = 0;
+                //Crear todo el reporte de tokens
+                foreach(nodoReporte item in reporte)
+                {                    
+                    XmlElement elemento = doc.CreateElement(string.Empty,"Bloque", string.Empty);
+                    
+
+                  //  if (!item.getTipo().Equals("Error Lexico"))
+                    //{
+                        analisisLexico.AppendChild(elemento);
+                    //}
+                    //else
+                   // {
+                     //   errores.AppendChild(elemento);
+                   // }
+
+                    //Agregar el tipo del token
+                    XmlElement tipoToken = doc.CreateElement(string.Empty, "Tipo_Token", string.Empty);
+                    XmlText tipoString = doc.CreateTextNode(item.getTipo());
+                    tipoToken.AppendChild(tipoString);
+                    elemento.AppendChild(tipoToken);
+
+                    //Agregar el lexema
+                    XmlElement lexemaToken = doc.CreateElement(string.Empty, "Lexema", string.Empty);
+                    XmlText lexemaString = doc.CreateTextNode("\"" + item.getToken()+ "\"" );
+                    lexemaToken.AppendChild(lexemaString);
+                    elemento.AppendChild(lexemaToken);
+
+                    //Agregar Transicion
+                    XmlElement transicionToken = doc.CreateElement(string.Empty, "Transicion", string.Empty);
+                    XmlText transicionString = doc.CreateTextNode(item.getTransicion());
+                    transicionToken.AppendChild(transicionString);
+                    elemento.AppendChild(transicionToken);
+                    
+                    conteo++;
                 }
 
-                repTT.Close();
-                
+                doc.Save(pathRep);
+
             }
             catch (Exception e)
             {
