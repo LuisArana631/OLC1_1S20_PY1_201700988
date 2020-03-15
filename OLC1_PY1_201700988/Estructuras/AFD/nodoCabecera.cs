@@ -81,8 +81,7 @@ namespace OLC1_PY1_201700988.Estructuras.AFD
         }
 
         public string permitirPaso(string caracter, string estadoActual, string cadena, ArrayList reporte)
-        {
-            Console.WriteLine("Evaluando " + caracter + " con la cadena " + cadena + " en el estado "+ estadoActual);            
+        {            
 
             int movs = 1;
             foreach(nodoTransicion next in transiciones)
@@ -143,8 +142,8 @@ namespace OLC1_PY1_201700988.Estructuras.AFD
             }
 
             //Insertar error
-            reporte.Add(new nodoReporte(caracter,"Error Lexico", "Se vuelve al estado inicial por el error"));
-            return "S0";
+            reporte.Add(new nodoReporte(caracter,"Error Lexico", "Se vuelve el estado actual por el error"));
+            return "Error";
         }
 
         private nodoConj getConjEvaluar(string id)

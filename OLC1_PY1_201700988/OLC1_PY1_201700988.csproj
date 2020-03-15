@@ -63,6 +63,7 @@
     <Compile Include="Estructuras\er.cs" />
     <Compile Include="Estructuras\lexema.cs" />
     <Compile Include="Estructuras\nodoArbol.cs" />
+    <Compile Include="Estructuras\nodoReporte.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
