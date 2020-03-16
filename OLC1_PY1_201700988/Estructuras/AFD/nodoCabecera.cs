@@ -98,39 +98,56 @@ namespace OLC1_PY1_201700988.Estructuras.AFD
                         break;
                 }
 
-                //Console.WriteLine("valor: \"" + next.getValor() + "\" char: \"" + caracter+ "\"");
+                //Console.WriteLine("valor: \"" + next.getValor() + "\" char: \"" + caracter+ "\"");                
                 //Si es conjunto
                 if (esConjunto)
                 {                    
-                    if(getConjEvaluar(next.getValor()) != null)
+                    if (getConjEvaluar(next.getValor()) != null)
                     {
                         if (getConjEvaluar(next.getValor()).existeChar(caracter))
                         {
-                            //Console.WriteLine("Retornando desde aca conjs");
-                            reporte.Add(new nodoReporte(caracter , next.getValor(), estadoActual + "->" + next.getEstadoSiguientes()));
-                            return next.getEstadoSiguientes();
+                                reporte.Add(new nodoReporte(caracter, next.getValor(), estadoActual + "->" + next.getEstadoSiguientes()));
+                                return next.getEstadoSiguientes();                            
                         }
                     }                
                 }                
                 //Si no es un conjunto y si el caracter es igual al que se encuentra en la expresion
                 else if (next.getValor().Equals(caracter))
-                {
+                {                    
                     reporte.Add(new nodoReporte(caracter, next.getValor(), estadoActual + "->" + next.getEstadoSiguientes()));
                     return next.getEstadoSiguientes();
+                }  
+                //Evaluar los caracteres \t \n [:asfgasfasf:]
+                else if (next.getValor().Equals(("\\t").ToString()))
+                {                    
+                    if (Convert.ToInt32(caracter[0]) == 9)
+                    {
+                        reporte.Add(new nodoReporte(caracter, next.getValor(), estadoActual + "->" + next.getEstadoSiguientes()));
+                        return next.getEstadoSiguientes();
+                    }
+                }
+                else if (next.getValor().Equals(("\\n").ToString()))
+                {                    
+                    if (Convert.ToInt32(caracter[0]) == 10)
+                    {                        
+                        reporte.Add(new nodoReporte(caracter, next.getValor(), estadoActual + "->" + next.getEstadoSiguientes()));
+                        return next.getEstadoSiguientes();
+                    }
                 }
                 //Evaluar si la cadena es de mas caracteres
                 else if(next.getValor().Length > 1 && cadena.Length <= next.getValor().Length)
-                {
+                {                    
                     //Console.WriteLine("Cadena: " + cadena + " valor: " + next.getValor());
                     if (cadena.Equals(next.getValor()))
                     {
+                        reporte.Add(new nodoReporte(caracter, next.getValor(), estadoActual + "->" + next.getEstadoSiguientes()));
                         return next.getEstadoSiguientes();
                     }
                     else
                     {
                         //Saber si estamos en la ultima transicion a evaluar
                         if (movs == transiciones.Count)
-                        {
+                        {                            
                             //Console.WriteLine("Retornando desde aca movs");
                             return estadoActual;
                         }                        

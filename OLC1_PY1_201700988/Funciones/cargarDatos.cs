@@ -99,7 +99,7 @@ namespace OLC1_PY1_201700988.Funciones
                                 break;
                             case 2:
                                 //Debemos insertar el conjunto
-                                if (item.getTipo() == token.tipo.CARACTER || item.getTipo() == token.tipo.NUMERO || item.getTipo() == token.tipo.SIMBOLO)
+                                if (item.getTipo() == token.tipo.CARACTER || item.getTipo() == token.tipo.NUMERO || item.getTipo() == token.tipo.SIMBOLO || item.getTipo() == token.tipo.SALTO_LINEA || item.getTipo() == token.tipo.COMILLA_SIMPLE || item.getTipo() == token.tipo.COMILLA_DOBLE || item.getTipo() == token.tipo.TABULACION || item.getTipo() == token.tipo.CUALQUIER_CARACTER )
                                 {
                                     //Si encontramos un token valido de un conjunto insertar
                                     posConj(idActual).addItem(item.getValor());
@@ -207,7 +207,10 @@ namespace OLC1_PY1_201700988.Funciones
                                     //Si encontramos una cadena insertar un nodo hoja
                                     if(item.getTipo() == token.tipo.CADENA)
                                     {
-                                        posEr(idActual).addNodoArbol(item.getValor().Replace('"'.ToString(), ""), 0,0);
+                                        string lexemaStr = item.getValor().TrimStart('"');
+                                        lexemaStr = lexemaStr.Remove(lexemaStr.Length-1, 1);
+
+                                         posEr(idActual).addNodoArbol(lexemaStr, 0,0);
                                     }
                                     else if(item.getTipo() == token.tipo.IDENTIFICADOR)
                                     {
@@ -369,7 +372,9 @@ namespace OLC1_PY1_201700988.Funciones
                         //Si encontramos una cadena
                         if(item.getTipo() == token.tipo.CADENA)
                         {
-                            posEr(idActual).addLexema(item.getValor().Replace('"'.ToString(),""));
+                            string lexemaStr = item.getValor().TrimStart('"');
+                            lexemaStr = lexemaStr.Remove(lexemaStr.Length - 1, 1);
+                            posEr(idActual).addLexema(lexemaStr);
                             consola.Text += "Cadena: "+item.getValor()+" insertada en la expresion: "+idActual+"\n";
                         }
                         //Si encontramos un punto y coma
