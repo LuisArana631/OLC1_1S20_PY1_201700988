@@ -134,7 +134,7 @@ namespace OLC1_PY1_201700988.Funciones
                                     string itemInicio = (string)posConj(idActual).getConjunto()[0];
                                     char caracterInicial = itemInicio[0];
 
-                                    for (int j = caracterInicial + 1; j < (char)item.getValor()[0]; j++)
+                                    for (int j = caracterInicial + 1; j <= (char)item.getValor()[0]; j++)
                                     {
                                         char charInsert = (char)j;
                                         if (char.IsLetter(charInsert))

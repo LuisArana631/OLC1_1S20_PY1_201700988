@@ -29,7 +29,7 @@ namespace OLC1_PY1_201700988.Analizador
             for (int i = 0; i < entrada.Length; i++)
             {
                 caracter = entrada[i];
-                if (caracter != 13)
+                if (caracter != 13 )
                 {
                     switch (estado)
                     {
@@ -37,23 +37,25 @@ namespace OLC1_PY1_201700988.Analizador
                             //Evaluar letra
                             if (Char.IsLetter(caracter))
                             {
-                                auxiliarLexico += caracter;
-                                try
-                                {
-
-                                    char prevChar = entrada[i - 1];
-                                    char posChar = entrada[i + 1];
-                                    if (posChar == 126 || prevChar == 126 || posChar == 44 || prevChar == 44)
+                                
+                                    auxiliarLexico += caracter;
+                                    try
                                     {
-                                        addToken(tipo.CARACTER);
-                                        break;
-                                    }
-                                }
-                                catch(Exception e)
-                                {
 
-                                }
-                                estado = 7;
+                                        char prevChar = entrada[i - 1];
+                                        char posChar = entrada[i + 1];
+                                        if (posChar == 126 || prevChar == 126 || posChar == 44 || prevChar == 44)
+                                        {
+                                            addToken(tipo.CARACTER);
+                                            break;
+                                        }
+                                    }
+                                    catch (Exception e)
+                                    {
+
+                                    }
+                                    estado = 7;
+                                                            
                             }
                             //Evaluar numero
                             else if (Char.IsDigit(caracter))
@@ -306,7 +308,7 @@ namespace OLC1_PY1_201700988.Analizador
 
                         case 7:
                             //Evaluar letra o identificador
-                            if (Char.IsLetterOrDigit(caracter))
+                            if (Char.IsLetterOrDigit(caracter) && caracter>=32 && caracter<=125)
                             {
                                 auxiliarLexico += caracter;
                             }

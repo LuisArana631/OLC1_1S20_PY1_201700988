@@ -142,7 +142,7 @@ namespace OLC1_PY1_201700988.Estructuras.AFD
             }
 
             //Insertar error
-            reporte.Add(new nodoReporte(caracter,"Error Lexico", "Se vuelve el estado actual por el error"));
+            reporte.Add(new nodoReporte(caracter,"Error Lexico", "Se vuelve el estado actual ("+estadoActual+") por el error"));
             return "Error";
         }
 

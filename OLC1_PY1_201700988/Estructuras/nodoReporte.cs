@@ -48,5 +48,7 @@ namespace OLC1_PY1_201700988.Estructuras
         {
             this.valorTipo = tipo;
         }
+
+
     }
 }
