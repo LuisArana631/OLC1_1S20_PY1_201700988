@@ -71,6 +71,17 @@ namespace OLC1_PY1_201700988.Analizador
                                 {
                                     char prevChar = entrada[i - 1];                                    
                                     char posChar = entrada[i + 1];
+                                    
+                                    if(caracter == 92)
+                                    {
+                                        if (posChar != 126 || posChar != 44)
+                                        {
+                                            auxiliarLexico += caracter;
+                                            estado = 6;
+                                            break;
+                                        }
+                                    }
+                                    
                                     if (posChar == 126 || prevChar == 126 || posChar == 44 || prevChar == 44)
                                     {                                        
                                         auxiliarLexico += caracter;
@@ -95,7 +106,7 @@ namespace OLC1_PY1_201700988.Analizador
                                     estado = 4;                                    
                                 }
                                 //Evaluar si viene un "
-                                else if(caracter == 34 || caracter == 39)
+                                else if(caracter == 34)
                                 {
                                     auxiliarLexico += caracter;
                                     estado = 5;                                    

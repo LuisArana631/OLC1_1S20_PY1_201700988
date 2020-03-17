@@ -216,6 +216,12 @@ namespace OLC1_PY1_201700988.Funciones
                                     {
                                         posEr(idActual).addNodoArbol(item.getValor(), 0,1);
                                     }
+                                    else if(item.getTipo() == token.tipo.CUALQUIER_CARACTER)
+                                    {
+                                        string lexemaStr = item.getValor().Remove(0, 2);
+                                        lexemaStr = lexemaStr.Remove(lexemaStr.Length - 2, 2);
+                                        posEr(idActual).addNodoArbol(lexemaStr, 0, 0);
+                                    }
                                     else
                                     {
                                         posEr(idActual).addNodoArbol(item.getValor(), 0,0);

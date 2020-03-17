@@ -140,7 +140,7 @@ namespace OLC1_PY1_201700988.Estructuras.AFD
                     //Console.WriteLine("Cadena: " + cadena + " valor: " + next.getValor());
                     if (cadena.Equals(next.getValor()))
                     {
-                        reporte.Add(new nodoReporte(caracter, next.getValor(), estadoActual + "->" + next.getEstadoSiguientes()));
+                        reporte.Add(new nodoReporte(cadena, next.getValor(), estadoActual + "->" + next.getEstadoSiguientes()));
                         return next.getEstadoSiguientes();
                     }
                     else
@@ -159,7 +159,7 @@ namespace OLC1_PY1_201700988.Estructuras.AFD
             }
 
             //Insertar error
-            reporte.Add(new nodoReporte(caracter,"Error Lexico", "Se vuelve el estado actual ("+estadoActual+") por el error"));
+            reporte.Add(new nodoReporte(cadena,"Error Lexico con el caracter "+caracter, "Se vuelve el estado actual ("+estadoActual+") por el error"));
             return "Error";
         }
 
