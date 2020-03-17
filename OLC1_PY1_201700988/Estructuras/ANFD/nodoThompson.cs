@@ -18,9 +18,9 @@ namespace OLC1_PY1_201700988.Estructuras.ANFD
             this.transiciones = new ArrayList();
         }
 
-        public void addTransicion(int estadoNext, string valor, int dir)
+        public void addTransicion(int estadoNext, string valor, int dir, int esConj)
         {
-            this.transiciones.Add(new nodoSiguientes(valor,estadoNext, dir));
+            this.transiciones.Add(new nodoSiguientes(valor,estadoNext, dir, esConj));
         }
 
         public bool transicionRepetida(int estado)

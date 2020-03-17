@@ -11,6 +11,7 @@ namespace OLC1_PY1_201700988.Estructuras.ANFD
         private int estadoNext;
         private string valor;
         private int dir;
+        private int esConj;
 
         public int getDir()
         {
@@ -22,11 +23,22 @@ namespace OLC1_PY1_201700988.Estructuras.ANFD
             this.dir = dir;
         }
 
-        public nodoSiguientes(string valor, int estado, int dir)
+        public nodoSiguientes(string valor, int estado, int dir, int esConj)
         {
             this.estadoNext = estado;
             this.valor = valor;
             this.dir = dir;
+            this.esConj = esConj;
+        }
+
+        public void setEsConj(int esConj)
+        {
+            this.esConj = esConj;
+        }
+
+        public int getEsConj()
+        {
+            return esConj;
         }
 
         public int getEstadoNext()

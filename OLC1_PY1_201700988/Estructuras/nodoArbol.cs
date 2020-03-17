@@ -14,11 +14,13 @@ namespace OLC1_PY1_201700988.Estructuras
         private nodoArbol left;
         private nodoArbol right;
         private int tipo;
+        private int esConj = 0;
 
-        public nodoArbol(string valor, int tipo)
+        public nodoArbol(string valor, int tipo, int esConj)
         {
             this.valor = valor;
             this.tipo = tipo;
+            this.esConj = esConj;
         }
 
         public void setValor(string valor)
@@ -79,6 +81,16 @@ namespace OLC1_PY1_201700988.Estructuras
         public int getTipo()
         {
             return this.tipo;
+        }
+
+        public void setEsConj(int esConj)
+        {
+            this.esConj=esConj;
+        }
+
+        public int getEsConj()
+        {
+            return esConj;
         }
 
     }

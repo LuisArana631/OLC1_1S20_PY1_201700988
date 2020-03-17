@@ -510,6 +510,9 @@ namespace OLC1_PY1_201700988
                             Program.listTokensAnalisis = Program.analizador.scannerMethod(controlBox.Text);
 
                             Program.upDate.upDateLexema(Program.listTokensAnalisis, ConsolaLexema);
+                            ConsolaLexema.Text += "-------------------------------------------------------------------------------\n";
+                            Program.validar.validarLexemas(ConsolaLexema);                            
+
                         }
                     }
                 }

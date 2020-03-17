@@ -19,6 +19,22 @@ namespace OLC1_PY1_201700988.Estructuras
         private ArrayList afd;
         private int numEr;
         private int conteoAnalisis;
+        private ArrayList lexemas;
+
+        public ArrayList getLexemas()
+        {
+            return lexemas;
+        }
+
+        public void setLexemas(ArrayList lexemas)
+        {
+            this.lexemas = lexemas;
+        }
+
+        public void addLexema(string lexema)
+        {
+            lexemas.Add(lexema);
+        }
 
         public int getConteoAnalisis()
         {
@@ -78,11 +94,12 @@ namespace OLC1_PY1_201700988.Estructuras
             this.afd = new ArrayList();
             this.numEr = numEr;
             this.conteoAnalisis = conteo;
+            this.lexemas = new ArrayList();
         }
 
-        public void addNodoArbol(string valor, int tipo)
+        public void addNodoArbol(string valor, int tipo, int esConj)
         {
-            arbolGuia.insert(valor, tipo);
+            arbolGuia.insert(valor, tipo, esConj);
         }
 
         private void afnInsert()
@@ -345,5 +362,19 @@ namespace OLC1_PY1_201700988.Estructuras
 
             return listReturn;
         }
+
+        public nodoCabecera getEstadoActual(string id)
+        {
+            foreach(nodoCabecera item in afd)
+            {
+                if (item.getIdEstado().Equals(id))
+                {
+                    return item;
+                }
+            }
+
+            return null;
+        }
+
     }
 }
