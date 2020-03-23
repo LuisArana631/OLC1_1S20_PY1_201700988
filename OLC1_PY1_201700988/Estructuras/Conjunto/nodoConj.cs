@@ -43,6 +43,10 @@ namespace OLC1_PY1_201700988.Estructuras.Conjunto
                 {
                     return true;
                 }
+                else if (item.Equals("[:todo:]"))
+                {
+                    return true;
+                }
             }
             return false;
         }

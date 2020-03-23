@@ -134,6 +134,11 @@ namespace OLC1_PY1_201700988.Estructuras.AFD
                         return next.getEstadoSiguientes();
                     }
                 }
+                else if (next.getValor().Equals("[:todo:]"))
+                {
+                    reporte.Add(new nodoReporte(caracter, next.getValor(), estadoActual + "->" + next.getEstadoSiguientes()));
+                    return next.getEstadoSiguientes();
+                }
                 //Evaluar si la cadena es de mas caracteres
                 else if(next.getValor().Length > 1 && cadena.Length <= next.getValor().Length)
                 {                    
