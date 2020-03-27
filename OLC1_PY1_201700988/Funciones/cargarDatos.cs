@@ -98,6 +98,7 @@ namespace OLC1_PY1_201700988.Funciones
                                 }
                                 break;
                             case 2:
+                                
                                 //Debemos insertar el conjunto
                                 if (item.getTipo() == token.tipo.CARACTER || item.getTipo() == token.tipo.NUMERO || item.getTipo() == token.tipo.SIMBOLO || item.getTipo() == token.tipo.SALTO_LINEA || item.getTipo() == token.tipo.COMILLA_SIMPLE || item.getTipo() == token.tipo.COMILLA_DOBLE || item.getTipo() == token.tipo.TABULACION || item.getTipo() == token.tipo.CUALQUIER_CARACTER )
                                 {
@@ -128,10 +129,11 @@ namespace OLC1_PY1_201700988.Funciones
 
                                 break;
                             case 3:
+                                
                                 if (item.getTipo() == token.tipo.CARACTER)
                                 {
                                     //Insertar los caracteres
-                                    string itemInicio = (string)posConj(idActual).getConjunto()[0];
+                                    string itemInicio = (string) posConj(idActual).getConjunto()[0];
                                     char caracterInicial = itemInicio[0];
 
                                     for (int j = caracterInicial + 1; j <= (char)item.getValor()[0]; j++)
@@ -146,7 +148,8 @@ namespace OLC1_PY1_201700988.Funciones
                                 else if (item.getTipo() == token.tipo.NUMERO)
                                 {
                                     //Insertar el conjunto de numeros
-                                    int itemInicio = Int32.Parse((string) posConj(idActual).getConjunto()[0]);
+                                    
+                                    int itemInicio = Int32.Parse(posConj(idActual).getConjunto()[0].ToString());
 
                                     for (int j  = itemInicio+1; j <= int.Parse(item.getValor()); j++)
                                     {

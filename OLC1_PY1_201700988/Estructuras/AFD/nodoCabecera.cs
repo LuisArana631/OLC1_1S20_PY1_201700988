@@ -86,6 +86,7 @@ namespace OLC1_PY1_201700988.Estructuras.AFD
             int movs = 1;
             foreach(nodoTransicion next in transiciones)
             {
+                Console.WriteLine("Cadena: " + cadena + " valor: " + next.getValor());
                 bool esConjunto = false;                
 
                 //Reconocer si es conjunto
@@ -140,8 +141,8 @@ namespace OLC1_PY1_201700988.Estructuras.AFD
                     return next.getEstadoSiguientes();
                 }
                 //Evaluar si la cadena es de mas caracteres
-                else if(next.getValor().Length > 1 && cadena.Length <= next.getValor().Length)
-                {                    
+                else if(next.getValor().Length >= 1 && cadena.Length <= next.getValor().Length)
+                {
                     //Console.WriteLine("Cadena: " + cadena + " valor: " + next.getValor());
                     if (cadena.Equals(next.getValor()))
                     {
@@ -150,6 +151,7 @@ namespace OLC1_PY1_201700988.Estructuras.AFD
                     }
                     else
                     {
+                        //Console.WriteLine(movs + " " + transiciones.Count);
                         //Saber si estamos en la ultima transicion a evaluar
                         if (movs == transiciones.Count)
                         {                            

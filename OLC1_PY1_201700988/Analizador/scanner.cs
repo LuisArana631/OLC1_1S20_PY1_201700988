@@ -315,6 +315,13 @@ namespace OLC1_PY1_201700988.Analizador
                                 auxiliarLexico += caracter;
                                 addToken(tipo.TABULACION);
                             }
+                            //Evaluar si viene una coma
+                            else if(caracter == 44)
+                            {
+                                addToken(tipo.SIMBOLO);
+                                i--;
+                            }
+
                             break;
 
                         case 7:
